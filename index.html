@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Anusmrith M M | CSE Student & Software Developer</title>
-  <meta name="description" content="Portfolio of Anusmrith M M — Computer Science & Engineering undergrad, Flutter developer, Python enthusiast, and Godot game creator." />
+  <meta name="description"
+    content="Portfolio of Anusmrith M M — Computer Science & Engineering undergrad, Flutter developer, Python enthusiast, and Godot game creator." />
 
   <!-- Modern Tech Fonts: Space Grotesk (Headers), Inter (Body), JetBrains Mono (Code/Tags) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
 
   <style>
-    /* ==========================================================================
-       Design System — Minimalist Bento Luxury Studio
-       ========================================================================== */
     :root {
       --bg-dark: #030712;
       --bg-surface: #090e1d;
@@ -48,7 +49,9 @@
       --shadow-hover: 0 20px 45px -12px rgba(0, 0, 0, 0.8), 0 0 25px rgba(99, 102, 241, 0.2);
     }
 
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -103,7 +106,7 @@
     .studio-grid {
       position: fixed;
       inset: 0;
-      background-image: 
+      background-image:
         linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
       background-size: 40px 40px;
@@ -142,9 +145,17 @@
     }
 
     @keyframes floatGlow {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(40px, 30px) scale(1.1); }
-      100% { transform: translate(-30px, -20px) scale(0.95); }
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(40px, 30px) scale(1.1);
+      }
+
+      100% {
+        transform: translate(-30px, -20px) scale(0.95);
+      }
     }
 
     .container {
@@ -155,9 +166,6 @@
       z-index: 1;
     }
 
-    /* ==========================================================================
-       Navigation Bar — Floating Glass Island
-       ========================================================================== */
     .nav-wrapper {
       position: sticky;
       top: 18px;
@@ -239,7 +247,8 @@
       transition: all 0.25s ease;
     }
 
-    .nav-link:hover, .nav-link.active {
+    .nav-link:hover,
+    .nav-link.active {
       color: var(--text-main);
       background: rgba(255, 255, 255, 0.08);
     }
@@ -271,9 +280,6 @@
       padding: 6px;
     }
 
-    /* ==========================================================================
-       Bento Grid Foundation
-       ========================================================================== */
     .bento-card {
       background: var(--bento-bg);
       border: 1px solid var(--bento-border);
@@ -312,9 +318,6 @@
       transform: translateY(-3px);
     }
 
-    /* ==========================================================================
-       Hero Bento Layout (Zero Overlap Studio Architecture)
-       ========================================================================== */
     .hero-section {
       padding: 20px 0 60px;
       position: relative;
@@ -371,8 +374,15 @@
     }
 
     @keyframes pulseRadar {
-      0% { transform: scale(1); opacity: 0.85; }
-      100% { transform: scale(2.8); opacity: 0; }
+      0% {
+        transform: scale(1);
+        opacity: 0.85;
+      }
+
+      100% {
+        transform: scale(2.8);
+        opacity: 0;
+      }
     }
 
     .hero-title {
@@ -572,9 +582,6 @@
       line-height: 1.25;
     }
 
-    /* ==========================================================================
-       Section Styling
-       ========================================================================== */
     section {
       margin-bottom: 80px;
       position: relative;
@@ -592,10 +599,25 @@
       transform: translateY(0);
     }
 
-    .stagger-1 { transition-delay: 0.08s; }
-    .stagger-2 { transition-delay: 0.16s; }
-    .stagger-3 { transition-delay: 0.24s; }
-    .stagger-4 { transition-delay: 0.32s; }
+    .stagger-1 {
+      transition-delay: 0.08s;
+    }
+
+    .stagger-2 {
+      transition-delay: 0.16s;
+    }
+
+    .stagger-3 {
+      transition-delay: 0.24s;
+    }
+
+    .stagger-4 {
+      transition-delay: 0.32s;
+    }
+
+    .stagger-5 {
+      transition-delay: 0.40s;
+    }
 
     .section-header {
       display: flex;
@@ -636,9 +658,6 @@
       margin-top: 4px;
     }
 
-    /* ==========================================================================
-       Technical Skills Grid
-       ========================================================================== */
     .skills-bento-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -721,9 +740,7 @@
       background: #38bdf8;
     }
 
-    /* ==========================================================================
-       Featured Projects Section
-       ========================================================================== */
+
     .filter-tabs {
       display: flex;
       gap: 8px;
@@ -824,6 +841,13 @@
       font-style: italic;
     }
 
+    .project-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
     .project-link-btn {
       display: inline-flex;
       align-items: center;
@@ -839,6 +863,12 @@
       transition: all 0.25s ease;
     }
 
+    .project-link-btn.demo-btn {
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #6ee7b7;
+    }
+
     .project-link-btn svg {
       transition: transform 0.25s ease;
     }
@@ -848,6 +878,13 @@
       color: #fff;
       box-shadow: 0 4px 18px var(--glow-indigo);
       transform: translateY(-2px);
+    }
+
+    .project-link-btn.demo-btn:hover {
+      background: var(--accent-emerald);
+      border-color: var(--accent-emerald);
+      color: #030712;
+      box-shadow: 0 4px 18px rgba(16, 185, 129, 0.35);
     }
 
     .project-link-btn:hover svg {
@@ -918,9 +955,6 @@
       display: none;
     }
 
-    /* ==========================================================================
-       Education Section
-       ========================================================================== */
     .edu-card {
       padding: 30px;
     }
@@ -990,9 +1024,6 @@
       font-weight: 700;
     }
 
-    /* ==========================================================================
-       Contact Section
-       ========================================================================== */
     .contact-banner {
       background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(6, 182, 212, 0.08) 100%);
       border: 1px solid rgba(99, 102, 241, 0.28);
@@ -1028,9 +1059,6 @@
       flex-wrap: wrap;
     }
 
-    /* ==========================================================================
-       Toast Notification
-       ========================================================================== */
     #toast {
       position: fixed;
       bottom: 30px;
@@ -1058,9 +1086,6 @@
       opacity: 1;
     }
 
-    /* ==========================================================================
-       Footer
-       ========================================================================== */
     footer {
       padding: 42px 0 32px;
       border-top: 1px solid rgba(255, 255, 255, 0.07);
@@ -1121,9 +1146,6 @@
       box-shadow: 0 4px 18px var(--glow-indigo);
     }
 
-    /* ==========================================================================
-       Responsive Breakpoints
-       ========================================================================== */
     @media (max-width: 960px) {
       .hero-bento-grid {
         grid-template-columns: 1fr;
@@ -1208,6 +1230,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- Top Real-Time Scroll Progress Indicator -->
@@ -1234,7 +1257,8 @@
       </a>
 
       <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Menu">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
           <line x1="3" y1="12" x2="21" y2="12"></line>
           <line x1="3" y1="6" x2="21" y2="6"></line>
           <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -1252,13 +1276,9 @@
   </div>
 
   <div class="container" id="home">
-    <!-- ======================================================================
-         Hero Section — Bento Studio Architecture (Completely Non-Overlapping)
-         ====================================================================== -->
     <header class="hero-section" id="about">
       <div class="hero-bento-grid">
-        
-        <!-- Tile 1: Main Introduction Bento Card -->
+
         <div class="bento-card hero-main-card reveal in-view">
           <div>
             <div class="status-pill">
@@ -1272,7 +1292,11 @@
             </h1>
 
             <p class="hero-subtitle">
-              Computer Science student at <strong>College of Engineering Karunagappally</strong> passionate about turning ideas into code. Currently developing foundational skills across mobile development with <strong>Flutter</strong>, <strong>Python</strong> programming, and responsive web design, while tinkering with game logic using <strong>Godot</strong>. Dedicated to writing clean code, building side projects, and expanding my technical toolkit one challenge at a time.
+              Computer Science student at <strong>College of Engineering Karunagappally</strong> passionate about
+              turning ideas into code. Currently developing foundational skills across mobile development with
+              <strong>Flutter</strong>, <strong>Python</strong> programming, and responsive web design, while tinkering
+              with game logic using <strong>Godot</strong>. Dedicated to writing clean code, building side projects, and
+              expanding my technical toolkit one challenge at a time.
             </p>
           </div>
 
@@ -1280,7 +1304,8 @@
           <div class="hero-actions">
             <a href="#projects" class="btn btn-primary">
               <span>View Featured Projects</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
@@ -1288,20 +1313,24 @@
 
             <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
               </svg>
               <span>GitHub</span>
             </a>
 
-            <a href="https://www.linkedin.com/in/anusmrith-m-m-9081812b2" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <a href="https://www.linkedin.com/in/anusmrith-m-m-9081812b2" target="_blank" rel="noopener noreferrer"
+              class="btn btn-secondary">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.96 0-1.74.78-1.74 1.74s.78 1.74 1.74 1.74 1.74-.78 1.74-1.74-.78-1.74-1.74-1.74Z"/>
+                <path
+                  d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.96 0-1.74.78-1.74 1.74s.78 1.74 1.74 1.74 1.74-.78 1.74-1.74-.78-1.74-1.74-1.74Z" />
               </svg>
               <span>LinkedIn</span>
             </a>
 
             <button class="btn btn-ghost" id="copyEmailBtn" title="Click to copy email address">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
               </svg>
@@ -1329,7 +1358,7 @@
         <!-- Tile 3, 4, 5: Distinct Metric Bento Tiles (CGPA has its own dedicated tile!) -->
         <div class="hero-metrics-bento">
           <div class="bento-card metric-tile reveal stagger-2 in-view">
-            <span class="metric-num counter" data-target="4" data-suffix="+">0</span>
+            <span class="metric-num counter" data-target="5" data-suffix="+">0</span>
             <span class="metric-label">Featured<br />Projects</span>
           </div>
 
@@ -1348,9 +1377,6 @@
       </div>
     </header>
 
-    <!-- ======================================================================
-         Technical Skills Section (Exact Original Content)
-         ====================================================================== -->
     <section id="skills" class="reveal">
       <div class="section-header">
         <div>
@@ -1367,7 +1393,8 @@
         <div class="bento-card skill-tile reveal stagger-1">
           <div class="skill-tile-top">
             <div class="skill-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="16 18 22 12 16 6"></polyline>
                 <polyline points="8 6 2 12 8 18"></polyline>
               </svg>
@@ -1386,7 +1413,8 @@
         <div class="bento-card skill-tile reveal stagger-2">
           <div class="skill-tile-top">
             <div class="skill-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
                 <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
                 <line x1="12" y1="18" x2="12.01" y2="18"></line>
               </svg>
@@ -1405,8 +1433,11 @@
         <div class="bento-card skill-tile reveal stagger-3">
           <div class="skill-tile-top">
             <div class="skill-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z">
+                </path>
               </svg>
             </div>
             <h3>Tools & Engines</h3>
@@ -1423,7 +1454,8 @@
         <div class="bento-card skill-tile reveal stagger-4">
           <div class="skill-tile-top">
             <div class="skill-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10"></circle>
                 <line x1="12" y1="8" x2="12" y2="12"></line>
                 <line x1="12" y1="16" x2="12.01" y2="16"></line>
@@ -1439,299 +1471,382 @@
           </div>
         </div>
       </div>
-    </section>
+      </section>
 
-    <!-- ======================================================================
-         Featured Projects Section (Exact Original Content & All 4 Projects)
-         ====================================================================== -->
-    <section id="projects" class="reveal">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">
-            <span class="section-title-icon">🚀</span>
-            Featured Projects
-          </h2>
-          <p class="section-subtitle">Real-world applications across mobile, web utilities, and game systems</p>
+      <section id="projects" class="reveal">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">
+              <span class="section-title-icon">🚀</span>
+              Featured Projects
+            </h2>
+            <p class="section-subtitle">Real-world applications across mobile, web utilities, and game systems</p>
+          </div>
+
+          <!-- Filter Tabs -->
+          <div class="filter-tabs">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="web">Web & Full-Stack</button>
+            <button class="filter-btn" data-filter="mobile">Flutter / Mobile</button>
+            <button class="filter-btn" data-filter="game">Godot Game</button>
+          </div>
         </div>
 
-        <!-- Filter Tabs -->
-        <div class="filter-tabs">
-          <button class="filter-btn active" data-filter="all">All Projects</button>
-          <button class="filter-btn" data-filter="web">Web & Full-Stack</button>
-          <button class="filter-btn" data-filter="mobile">Flutter / Mobile</button>
-          <button class="filter-btn" data-filter="game">Godot Game</button>
-        </div>
-      </div>
-
-      <div class="projects-container">
-        <!-- Project 1: AttendWise -->
-        <div class="bento-card project-card reveal stagger-1" data-category="web">
-          <div class="project-top-row">
-            <div class="project-title-group">
-              <h3>AttendWise — Smart College Attendance Management</h3>
-              <span class="badge-category cat-web">Full-Stack / Web</span>
+        <div class="projects-container">
+          <!-- Project 1: KSEB Slab Watchdog -->
+          <div class="bento-card project-card reveal stagger-1" data-category="web">
+            <div class="project-top-row">
+              <div class="project-title-group">
+                <h3>KSEB Slab Watchdog — Kerala Electricity Tracker & Forecaster</h3>
+                <span class="badge-category cat-web">Energy Analytics & PWA</span>
+              </div>
+              <div class="project-actions">
+                <a href="https://anusmrith.github.io/kseb-watchdog/" target="_blank" rel="noopener noreferrer"
+                  class="project-link-btn demo-btn" title="Open Live Web Application">
+                  <span>Live Demo</span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"></polygon>
+                  </svg>
+                </a>
+                <a href="https://github.com/Anusmrith/kseb-watchdog" target="_blank" rel="noopener noreferrer"
+                  class="project-link-btn" title="View Source Code on GitHub">
+                  <span>View Repository</span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </a>
+              </div>
             </div>
-            <a href="https://github.com/Anusmrith/Attendwise" target="_blank" rel="noopener noreferrer" class="project-link-btn">
-              <span>View Repository</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="7" y1="17" x2="17" y2="7"></line>
-                <polyline points="7 7 17 7 17 17"></polyline>
-              </svg>
-            </a>
-          </div>
 
-          <span class="project-tagline">"Smart attendance tracking, shortage risk assessment, and class margin forecasting."</span>
-          
-          <p class="project-desc">
-            A comprehensive full-stack student utility built to help college undergraduates monitor subject-wise attendance percentages, analyze shortage risks, and calculate how many classes they need to attend (or can safely miss) based on customizable minimum attendance thresholds.
-          </p>
+            <span class="project-tagline">"Kerala electricity meter tracker, daily burn rate predictor, 500-unit slab cliff radar, and household appliance simulator."</span>
 
-          <ul class="project-bullets">
-            <li>Integrated <strong>Supabase (PostgreSQL)</strong> with cloud authentication and Row Level Security (RLS) for multi-user security and personalized data isolation.</li>
-            <li>Engineered predictive calculation algorithms that determine the exact consecutive classes needed to recover from shortages or how many classes can safely be skipped without falling below criteria.</li>
-            <li>Designed visual status categorization (🟢 Safe / 🟡 Warning / 🔴 At Risk) with instant client-side calculation and responsive input validation.</li>
-            <li>Built with clean modular <strong>JavaScript (Vanilla JS)</strong> architecture ensuring high performance, zero runtime bloat, and mobile-first responsiveness.</li>
-          </ul>
+            <p class="project-desc">
+              A specialized bilingual Progressive Web App (PWA) engineered to prevent unexpected electricity bill shock for Kerala households under the KSERC LT-1A tariff. Accurately simulates bi-monthly telescopic slabs and warns against the severe ₹1,420+ non-telescopic penalty cliff at 500 units before bills are issued.
+            </p>
 
-          <div class="tech-stack-tags">
-            <span class="tech-tag">JavaScript (ES6+)</span>
-            <span class="tech-tag">Supabase</span>
-            <span class="tech-tag">PostgreSQL</span>
-            <span class="tech-tag">HTML5 / CSS3</span>
-            <span class="tech-tag">Row Level Security</span>
-            <span class="tech-tag">Git & GitHub</span>
-          </div>
-        </div>
+            <ul class="project-bullets">
+              <li>Engineered the official <strong>KSERC LT-1A bi-monthly tariff engine</strong> modeling telescopic tiers (Slabs 1–5), fixed charges, meter rent, fuel surcharges, and the steep 500+ unit flat-rate cliff transition.</li>
+              <li>Developed a mid-cycle <strong>Daily Burn Rate predictor</strong> computing elapsed-day velocity to accurately forecast Day-60 consumption and projected expenses with dynamic status radars.</li>
+              <li>Built an interactive <strong>Kerala Household Appliance Inspector & Simulator</strong> modeling real-time energy draw for ACs, water pumps, and refrigeration with live duty-cycle sliders and savings calculators.</li>
+              <li>Implemented full <strong>Malayalam & English localization</strong>, procedural audio feedback using the <strong>Web Audio API</strong> (zero external audio assets), and one-click WhatsApp family alert summaries ("Stern Malayali Dad" mode).</li>
+              <li>Architected with <strong>Vite 6</strong> and Vanilla ES6+ modules into an installable, offline-capable PWA with 100% passing automated mathematical test suites.</li>
+            </ul>
 
-        <!-- Project 2: NutriDecide -->
-        <div class="bento-card project-card reveal stagger-2" data-category="mobile">
-          <div class="project-top-row">
-            <div class="project-title-group">
-              <h3>NutriDecide — Food Intelligence App</h3>
-              <span class="badge-category cat-mobile">Flutter / Mobile</span>
+            <div class="tech-stack-tags">
+              <span class="tech-tag">JavaScript (ES6+)</span>
+              <span class="tech-tag">Vite 6</span>
+              <span class="tech-tag">Progressive Web App (PWA)</span>
+              <span class="tech-tag">Web Audio API</span>
+              <span class="tech-tag">KSERC Tariff Engine</span>
+              <span class="tech-tag">HTML5 & CSS3</span>
+              <span class="tech-tag">Git & GitHub Pages</span>
             </div>
-            <a href="https://github.com/Anusmrith/NutriDecide" target="_blank" rel="noopener noreferrer" class="project-link-btn">
-              <span>View Repository</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="7" y1="17" x2="17" y2="7"></line>
-                <polyline points="7 7 17 7 17 17"></polyline>
-              </svg>
-            </a>
           </div>
 
-          <span class="project-tagline">"Personalized nutrition and food product suitability analysis."</span>
-          
-          <p class="project-desc">
-            A comprehensive cross-platform mobile application designed to evaluate packaged food items against personal dietary goals, empowering consumers to make healthy and conscious nutritional decisions.
-          </p>
-
-          <ul class="project-bullets">
-            <li>Designed and engineered fluid mobile UI layouts, custom navigation flows, and interactive components using <strong>Flutter & Dart</strong>.</li>
-            <li>Built streamlined user preference forms to input dietary requirements, allergens, and targeted macronutrient limits.</li>
-            <li>Formulated and tested back-end computational logic using <strong>Python</strong> to validate nutritional algorithms and score suitability rules.</li>
-            <li>Employed disciplined version control practices using <strong>Git & GitHub</strong> for feature branching and clean commit history.</li>
-          </ul>
-
-          <div class="tech-stack-tags">
-            <span class="tech-tag">Flutter</span>
-            <span class="tech-tag">Dart</span>
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">Mobile UI/UX</span>
-            <span class="tech-tag">Git & GitHub</span>
-          </div>
-        </div>
-
-        <!-- Project 3: QuickNutri -->
-        <div class="bento-card project-card reveal stagger-3" data-category="web">
-          <div class="project-top-row">
-            <div class="project-title-group">
-              <h3>QuickNutri — Instant Nutritional Metric Calculator</h3>
-              <span class="badge-category cat-web">Web Utility</span>
+          <!-- Project 2: AttendWise -->
+          <div class="bento-card project-card reveal stagger-2" data-category="web">
+            <div class="project-top-row">
+              <div class="project-title-group">
+                <h3>AttendWise — Smart College Attendance Management</h3>
+                <span class="badge-category cat-web">Full-Stack / Web</span>
+              </div>
+              <a href="https://github.com/Anusmrith/Attendwise" target="_blank" rel="noopener noreferrer"
+                class="project-link-btn">
+                <span>View Repository</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
             </div>
-            <a href="https://github.com/Anusmrith/NutriCalc---calculator" target="_blank" rel="noopener noreferrer" class="project-link-btn">
-              <span>View Repository</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="7" y1="17" x2="17" y2="7"></line>
-                <polyline points="7 7 17 7 17 17"></polyline>
-              </svg>
-            </a>
-          </div>
 
-          <span class="project-tagline">"Interactive daily calorie and macronutrient estimation utility."</span>
-          
-          <p class="project-desc">
-            A high-speed, lightweight responsive web utility built to calculate baseline energy expenditure (BMR/TDEE) and recommend daily caloric and macronutrient targets based on customizable fitness outcomes.
-          </p>
+            <span class="project-tagline">"Smart attendance tracking, shortage risk assessment, and class margin
+              forecasting."</span>
 
-          <ul class="project-bullets">
-            <li>Implemented the precision <strong>Mifflin-St Jeor formula</strong> with automated logic adjustments for caloric deficit, maintenance, and muscular surplus goals.</li>
-            <li>Engineered snappy, client-side DOM manipulation in <strong>JavaScript</strong> to render real-time recalculations with zero page reloads.</li>
-            <li>Crafted an adaptive dark-themed layout that maintains seamless visual clarity across mobile screens, tablets, and desktop displays.</li>
-          </ul>
+            <p class="project-desc">
+              A comprehensive full-stack student utility built to help college undergraduates monitor subject-wise
+              attendance percentages, analyze shortage risks, and calculate how many classes they need to attend (or can
+              safely miss) based on customizable minimum attendance thresholds.
+            </p>
 
-          <div class="tech-stack-tags">
-            <span class="tech-tag">JavaScript (ES6+)</span>
-            <span class="tech-tag">HTML5</span>
-            <span class="tech-tag">CSS3</span>
-            <span class="tech-tag">Responsive Design</span>
-            <span class="tech-tag">Health Metrics</span>
-          </div>
-        </div>
+            <ul class="project-bullets">
+              <li>Integrated <strong>Supabase (PostgreSQL)</strong> with cloud authentication and Row Level Security
+                (RLS)
+                for multi-user security and personalized data isolation.</li>
+              <li>Engineered predictive calculation algorithms that determine the exact consecutive classes needed to
+                recover from shortages or how many classes can safely be skipped without falling below criteria.</li>
+              <li>Designed visual status categorization (🟢 Safe / 🟡 Warning / 🔴 At Risk) with instant client-side
+                calculation and responsive input validation.</li>
+              <li>Built with clean modular <strong>JavaScript (Vanilla JS)</strong> architecture ensuring high
+                performance, zero runtime bloat, and mobile-first responsiveness.</li>
+            </ul>
 
-        <!-- Project 4: Blackout -->
-        <div class="bento-card project-card reveal stagger-4" data-category="game">
-          <div class="project-top-row">
-            <div class="project-title-group">
-              <h3>Blackout — Godot 2D Action Game</h3>
-              <span class="badge-category cat-game">Godot Game Dev</span>
+            <div class="tech-stack-tags">
+              <span class="tech-tag">JavaScript (ES6+)</span>
+              <span class="tech-tag">Supabase</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">HTML5 / CSS3</span>
+              <span class="tech-tag">Row Level Security</span>
+              <span class="tech-tag">Git & GitHub</span>
             </div>
-            <a href="https://github.com/Anusmrith/blackoutgame" target="_blank" rel="noopener noreferrer" class="project-link-btn">
-              <span>View Repository</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="7" y1="17" x2="17" y2="7"></line>
-                <polyline points="7 7 17 7 17 17"></polyline>
-              </svg>
-            </a>
           </div>
 
-          <span class="project-tagline">"Atmospheric 2D game built with Godot Engine and GDScript."</span>
-          
-          <p class="project-desc">
-            A standalone 2D game focusing on gameplay loops, collision physics, player movement mechanics, custom scene transitions, and reactive state systems.
-          </p>
+          <!-- Project 3: NutriDecide -->
+          <div class="bento-card project-card reveal stagger-3" data-category="mobile">
+            <div class="project-top-row">
+              <div class="project-title-group">
+                <h3>NutriDecide — Food Intelligence App</h3>
+                <span class="badge-category cat-mobile">Flutter / Mobile</span>
+              </div>
+              <a href="https://github.com/Anusmrith/NutriDecide" target="_blank" rel="noopener noreferrer"
+                class="project-link-btn">
+                <span>View Repository</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+            </div>
 
-          <ul class="project-bullets">
-            <li>Structured scalable game architecture by leveraging Godot's node and scene-tree hierarchy to separate asset pipelines from controller code.</li>
-            <li>Programmed movement physics, jump curves, and collision boundaries using custom <strong>GDScript</strong> routines.</li>
-            <li>Implemented robust game-loop event triggers and state machines for handling win/loss scenarios and game resets.</li>
-            <li>Maintained repository integrity and code revisions via <strong>Git</strong>.</li>
-          </ul>
+            <span class="project-tagline">"Personalized nutrition and food product suitability analysis."</span>
 
-          <div class="tech-stack-tags">
-            <span class="tech-tag">Godot Engine</span>
-            <span class="tech-tag">GDScript</span>
-            <span class="tech-tag">2D Physics</span>
-            <span class="tech-tag">Game Architecture</span>
-            <span class="tech-tag">Git</span>
+            <p class="project-desc">
+              A comprehensive cross-platform mobile application designed to evaluate packaged food items against
+              personal
+              dietary goals, empowering consumers to make healthy and conscious nutritional decisions.
+            </p>
+
+            <ul class="project-bullets">
+              <li>Designed and engineered fluid mobile UI layouts, custom navigation flows, and interactive components
+                using <strong>Flutter & Dart</strong>.</li>
+              <li>Built streamlined user preference forms to input dietary requirements, allergens, and targeted
+                macronutrient limits.</li>
+              <li>Formulated and tested back-end computational logic using <strong>Python</strong> to validate
+                nutritional
+                algorithms and score suitability rules.</li>
+              <li>Employed disciplined version control practices using <strong>Git & GitHub</strong> for feature
+                branching
+                and clean commit history.</li>
+            </ul>
+
+            <div class="tech-stack-tags">
+              <span class="tech-tag">Flutter</span>
+              <span class="tech-tag">Dart</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Mobile UI/UX</span>
+              <span class="tech-tag">Git & GitHub</span>
+            </div>
+          </div>
+
+          <!-- Project 4: QuickNutri -->
+          <div class="bento-card project-card reveal stagger-4" data-category="web">
+            <div class="project-top-row">
+              <div class="project-title-group">
+                <h3>QuickNutri — Instant Nutritional Metric Calculator</h3>
+                <span class="badge-category cat-web">Web Utility</span>
+              </div>
+              <a href="https://github.com/Anusmrith/NutriCalc---calculator" target="_blank" rel="noopener noreferrer"
+                class="project-link-btn">
+                <span>View Repository</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+            </div>
+
+            <span class="project-tagline">"Interactive daily calorie and macronutrient estimation utility."</span>
+
+            <p class="project-desc">
+              A high-speed, lightweight responsive web utility built to calculate baseline energy expenditure (BMR/TDEE)
+              and recommend daily caloric and macronutrient targets based on customizable fitness outcomes.
+            </p>
+
+            <ul class="project-bullets">
+              <li>Implemented the precision <strong>Mifflin-St Jeor formula</strong> with automated logic adjustments
+                for
+                caloric deficit, maintenance, and muscular surplus goals.</li>
+              <li>Engineered snappy, client-side DOM manipulation in <strong>JavaScript</strong> to render real-time
+                recalculations with zero page reloads.</li>
+              <li>Crafted an adaptive dark-themed layout that maintains seamless visual clarity across mobile screens,
+                tablets, and desktop displays.</li>
+            </ul>
+
+            <div class="tech-stack-tags">
+              <span class="tech-tag">JavaScript (ES6+)</span>
+              <span class="tech-tag">HTML5</span>
+              <span class="tech-tag">CSS3</span>
+              <span class="tech-tag">Responsive Design</span>
+              <span class="tech-tag">Health Metrics</span>
+            </div>
+          </div>
+
+          <!-- Project 5: Blackout -->
+          <div class="bento-card project-card reveal stagger-5" data-category="game">
+            <div class="project-top-row">
+              <div class="project-title-group">
+                <h3>Blackout — Godot 2D Action Game</h3>
+                <span class="badge-category cat-game">Godot Game Dev</span>
+              </div>
+              <a href="https://github.com/Anusmrith/blackoutgame" target="_blank" rel="noopener noreferrer"
+                class="project-link-btn">
+                <span>View Repository</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+            </div>
+
+            <span class="project-tagline">"Atmospheric 2D game built with Godot Engine and GDScript."</span>
+
+            <p class="project-desc">
+              A standalone 2D game focusing on gameplay loops, collision physics, player movement mechanics, custom
+              scene
+              transitions, and reactive state systems.
+            </p>
+
+            <ul class="project-bullets">
+              <li>Structured scalable game architecture by leveraging Godot's node and scene-tree hierarchy to separate
+                asset pipelines from controller code.</li>
+              <li>Programmed movement physics, jump curves, and collision boundaries using custom
+                <strong>GDScript</strong> routines.
+              </li>
+              <li>Implemented robust game-loop event triggers and state machines for handling win/loss scenarios and
+                game
+                resets.</li>
+              <li>Maintained repository integrity and code revisions via <strong>Git</strong>.</li>
+            </ul>
+
+            <div class="tech-stack-tags">
+              <span class="tech-tag">Godot Engine</span>
+              <span class="tech-tag">GDScript</span>
+              <span class="tech-tag">2D Physics</span>
+              <span class="tech-tag">Game Architecture</span>
+              <span class="tech-tag">Git</span>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ======================================================================
-         Education Section (Exact Original Content)
-         ====================================================================== -->
-    <section id="education" class="reveal">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">
-            <span class="section-title-icon">🎓</span>
-            Education & Academics
-          </h2>
-          <p class="section-subtitle">Formal foundation in Computer Science & Engineering</p>
-        </div>
-      </div>
-
-      <div class="bento-card edu-card">
-        <div class="edu-header-row">
-          <div class="edu-title">Bachelor of Technology (B.Tech) in Computer Science & Engineering</div>
-          <div class="edu-period">2023 – 2027</div>
-        </div>
-        
-        <div class="edu-college">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-            <circle cx="12" cy="10" r="3"></circle>
-          </svg>
-          College of Engineering Karunagappally (CEK)
-        </div>
-
-        <div class="edu-highlights">
-          <div class="edu-pill-stat">
-            Cumulative GPA: <span>7.15 / 10.0</span>
-          </div>
-          <div class="edu-pill-stat">
-            Status: <span>Active Undergraduate</span>
-          </div>
-          <div class="edu-pill-stat">
-            Focus: <span>Software Engineering & Systems</span>
+      <section id="education" class="reveal">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">
+              <span class="section-title-icon">🎓</span>
+              Education & Academics
+            </h2>
+            <p class="section-subtitle">Formal foundation in Computer Science & Engineering</p>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- ======================================================================
-         Contact CTA Banner (Exact Original Content)
-         ====================================================================== -->
-    <section id="contact" class="reveal">
-      <div class="bento-card contact-banner">
-        <h2>Let's Connect & Collaborate</h2>
-        <p>
-          I'm currently seeking internship opportunities, collaborative open-source projects, and new challenges in software development. Have an opportunity or want to chat?
-        </p>
+        <div class="bento-card edu-card">
+          <div class="edu-header-row">
+            <div class="edu-title">Bachelor of Technology (B.Tech) in Computer Science & Engineering</div>
+            <div class="edu-period">2023 – 2027</div>
+          </div>
 
-        <div class="contact-button-group">
-          <a href="mailto:anusmrithchanju@gmail.com" class="btn btn-primary">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
+          <div class="edu-college">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
             </svg>
-            <span>Send Me an Email</span>
-          </a>
+            College of Engineering Karunagappally (CEK)
+          </div>
 
-          <a href="https://www.linkedin.com/in/anusmrith-m-m-9081812b2" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.96 0-1.74.78-1.74 1.74s.78 1.74 1.74 1.74 1.74-.78 1.74-1.74-.78-1.74-1.74-1.74Z"/>
-            </svg>
-            <span>Connect on LinkedIn</span>
-          </a>
-
-          <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-            </svg>
-            <span>GitHub Profile</span>
-          </a>
+          <div class="edu-highlights">
+            <div class="edu-pill-stat">
+              Cumulative GPA: <span>7.15 / 10.0</span>
+            </div>
+            <div class="edu-pill-stat">
+              Status: <span>Active Undergraduate</span>
+            </div>
+            <div class="edu-pill-stat">
+              Focus: <span>Software Engineering & Systems</span>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ======================================================================
-         Footer
-         ====================================================================== -->
-    <footer>
-      <p>© <span id="year"></span> Anusmrith M M • College of Engineering Karunagappally</p>
-      <div class="footer-links">
-        <a href="#about" class="footer-link">About</a>
-        <a href="#skills" class="footer-link">Skills</a>
-        <a href="#projects" class="footer-link">Projects</a>
-        <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
-        <a href="https://www.linkedin.com/in/anusmrith-m-m-9081812b2" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
-      </div>
-    </footer>
+      <section id="contact" class="reveal">
+        <div class="bento-card contact-banner">
+          <h2>Let's Connect & Collaborate</h2>
+          <p>
+            I'm currently seeking internship opportunities, collaborative open-source projects, and new challenges in
+            software development. Have an opportunity or want to chat?
+          </p>
+
+          <div class="contact-button-group">
+            <a href="mailto:anusmrithchanju@gmail.com" class="btn btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <span>Send Me an Email</span>
+            </a>
+
+            <a href="https://www.linkedin.com/in/anusmrith-m-m-9081812b2" target="_blank" rel="noopener noreferrer"
+              class="btn btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.96 0-1.74.78-1.74 1.74s.78 1.74 1.74 1.74 1.74-.78 1.74-1.74-.78-1.74-1.74-1.74Z" />
+              </svg>
+              <span>Connect on LinkedIn</span>
+            </a>
+
+            <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              </svg>
+              <span>GitHub Profile</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <p>© <span id="year"></span> Anusmrith M M • College of Engineering Karunagappally</p>
+        <div class="footer-links">
+          <a href="#about" class="footer-link">About</a>
+          <a href="#skills" class="footer-link">Skills</a>
+          <a href="#projects" class="footer-link">Projects</a>
+          <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer"
+            class="footer-link">GitHub</a>
+          <a href="https://www.linkedin.com/in/anusmrith-m-m-9081812b2" target="_blank" rel="noopener noreferrer"
+            class="footer-link">LinkedIn</a>
+        </div>
+      </footer>
   </div>
 
   <!-- Interactive Back to Top Floating Button -->
   <button class="back-to-top" id="backToTop" aria-label="Scroll back to top">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+      stroke-linecap="round" stroke-linejoin="round">
       <polyline points="18 15 12 9 6 15"></polyline>
     </svg>
   </button>
 
   <!-- Interactive Toast Notification -->
   <div id="toast" role="alert" aria-live="polite">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round">
       <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
       <polyline points="22 4 12 14.01 9 11.01"></polyline>
     </svg>
     <span id="toastMsg">Email copied to clipboard!</span>
   </div>
 
-  <!-- ==========================================================================
-       Interactive Logic & Animations
-       ========================================================================== -->
   <script>
-    // 0. Clean rogue service workers from previous localhost projects
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then(registrations => {
         for (let registration of registrations) {
@@ -2076,4 +2191,5 @@
     }
   </script>
 </body>
+
 </html>
