@@ -397,7 +397,9 @@
     .hero-title .gradient-text {
       background: linear-gradient(135deg, #ffffff 15%, #a5b4fc 55%, #06b6d4 100%);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
+      color: transparent;
       display: inline-block;
     }
 
@@ -831,6 +833,39 @@
       background: rgba(168, 85, 247, 0.14);
       border: 1px solid rgba(168, 85, 247, 0.35);
       color: #d8b4fe;
+    }
+
+    .badge-role {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #cbd5e1;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-role::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #818cf8;
+    }
+
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.86em;
+      background: rgba(99, 102, 241, 0.12);
+      color: #c7d2fe;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(99, 102, 241, 0.22);
     }
 
     .project-tagline {
@@ -1426,6 +1461,7 @@
             <span class="skill-pill"><span class="pill-dot"></span>HTML5 / CSS3</span>
             <span class="skill-pill"><span class="pill-dot"></span>JavaScript (ES6+)</span>
             <span class="skill-pill"><span class="pill-dot"></span>Supabase & PostgreSQL</span>
+            <span class="skill-pill"><span class="pill-dot"></span>Capacitor & PWA</span>
           </div>
         </div>
 
@@ -1471,90 +1507,46 @@
           </div>
         </div>
       </div>
-      </section>
+    </section>
 
-      <section id="projects" class="reveal">
-        <div class="section-header">
-          <div>
-            <h2 class="section-title">
-              <span class="section-title-icon">🚀</span>
-              Featured Projects
-            </h2>
-            <p class="section-subtitle">Real-world applications across mobile, web utilities, and game systems</p>
-          </div>
-
-          <!-- Filter Tabs -->
-          <div class="filter-tabs">
-            <button class="filter-btn active" data-filter="all">All Projects</button>
-            <button class="filter-btn" data-filter="web">Web & Full-Stack</button>
-            <button class="filter-btn" data-filter="mobile">Flutter / Mobile</button>
-            <button class="filter-btn" data-filter="game">Godot Game</button>
-          </div>
+    <section id="projects" class="reveal">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">
+            <span class="section-title-icon">🚀</span>
+            Featured Projects
+          </h2>
+          <p class="section-subtitle">Real-world applications across mobile, web utilities, and game systems</p>
         </div>
 
-        <div class="projects-container">
-          <!-- Project 1: KSEB Slab Watchdog -->
-          <div class="bento-card project-card reveal stagger-1" data-category="web">
-            <div class="project-top-row">
-              <div class="project-title-group">
-                <h3>KSEB Slab Watchdog — Kerala Electricity Tracker & Forecaster</h3>
-                <span class="badge-category cat-web">Energy Analytics & PWA</span>
-              </div>
-              <div class="project-actions">
-                <a href="https://anusmrith.github.io/kseb-watchdog/" target="_blank" rel="noopener noreferrer"
-                  class="project-link-btn demo-btn" title="Open Live Web Application">
-                  <span>Live Demo</span>
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"></polygon>
-                  </svg>
-                </a>
-                <a href="https://github.com/Anusmrith/kseb-watchdog" target="_blank" rel="noopener noreferrer"
-                  class="project-link-btn" title="View Source Code on GitHub">
-                  <span>View Repository</span>
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
-                  </svg>
-                </a>
-              </div>
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+          <button class="filter-btn active" data-filter="all">All Projects</button>
+          <button class="filter-btn" data-filter="web">Web & Full-Stack</button>
+          <button class="filter-btn" data-filter="mobile">Mobile & Cross-Platform</button>
+          <button class="filter-btn" data-filter="game">Godot Game</button>
+        </div>
+      </div>
+
+      <div class="projects-container">
+        <!-- Project 1: KSEB Slab Watchdog -->
+        <div class="bento-card project-card reveal stagger-1" data-category="web">
+          <div class="project-top-row">
+            <div class="project-title-group">
+              <h3>KSEB Slab Watchdog — Kerala Electricity Tracker & Forecaster</h3>
+              <span class="badge-category cat-web">Energy Analytics & PWA</span>
             </div>
-
-            <span class="project-tagline">"Kerala electricity meter tracker, daily burn rate predictor, 500-unit slab cliff radar, and household appliance simulator."</span>
-
-            <p class="project-desc">
-              A specialized bilingual Progressive Web App (PWA) engineered to prevent unexpected electricity bill shock for Kerala households under the KSERC LT-1A tariff. Accurately simulates bi-monthly telescopic slabs and warns against the severe ₹1,420+ non-telescopic penalty cliff at 500 units before bills are issued.
-            </p>
-
-            <ul class="project-bullets">
-              <li>Engineered the official <strong>KSERC LT-1A bi-monthly tariff engine</strong> modeling telescopic tiers (Slabs 1–5), fixed charges, meter rent, fuel surcharges, and the steep 500+ unit flat-rate cliff transition.</li>
-              <li>Developed a mid-cycle <strong>Daily Burn Rate predictor</strong> computing elapsed-day velocity to accurately forecast Day-60 consumption and projected expenses with dynamic status radars.</li>
-              <li>Built an interactive <strong>Kerala Household Appliance Inspector & Simulator</strong> modeling real-time energy draw for ACs, water pumps, and refrigeration with live duty-cycle sliders and savings calculators.</li>
-              <li>Implemented full <strong>Malayalam & English localization</strong>, procedural audio feedback using the <strong>Web Audio API</strong> (zero external audio assets), and one-click WhatsApp family alert summaries ("Stern Malayali Dad" mode).</li>
-              <li>Architected with <strong>Vite 6</strong> and Vanilla ES6+ modules into an installable, offline-capable PWA with 100% passing automated mathematical test suites.</li>
-            </ul>
-
-            <div class="tech-stack-tags">
-              <span class="tech-tag">JavaScript (ES6+)</span>
-              <span class="tech-tag">Vite 6</span>
-              <span class="tech-tag">Progressive Web App (PWA)</span>
-              <span class="tech-tag">Web Audio API</span>
-              <span class="tech-tag">KSERC Tariff Engine</span>
-              <span class="tech-tag">HTML5 & CSS3</span>
-              <span class="tech-tag">Git & GitHub Pages</span>
-            </div>
-          </div>
-
-          <!-- Project 2: AttendWise -->
-          <div class="bento-card project-card reveal stagger-2" data-category="web">
-            <div class="project-top-row">
-              <div class="project-title-group">
-                <h3>AttendWise — Smart College Attendance Management</h3>
-                <span class="badge-category cat-web">Full-Stack / Web</span>
-              </div>
-              <a href="https://github.com/Anusmrith/Attendwise" target="_blank" rel="noopener noreferrer"
-                class="project-link-btn">
+            <div class="project-actions">
+              <a href="https://anusmrith.github.io/kseb-watchdog/" target="_blank" rel="noopener noreferrer"
+                class="project-link-btn demo-btn" title="Open Live Web Application">
+                <span>Live Demo</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"></polygon>
+                </svg>
+              </a>
+              <a href="https://github.com/Anusmrith/kseb-watchdog" target="_blank" rel="noopener noreferrer"
+                class="project-link-btn" title="View Source Code on GitHub">
                 <span>View Repository</span>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                   stroke-linecap="round" stroke-linejoin="round">
@@ -1563,269 +1555,345 @@
                 </svg>
               </a>
             </div>
-
-            <span class="project-tagline">"Smart attendance tracking, shortage risk assessment, and class margin
-              forecasting."</span>
-
-            <p class="project-desc">
-              A comprehensive full-stack student utility built to help college undergraduates monitor subject-wise
-              attendance percentages, analyze shortage risks, and calculate how many classes they need to attend (or can
-              safely miss) based on customizable minimum attendance thresholds.
-            </p>
-
-            <ul class="project-bullets">
-              <li>Integrated <strong>Supabase (PostgreSQL)</strong> with cloud authentication and Row Level Security
-                (RLS)
-                for multi-user security and personalized data isolation.</li>
-              <li>Engineered predictive calculation algorithms that determine the exact consecutive classes needed to
-                recover from shortages or how many classes can safely be skipped without falling below criteria.</li>
-              <li>Designed visual status categorization (🟢 Safe / 🟡 Warning / 🔴 At Risk) with instant client-side
-                calculation and responsive input validation.</li>
-              <li>Built with clean modular <strong>JavaScript (Vanilla JS)</strong> architecture ensuring high
-                performance, zero runtime bloat, and mobile-first responsiveness.</li>
-            </ul>
-
-            <div class="tech-stack-tags">
-              <span class="tech-tag">JavaScript (ES6+)</span>
-              <span class="tech-tag">Supabase</span>
-              <span class="tech-tag">PostgreSQL</span>
-              <span class="tech-tag">HTML5 / CSS3</span>
-              <span class="tech-tag">Row Level Security</span>
-              <span class="tech-tag">Git & GitHub</span>
-            </div>
           </div>
 
-          <!-- Project 3: NutriDecide -->
-          <div class="bento-card project-card reveal stagger-3" data-category="mobile">
-            <div class="project-top-row">
-              <div class="project-title-group">
-                <h3>NutriDecide — Food Intelligence App</h3>
-                <span class="badge-category cat-mobile">Flutter / Mobile</span>
-              </div>
-              <a href="https://github.com/Anusmrith/NutriDecide" target="_blank" rel="noopener noreferrer"
-                class="project-link-btn">
-                <span>View Repository</span>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="7" y1="17" x2="17" y2="7"></line>
-                  <polyline points="7 7 17 7 17 17"></polyline>
-                </svg>
-              </a>
-            </div>
+          <span class="project-tagline">"Kerala electricity meter tracker, daily burn rate predictor, 500-unit slab
+            cliff radar, and household appliance simulator."</span>
 
-            <span class="project-tagline">"Personalized nutrition and food product suitability analysis."</span>
-
-            <p class="project-desc">
-              A comprehensive cross-platform mobile application designed to evaluate packaged food items against
-              personal
-              dietary goals, empowering consumers to make healthy and conscious nutritional decisions.
-            </p>
-
-            <ul class="project-bullets">
-              <li>Designed and engineered fluid mobile UI layouts, custom navigation flows, and interactive components
-                using <strong>Flutter & Dart</strong>.</li>
-              <li>Built streamlined user preference forms to input dietary requirements, allergens, and targeted
-                macronutrient limits.</li>
-              <li>Formulated and tested back-end computational logic using <strong>Python</strong> to validate
-                nutritional
-                algorithms and score suitability rules.</li>
-              <li>Employed disciplined version control practices using <strong>Git & GitHub</strong> for feature
-                branching
-                and clean commit history.</li>
-            </ul>
-
-            <div class="tech-stack-tags">
-              <span class="tech-tag">Flutter</span>
-              <span class="tech-tag">Dart</span>
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">Mobile UI/UX</span>
-              <span class="tech-tag">Git & GitHub</span>
-            </div>
-          </div>
-
-          <!-- Project 4: QuickNutri -->
-          <div class="bento-card project-card reveal stagger-4" data-category="web">
-            <div class="project-top-row">
-              <div class="project-title-group">
-                <h3>QuickNutri — Instant Nutritional Metric Calculator</h3>
-                <span class="badge-category cat-web">Web Utility</span>
-              </div>
-              <a href="https://github.com/Anusmrith/NutriCalc---calculator" target="_blank" rel="noopener noreferrer"
-                class="project-link-btn">
-                <span>View Repository</span>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="7" y1="17" x2="17" y2="7"></line>
-                  <polyline points="7 7 17 7 17 17"></polyline>
-                </svg>
-              </a>
-            </div>
-
-            <span class="project-tagline">"Interactive daily calorie and macronutrient estimation utility."</span>
-
-            <p class="project-desc">
-              A high-speed, lightweight responsive web utility built to calculate baseline energy expenditure (BMR/TDEE)
-              and recommend daily caloric and macronutrient targets based on customizable fitness outcomes.
-            </p>
-
-            <ul class="project-bullets">
-              <li>Implemented the precision <strong>Mifflin-St Jeor formula</strong> with automated logic adjustments
-                for
-                caloric deficit, maintenance, and muscular surplus goals.</li>
-              <li>Engineered snappy, client-side DOM manipulation in <strong>JavaScript</strong> to render real-time
-                recalculations with zero page reloads.</li>
-              <li>Crafted an adaptive dark-themed layout that maintains seamless visual clarity across mobile screens,
-                tablets, and desktop displays.</li>
-            </ul>
-
-            <div class="tech-stack-tags">
-              <span class="tech-tag">JavaScript (ES6+)</span>
-              <span class="tech-tag">HTML5</span>
-              <span class="tech-tag">CSS3</span>
-              <span class="tech-tag">Responsive Design</span>
-              <span class="tech-tag">Health Metrics</span>
-            </div>
-          </div>
-
-          <!-- Project 5: Blackout -->
-          <div class="bento-card project-card reveal stagger-5" data-category="game">
-            <div class="project-top-row">
-              <div class="project-title-group">
-                <h3>Blackout — Godot 2D Action Game</h3>
-                <span class="badge-category cat-game">Godot Game Dev</span>
-              </div>
-              <a href="https://github.com/Anusmrith/blackoutgame" target="_blank" rel="noopener noreferrer"
-                class="project-link-btn">
-                <span>View Repository</span>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="7" y1="17" x2="17" y2="7"></line>
-                  <polyline points="7 7 17 7 17 17"></polyline>
-                </svg>
-              </a>
-            </div>
-
-            <span class="project-tagline">"Atmospheric 2D game built with Godot Engine and GDScript."</span>
-
-            <p class="project-desc">
-              A standalone 2D game focusing on gameplay loops, collision physics, player movement mechanics, custom
-              scene
-              transitions, and reactive state systems.
-            </p>
-
-            <ul class="project-bullets">
-              <li>Structured scalable game architecture by leveraging Godot's node and scene-tree hierarchy to separate
-                asset pipelines from controller code.</li>
-              <li>Programmed movement physics, jump curves, and collision boundaries using custom
-                <strong>GDScript</strong> routines.
-              </li>
-              <li>Implemented robust game-loop event triggers and state machines for handling win/loss scenarios and
-                game
-                resets.</li>
-              <li>Maintained repository integrity and code revisions via <strong>Git</strong>.</li>
-            </ul>
-
-            <div class="tech-stack-tags">
-              <span class="tech-tag">Godot Engine</span>
-              <span class="tech-tag">GDScript</span>
-              <span class="tech-tag">2D Physics</span>
-              <span class="tech-tag">Game Architecture</span>
-              <span class="tech-tag">Git</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="education" class="reveal">
-        <div class="section-header">
-          <div>
-            <h2 class="section-title">
-              <span class="section-title-icon">🎓</span>
-              Education & Academics
-            </h2>
-            <p class="section-subtitle">Formal foundation in Computer Science & Engineering</p>
-          </div>
-        </div>
-
-        <div class="bento-card edu-card">
-          <div class="edu-header-row">
-            <div class="edu-title">Bachelor of Technology (B.Tech) in Computer Science & Engineering</div>
-            <div class="edu-period">2023 – 2027</div>
-          </div>
-
-          <div class="edu-college">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-            College of Engineering Karunagappally (CEK)
-          </div>
-
-          <div class="edu-highlights">
-            <div class="edu-pill-stat">
-              Cumulative GPA: <span>7.15 / 10.0</span>
-            </div>
-            <div class="edu-pill-stat">
-              Status: <span>Active Undergraduate</span>
-            </div>
-            <div class="edu-pill-stat">
-              Focus: <span>Software Engineering & Systems</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" class="reveal">
-        <div class="bento-card contact-banner">
-          <h2>Let's Connect & Collaborate</h2>
-          <p>
-            I'm currently seeking internship opportunities, collaborative open-source projects, and new challenges in
-            software development. Have an opportunity or want to chat?
+          <p class="project-desc">
+            A specialized bilingual Progressive Web App (PWA) engineered to prevent unexpected electricity bill shock
+            for Kerala households under the KSERC LT-1A tariff. Accurately simulates bi-monthly telescopic slabs and
+            warns against the severe ₹1,420+ non-telescopic penalty cliff at 500 units before bills are issued.
           </p>
 
-          <div class="contact-button-group">
-            <a href="mailto:anusmrithchanju@gmail.com" class="btn btn-primary">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
-              <span>Send Me an Email</span>
-            </a>
+          <ul class="project-bullets">
+            <li>Engineered the official <strong>KSERC LT-1A bi-monthly tariff engine</strong> modeling telescopic tiers
+              (Slabs 1–5), fixed charges, meter rent, fuel surcharges, and the steep 500+ unit flat-rate cliff
+              transition.</li>
+            <li>Developed a mid-cycle <strong>Daily Burn Rate predictor</strong> computing elapsed-day velocity to
+              accurately forecast Day-60 consumption and projected expenses with dynamic status radars.</li>
+            <li>Built an interactive <strong>Kerala Household Appliance Inspector & Simulator</strong> modeling
+              real-time energy draw for ACs, water pumps, and refrigeration with live duty-cycle sliders and savings
+              calculators.</li>
+            <li>Implemented full <strong>Malayalam & English localization</strong>, procedural audio feedback using the
+              <strong>Web Audio API</strong> (zero external audio assets), and one-click WhatsApp family alert summaries
+              ("Stern Malayali Dad" mode).</li>
+            <li>Architected with <strong>Vite 6</strong> and Vanilla ES6+ modules into an installable, offline-capable
+              PWA with 100% passing automated mathematical test suites.</li>
+          </ul>
 
-            <a href="https://www.linkedin.com/in/anusmrith-m-m-9081812b2" target="_blank" rel="noopener noreferrer"
-              class="btn btn-secondary">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.96 0-1.74.78-1.74 1.74s.78 1.74 1.74 1.74 1.74-.78 1.74-1.74-.78-1.74-1.74-1.74Z" />
-              </svg>
-              <span>Connect on LinkedIn</span>
-            </a>
-
-            <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-              </svg>
-              <span>GitHub Profile</span>
-            </a>
+          <div class="tech-stack-tags">
+            <span class="tech-tag">JavaScript (ES6+)</span>
+            <span class="tech-tag">Vite 6</span>
+            <span class="tech-tag">Progressive Web App (PWA)</span>
+            <span class="tech-tag">Web Audio API</span>
+            <span class="tech-tag">KSERC Tariff Engine</span>
+            <span class="tech-tag">HTML5 & CSS3</span>
+            <span class="tech-tag">Git & GitHub Pages</span>
           </div>
         </div>
-      </section>
 
-      <footer>
-        <p>© <span id="year"></span> Anusmrith M M • College of Engineering Karunagappally</p>
-        <div class="footer-links">
-          <a href="#about" class="footer-link">About</a>
-          <a href="#skills" class="footer-link">Skills</a>
-          <a href="#projects" class="footer-link">Projects</a>
-          <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer"
-            class="footer-link">GitHub</a>
-          <a href="https://www.linkedin.com/in/anusmrith-m-m-9081812b2" target="_blank" rel="noopener noreferrer"
-            class="footer-link">LinkedIn</a>
+        <!-- Project 2: AttendWise -->
+        <div class="bento-card project-card reveal stagger-2" data-category="web mobile">
+          <div class="project-top-row">
+            <div class="project-title-group">
+              <h3>AttendWise — Cross-Platform Smart Attendance &amp; ERP System</h3>
+              <span class="badge-category cat-web">Full-Stack</span>
+              <span class="badge-category cat-mobile">Mobile / PWA</span>
+              <span class="badge-role">Full-Stack &amp; Mobile Developer</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://anusmrith.github.io/Attendwise/" target="_blank" rel="noopener noreferrer"
+                class="project-link-btn demo-btn" title="Open Live Web Application">
+                <span>Live Demo</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"></polygon>
+                </svg>
+              </a>
+              <a href="https://github.com/Anusmrith/Attendwise" target="_blank" rel="noopener noreferrer"
+                class="project-link-btn" title="View Source Code on GitHub">
+                <span>View Repository</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <span class="project-tagline">"Cross-Platform Smart Attendance Tracker &amp; ERP Integration System"</span>
+
+          <p class="project-desc">
+            AttendWise is a cross-platform college attendance management and academic risk analyzer. Built with Vanilla
+            JS, Supabase, and Capacitor, it features 1-click automated attendance synchronization with the EzyGo college
+            portal (<code>edu.ezygo.app</code>), predictive recovery algorithms, and offline-first PWA &amp; native
+            Android/iOS capabilities.
+          </p>
+
+          <ul class="project-bullets">
+            <li><strong>Automated ERP Sync</strong>: Integrated authenticated session syncing with the EzyGo portal
+              (<code>edu.ezygo.app</code>) to parse student reports and auto-populate attendance records with zero
+              manual input.</li>
+            <li><strong>Predictive Academic Calculators</strong>: Formulated dynamic algorithms that calculate exact
+              consecutive classes needed to recover from low attendance or safe bunk margins before dipping below policy
+              thresholds (e.g., 75%).</li>
+            <li><strong>Cross-Platform &amp; Offline-Ready</strong>: Deployed as an installable PWA with a network-first
+              caching Service Worker, and built for native Android (<code>.apk</code>/<code>.aab</code>) and iOS via
+              Capacitor 8.</li>
+            <li><strong>Secure Cloud Backend</strong>: Architected user authentication and isolated multi-tenant data
+              storage using Supabase and PostgreSQL Row Level Security (RLS).</li>
+            <li><strong>Responsive UI/UX</strong>: Designed a mobile-first interface featuring notch/safe-area insets,
+              interactive status pills (Safe/Warning/At Risk), and real-time aggregate statistics.</li>
+          </ul>
+
+          <div class="tech-stack-tags">
+            <span class="tech-tag">JavaScript (ES6+)</span>
+            <span class="tech-tag">HTML5 &amp; CSS3</span>
+            <span class="tech-tag">Capacitor 8</span>
+            <span class="tech-tag">Supabase</span>
+            <span class="tech-tag">PostgreSQL (RLS)</span>
+            <span class="tech-tag">Android (Gradle)</span>
+            <span class="tech-tag">iOS (Xcode)</span>
+            <span class="tech-tag">Progressive Web App (PWA)</span>
+            <span class="tech-tag">Service Workers</span>
+            <span class="tech-tag">EzyGo ERP API Sync</span>
+            <span class="tech-tag">Safe-Area Insets</span>
+            <span class="tech-tag">Git &amp; GitHub</span>
+          </div>
         </div>
-      </footer>
+
+        <!-- Project 3: NutriDecide -->
+        <div class="bento-card project-card reveal stagger-3" data-category="mobile">
+          <div class="project-top-row">
+            <div class="project-title-group">
+              <h3>NutriDecide — Food Intelligence App</h3>
+              <span class="badge-category cat-mobile">Flutter / Mobile</span>
+            </div>
+            <a href="https://github.com/Anusmrith/NutriDecide" target="_blank" rel="noopener noreferrer"
+              class="project-link-btn">
+              <span>View Repository</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </a>
+          </div>
+
+          <span class="project-tagline">"Personalized nutrition and food product suitability analysis."</span>
+
+          <p class="project-desc">
+            A comprehensive cross-platform mobile application designed to evaluate packaged food items against
+            personal
+            dietary goals, empowering consumers to make healthy and conscious nutritional decisions.
+          </p>
+
+          <ul class="project-bullets">
+            <li>Designed and engineered fluid mobile UI layouts, custom navigation flows, and interactive components
+              using <strong>Flutter & Dart</strong>.</li>
+            <li>Built streamlined user preference forms to input dietary requirements, allergens, and targeted
+              macronutrient limits.</li>
+            <li>Formulated and tested back-end computational logic using <strong>Python</strong> to validate
+              nutritional
+              algorithms and score suitability rules.</li>
+            <li>Employed disciplined version control practices using <strong>Git & GitHub</strong> for feature
+              branching
+              and clean commit history.</li>
+          </ul>
+
+          <div class="tech-stack-tags">
+            <span class="tech-tag">Flutter</span>
+            <span class="tech-tag">Dart</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Mobile UI/UX</span>
+            <span class="tech-tag">Git & GitHub</span>
+          </div>
+        </div>
+
+        <!-- Project 4: QuickNutri -->
+        <div class="bento-card project-card reveal stagger-4" data-category="web">
+          <div class="project-top-row">
+            <div class="project-title-group">
+              <h3>QuickNutri — Instant Nutritional Metric Calculator</h3>
+              <span class="badge-category cat-web">Web Utility</span>
+            </div>
+            <a href="https://github.com/Anusmrith/NutriCalc---calculator" target="_blank" rel="noopener noreferrer"
+              class="project-link-btn">
+              <span>View Repository</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </a>
+          </div>
+
+          <span class="project-tagline">"Interactive daily calorie and macronutrient estimation utility."</span>
+
+          <p class="project-desc">
+            A high-speed, lightweight responsive web utility built to calculate baseline energy expenditure (BMR/TDEE)
+            and recommend daily caloric and macronutrient targets based on customizable fitness outcomes.
+          </p>
+
+          <ul class="project-bullets">
+            <li>Implemented the precision <strong>Mifflin-St Jeor formula</strong> with automated logic adjustments
+              for
+              caloric deficit, maintenance, and muscular surplus goals.</li>
+            <li>Engineered snappy, client-side DOM manipulation in <strong>JavaScript</strong> to render real-time
+              recalculations with zero page reloads.</li>
+            <li>Crafted an adaptive dark-themed layout that maintains seamless visual clarity across mobile screens,
+              tablets, and desktop displays.</li>
+          </ul>
+
+          <div class="tech-stack-tags">
+            <span class="tech-tag">JavaScript (ES6+)</span>
+            <span class="tech-tag">HTML5</span>
+            <span class="tech-tag">CSS3</span>
+            <span class="tech-tag">Responsive Design</span>
+            <span class="tech-tag">Health Metrics</span>
+          </div>
+        </div>
+
+        <!-- Project 5: Blackout -->
+        <div class="bento-card project-card reveal stagger-5" data-category="game">
+          <div class="project-top-row">
+            <div class="project-title-group">
+              <h3>Blackout — Godot 2D Action Game</h3>
+              <span class="badge-category cat-game">Godot Game Dev</span>
+            </div>
+            <a href="https://github.com/Anusmrith/blackoutgame" target="_blank" rel="noopener noreferrer"
+              class="project-link-btn">
+              <span>View Repository</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </a>
+          </div>
+
+          <span class="project-tagline">"Atmospheric 2D game built with Godot Engine and GDScript."</span>
+
+          <p class="project-desc">
+            A standalone 2D game focusing on gameplay loops, collision physics, player movement mechanics, custom
+            scene
+            transitions, and reactive state systems.
+          </p>
+
+          <ul class="project-bullets">
+            <li>Structured scalable game architecture by leveraging Godot's node and scene-tree hierarchy to separate
+              asset pipelines from controller code.</li>
+            <li>Programmed movement physics, jump curves, and collision boundaries using custom
+              <strong>GDScript</strong> routines.
+            </li>
+            <li>Implemented robust game-loop event triggers and state machines for handling win/loss scenarios and
+              game
+              resets.</li>
+            <li>Maintained repository integrity and code revisions via <strong>Git</strong>.</li>
+          </ul>
+
+          <div class="tech-stack-tags">
+            <span class="tech-tag">Godot Engine</span>
+            <span class="tech-tag">GDScript</span>
+            <span class="tech-tag">2D Physics</span>
+            <span class="tech-tag">Game Architecture</span>
+            <span class="tech-tag">Git</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="reveal">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">
+            <span class="section-title-icon">🎓</span>
+            Education & Academics
+          </h2>
+          <p class="section-subtitle">Formal foundation in Computer Science & Engineering</p>
+        </div>
+      </div>
+
+      <div class="bento-card edu-card">
+        <div class="edu-header-row">
+          <div class="edu-title">Bachelor of Technology (B.Tech) in Computer Science & Engineering</div>
+          <div class="edu-period">2023 – 2027</div>
+        </div>
+
+        <div class="edu-college">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          College of Engineering Karunagappally (CEK)
+        </div>
+
+        <div class="edu-highlights">
+          <div class="edu-pill-stat">
+            Cumulative GPA: <span>7.15 / 10.0</span>
+          </div>
+          <div class="edu-pill-stat">
+            Status: <span>Active Undergraduate</span>
+          </div>
+          <div class="edu-pill-stat">
+            Focus: <span>Software Engineering & Systems</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="reveal">
+      <div class="bento-card contact-banner">
+        <h2>Let's Connect & Collaborate</h2>
+        <p>
+          I'm currently seeking internship opportunities, collaborative open-source projects, and new challenges in
+          software development. Have an opportunity or want to chat?
+        </p>
+
+        <div class="contact-button-group">
+          <a href="mailto:anusmrithchanju@gmail.com" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <span>Send Me an Email</span>
+          </a>
+
+          <a href="https://www.linkedin.com/in/anusmrith-m-m-9081812b2" target="_blank" rel="noopener noreferrer"
+            class="btn btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.96 0-1.74.78-1.74 1.74s.78 1.74 1.74 1.74 1.74-.78 1.74-1.74-.78-1.74-1.74-1.74Z" />
+            </svg>
+            <span>Connect on LinkedIn</span>
+          </a>
+
+          <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+            <span>GitHub Profile</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>© <span id="year"></span> Anusmrith M M • College of Engineering Karunagappally</p>
+      <div class="footer-links">
+        <a href="#about" class="footer-link">About</a>
+        <a href="#skills" class="footer-link">Skills</a>
+        <a href="#projects" class="footer-link">Projects</a>
+        <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+        <a href="https://www.linkedin.com/in/anusmrith-m-m-9081812b2" target="_blank" rel="noopener noreferrer"
+          class="footer-link">LinkedIn</a>
+      </div>
+    </footer>
   </div>
 
   <!-- Interactive Back to Top Floating Button -->
@@ -2095,8 +2163,9 @@
         const filter = btn.getAttribute('data-filter');
 
         projectCards.forEach(card => {
-          const category = card.getAttribute('data-category');
-          if (filter === 'all' || category === filter) {
+          const category = card.getAttribute('data-category') || '';
+          const categories = category.split(/\s+/);
+          if (filter === 'all' || categories.includes(filter)) {
             card.classList.remove('hide');
             card.style.opacity = '0';
             card.style.transform = 'translateY(14px)';
