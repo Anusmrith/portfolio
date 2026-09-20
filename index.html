@@ -599,29 +599,29 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       flex-wrap: wrap;
-      gap: 12px;
-      padding-bottom: 14px;
+      gap: 10px;
+      padding-bottom: 12px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .game-status-group {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
     .game-score-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
       font-family: var(--font-mono);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: #ffffff;
       background: rgba(255, 255, 255, 0.08);
-      padding: 6px 14px;
+      padding: 6px 13px;
       border-radius: var(--radius-full);
       border: 1px solid rgba(255, 255, 255, 0.16);
     }
@@ -630,6 +630,13 @@
       font-family: var(--font-mono);
       font-size: 0.82rem;
       color: #e4e4e7;
+    }
+
+    .game-actions-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .game-controls-hint {
@@ -654,17 +661,22 @@
     .game-canvas-wrapper {
       position: relative;
       width: 100%;
-      height: 320px;
+      aspect-ratio: 960 / 340;
+      height: auto;
+      min-height: 180px;
+      max-height: 360px;
       background: #020204;
       border-radius: var(--radius-md);
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      touch-action: none;
     }
 
     #game-canvas {
       width: 100%;
       height: 100%;
       display: block;
+      aspect-ratio: 960 / 340;
     }
 
     /* On-Screen Mobile Touch Controls */
@@ -674,6 +686,11 @@
       align-items: center;
       margin-top: 14px;
       gap: 12px;
+      padding: 10px 14px;
+      background: rgba(14, 14, 20, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      touch-action: none;
     }
 
     .touch-dir-group {
@@ -682,34 +699,60 @@
     }
 
     .touch-btn {
-      width: 52px;
-      height: 48px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 64px;
+      height: 52px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.22);
       border-radius: var(--radius-sm);
       color: #ffffff;
-      font-size: 1.1rem;
+      font-size: 1.25rem;
       display: flex;
       align-items: center;
       justify-content: center;
       user-select: none;
       -webkit-user-select: none;
-      touch-action: manipulation;
+      touch-action: none;
+      -webkit-tap-highlight-color: transparent;
+      cursor: pointer;
+      transition: background 0.12s ease, transform 0.1s ease, border-color 0.12s ease;
     }
 
-    .touch-btn:active {
+    .touch-btn:active,
+    .touch-btn.active {
       background: #ffffff;
       color: #000000;
+      border-color: #ffffff;
+      transform: scale(0.96);
     }
 
     .touch-jump-btn {
       flex: 1;
-      max-width: 140px;
-      background: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.35);
+      max-width: 150px;
+      height: 52px;
+      background: #ffffff;
+      color: #000000;
+      border: 1px solid #ffffff;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2);
+    }
+
+    .touch-jump-btn:active,
+    .touch-jump-btn.active {
+      background: #e4e4e7;
+      transform: scale(0.96);
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.4);
+    }
+
+    .touch-instruction-text {
       font-family: var(--font-mono);
-      font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 8px;
+      display: none;
     }
 
     /* Completed Evaluation Overlay Modal inside Game Canvas */
@@ -1298,6 +1341,9 @@
     }
 
     @media (max-width: 768px) {
+      .container {
+        padding: 0 14px 60px;
+      }
       .hero-title {
         font-size: 2.15rem;
       }
@@ -1325,6 +1371,103 @@
       }
       .project-top-row {
         flex-direction: column;
+      }
+
+      /* Mobile Game Section Optimization */
+      .game-console-card {
+        padding: 14px 12px;
+        border-radius: var(--radius-md);
+      }
+      .game-controls-hint {
+        display: none !important;
+      }
+      .game-header-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        margin-bottom: 12px;
+        padding-bottom: 10px;
+      }
+      .game-status-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        width: 100%;
+      }
+      .game-score-badge {
+        padding: 5px 10px;
+        font-size: 0.78rem;
+        justify-content: center;
+      }
+      .game-rating-badge {
+        grid-column: span 2;
+        font-size: 0.76rem;
+        text-align: center;
+        padding: 3px 0;
+      }
+      .game-actions-group {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        gap: 8px;
+      }
+      .game-actions-group .btn {
+        flex: 1;
+        padding: 8px 12px;
+        font-size: 0.78rem;
+        justify-content: center;
+      }
+      .game-canvas-wrapper {
+        border-radius: var(--radius-sm);
+        min-height: 180px;
+      }
+      .touch-controls-bar {
+        display: flex !important;
+        margin-top: 12px;
+        padding: 8px 10px;
+      }
+      .touch-instruction-text {
+        display: block !important;
+      }
+      .touch-btn {
+        width: 58px;
+        height: 48px;
+        font-size: 1.15rem;
+      }
+      .touch-jump-btn {
+        height: 48px;
+        font-size: 0.85rem;
+        max-width: 130px;
+      }
+
+      /* Game Evaluation Modal on Mobile */
+      .game-eval-modal {
+        padding: 12px 10px;
+      }
+      .eval-badge-title {
+        font-size: 1.15rem;
+        margin-bottom: 4px;
+      }
+      .eval-badge-sub {
+        font-size: 0.74rem;
+        line-height: 1.35;
+        margin-bottom: 10px;
+        max-width: 100%;
+      }
+      .eval-stats-row {
+        gap: 6px;
+        margin-bottom: 10px;
+      }
+      .eval-pill {
+        padding: 3px 8px;
+        font-size: 0.7rem;
+      }
+      .eval-actions-row {
+        gap: 8px;
+      }
+      .eval-actions-row .btn {
+        padding: 7px 12px;
+        font-size: 0.78rem;
       }
     }
   </style>
@@ -1506,7 +1649,7 @@
             </div>
           </div>
 
-          <div style="display: flex; align-items: center; gap: 14px;">
+          <div class="game-actions-group">
             <div class="game-controls-hint">
               <span>Move:</span> <span class="key-cap">A</span><span class="key-cap">D</span> / <span class="key-cap">◀</span><span class="key-cap">▶</span>
               <span style="margin-left:6px;">Jump:</span> <span class="key-cap">W</span> / <span class="key-cap">▲</span> / <span class="key-cap">Space</span>
@@ -1554,6 +1697,9 @@
             <button class="touch-btn" id="btnRight" aria-label="Move Right">▶</button>
           </div>
           <button class="touch-btn touch-jump-btn" id="btnJump" aria-label="Jump / Boost">JUMP ▲</button>
+        </div>
+        <div class="touch-instruction-text">
+          <span>🕹️ Tap ◀ ▶ to move, JUMP ▲ to boost (or tap directly on game screen)</span>
         </div>
       </div>
     </section>
@@ -2347,23 +2493,57 @@
       window.addEventListener('keydown', onKeyDown);
       window.addEventListener('keyup', onKeyUp);
 
-      // Touch Buttons Setup
+      // Touch Buttons Setup with Instant Pointer Events
       const btnLeft = document.getElementById('btnLeft');
       const btnRight = document.getElementById('btnRight');
       const btnJump = document.getElementById('btnJump');
 
-      if (btnLeft && btnRight && btnJump) {
-        const addTouch = (el, pressAction, releaseAction) => {
-          el.addEventListener('touchstart', (e) => { e.preventDefault(); pressAction(); });
-          el.addEventListener('touchend', (e) => { e.preventDefault(); releaseAction(); });
-          el.addEventListener('mousedown', (e) => { e.preventDefault(); pressAction(); });
-          el.addEventListener('mouseup', (e) => { e.preventDefault(); releaseAction(); });
+      function bindButton(el, onPress, onRelease) {
+        if (!el) return;
+        const start = (e) => {
+          e.preventDefault();
+          el.classList.add('active');
+          onPress();
         };
-
-        addTouch(btnLeft, () => { keys.left = true; }, () => { keys.left = false; });
-        addTouch(btnRight, () => { keys.right = true; }, () => { keys.right = false; });
-        addTouch(btnJump, () => { triggerJump(); keys.up = true; }, () => { keys.up = false; });
+        const end = (e) => {
+          e.preventDefault();
+          el.classList.remove('active');
+          onRelease();
+        };
+        el.addEventListener('pointerdown', start);
+        el.addEventListener('pointerup', end);
+        el.addEventListener('pointercancel', end);
+        el.addEventListener('pointerleave', end);
       }
+
+      bindButton(btnLeft, () => { keys.left = true; }, () => { keys.left = false; });
+      bindButton(btnRight, () => { keys.right = true; }, () => { keys.right = false; });
+      bindButton(btnJump, () => { triggerJump(); keys.up = true; }, () => { keys.up = false; });
+
+      // Direct Canvas Touch Interaction
+      canvas.addEventListener('pointerdown', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.clientX - rect.left;
+        const clientY = e.clientY - rect.top;
+        const normX = clientX / rect.width;
+        const normY = clientY / rect.height;
+
+        // If tap is in upper 40% of canvas -> Jump!
+        if (normY < 0.42) {
+          triggerJump();
+        } else if (normX < 0.45) {
+          keys.left = true;
+        } else if (normX > 0.55) {
+          keys.right = true;
+        }
+      });
+      const releaseCanvasTap = () => {
+        keys.left = false;
+        keys.right = false;
+      };
+      canvas.addEventListener('pointerup', releaseCanvasTap);
+      canvas.addEventListener('pointercancel', releaseCanvasTap);
+      canvas.addEventListener('pointerleave', releaseCanvasTap);
 
       function triggerJump() {
         if (player.isGrounded) {
