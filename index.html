@@ -1546,6 +1546,48 @@
       background: rgba(255, 255, 255, 0.06);
     }
 
+    .mani-mic-btn {
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .mani-mic-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .mani-mic-btn.listening {
+      background: #dc2626 !important;
+      border-color: #ef4444 !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 18px rgba(239, 68, 68, 0.75) !important;
+      animation: pulseMic 1.2s infinite;
+    }
+
+    @keyframes pulseMic {
+      0%, 100% {
+        box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 0 24px rgba(239, 68, 68, 0.95);
+        transform: scale(1.04);
+      }
+    }
+
     .mani-send-btn {
       padding: 10px 20px;
       border-radius: var(--radius-sm);
@@ -2994,7 +3036,16 @@
 
         <!-- Command Input Form -->
         <form class="mani-input-bar" id="maniInputForm" onsubmit="handleManiSubmit(event)">
-          <input type="text" id="maniCommandInput" placeholder="Type a command (e.g., 'What is your system status?', 'Who are you?')..." autocomplete="off" />
+          <button type="button" class="mani-mic-btn" id="maniMicBtn" onclick="toggleManiVoiceRecognition()" title="Speak voice command via microphone">
+            <svg class="mani-mic-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+              <line x1="12" y1="19" x2="12" y2="23"></line>
+              <line x1="8" y1="23" x2="16" y2="23"></line>
+            </svg>
+            <span class="mani-mic-label" id="maniMicLabel">Voice Command</span>
+          </button>
+          <input type="text" id="maniCommandInput" placeholder="Speak via mic or type a command (e.g., 'system status', 'who are you')..." autocomplete="off" />
           <button type="submit" class="mani-send-btn">
             <span>Send</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -3842,13 +3893,17 @@
       const ramVal = document.getElementById('maniRamVal');
       const ramBar = document.getElementById('maniRamBar');
       const latencyVal = document.getElementById('maniLatencyVal');
+      const micBtn = document.getElementById('maniMicBtn');
+      const micLabel = document.getElementById('maniMicLabel');
 
       let waveCtx = null;
       let waveAnimId = null;
       let waveTime = 0;
       let isVoiceResponding = false;
+      let isListeningForVoice = false;
       let voiceSynthesisEnabled = false;
       let telemetryInterval = null;
+      let recognition = null;
 
       // Initialize Wave Canvas
       if (waveCanvas) {
@@ -3934,6 +3989,10 @@
           modalBackdrop.classList.remove('active');
           document.body.style.overflow = '';
           if (window.speechSynthesis) window.speechSynthesis.cancel();
+          if (recognition && isListeningForVoice) {
+            try { recognition.stop(); } catch(e) {}
+          }
+          stopVoiceListening();
           setSpeakingState(false);
         }
       };
@@ -3971,6 +4030,96 @@
           if (btnSim) btnSim.classList.remove('active');
           if (panelWin) panelWin.classList.add('active');
           if (panelSim) panelSim.classList.remove('active');
+        }
+      };
+
+      // ========================================================
+      // Web Speech API: Real-time Voice Command Recognition
+      // ========================================================
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SpeechRecognition) {
+        try {
+          recognition = new SpeechRecognition();
+          recognition.continuous = false;
+          recognition.interimResults = true;
+          recognition.lang = 'en-US';
+
+          recognition.onstart = function() {
+            isListeningForVoice = true;
+            if (micBtn) micBtn.classList.add('listening');
+            if (micLabel) micLabel.textContent = 'Listening...';
+            if (waveLabel) waveLabel.textContent = '🎙️ Neural Voice Capture: Listening to your command...';
+            isVoiceResponding = true;
+            if (cmdInput) cmdInput.placeholder = 'Listening... speak now (e.g., "What is your system status?")...';
+          };
+
+          recognition.onresult = function(event) {
+            let transcript = '';
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+              transcript += event.results[i][0].transcript;
+            }
+            if (cmdInput) cmdInput.value = transcript;
+          };
+
+          recognition.onerror = function(event) {
+            console.warn('[M.A.N.I. Voice Error]', event.error);
+            stopVoiceListening();
+            if (event.error === 'not-allowed') {
+              appendChatMessage('System', 'Microphone access was denied. Please allow microphone permissions in your browser to speak commands.', false);
+            } else if (event.error !== 'no-speech') {
+              appendChatMessage('System', `Microphone notice: ${event.error}. You can also type commands directly.`, false);
+            }
+          };
+
+          recognition.onend = function() {
+            stopVoiceListening();
+            if (cmdInput && cmdInput.value.trim()) {
+              const spokenText = cmdInput.value.trim();
+              cmdInput.value = '';
+              appendChatMessage('You', `🎙️ ${spokenText}`, false);
+              processManiQuery(spokenText);
+            }
+          };
+        } catch (e) {
+          console.error('[SpeechRecognition Init Error]', e);
+        }
+      }
+
+      function stopVoiceListening() {
+        isListeningForVoice = false;
+        if (micBtn) micBtn.classList.remove('listening');
+        if (micLabel) micLabel.textContent = 'Voice Command';
+        if (waveLabel) {
+          waveLabel.textContent = isVoiceResponding
+            ? 'Neural Audio Resonance: Active Speech Output'
+            : 'Neural Audio Resonance: Standby (Passive Scan)';
+        }
+        if (cmdInput) cmdInput.placeholder = "Speak via mic or type a command (e.g., 'system status', 'who are you')...";
+      }
+
+      window.toggleManiVoiceRecognition = function() {
+        if (!SpeechRecognition) {
+          appendChatMessage('System', 'Web Speech recognition is not supported in this browser. Please use Chrome, Edge, or Safari, or type commands directly below.', false);
+          return;
+        }
+        if (!recognition) return;
+
+        if (isListeningForVoice) {
+          try { recognition.stop(); } catch(e) {}
+          stopVoiceListening();
+        } else {
+          if (window.speechSynthesis) window.speechSynthesis.cancel();
+          setSpeakingState(false);
+          try {
+            recognition.start();
+          } catch (e) {
+            try {
+              recognition.abort();
+              setTimeout(() => {
+                try { recognition.start(); } catch(err) {}
+              }, 150);
+            } catch (err) {}
+          }
         }
       };
 
@@ -4087,6 +4236,13 @@
       }
 
       window.executeManiPrompt = function(promptText) {
+        if (recognition) {
+          if (promptText.includes('Malayalam') || promptText.includes('മലയാളം')) {
+            recognition.lang = 'ml-IN';
+          } else {
+            recognition.lang = 'en-US';
+          }
+        }
         appendChatMessage('You', promptText, false);
         processManiQuery(promptText);
       };
