@@ -1116,6 +1116,592 @@
     }
 
     /* ==========================================================================
+       M.A.N.I. MARK VII INTERACTIVE SIMULATOR MODAL
+       ========================================================================== */
+    .mani-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 5, 8, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .mani-modal-backdrop.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .mani-modal-dialog {
+      background: #09090f;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 860px;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 32px 64px -16px rgba(0, 0, 0, 0.95), 0 0 36px rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+      transform: scale(0.96) translateY(12px);
+      transition: transform 0.3s var(--transition-spring);
+    }
+
+    .mani-modal-backdrop.active .mani-modal-dialog {
+      transform: scale(1) translateY(0);
+    }
+
+    /* Modal Top Header Bar */
+    .mani-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 22px;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      gap: 16px;
+    }
+
+    .mani-header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .mani-window-dots {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .mani-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .mani-dot:nth-child(1) { background: rgba(255, 255, 255, 0.45); }
+
+    .mani-brand-badge {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mani-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: #d4d4d8;
+      letter-spacing: 0.02em;
+    }
+
+    .mani-status-indicator {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+      animation: pulseIndicator 1.8s infinite ease-in-out;
+    }
+
+    @keyframes pulseIndicator {
+      0%, 100% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.15); box-shadow: 0 0 12px rgba(255, 255, 255, 1); }
+    }
+
+    .mani-close-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+      line-height: 1;
+      transition: all 0.2s ease;
+    }
+
+    .mani-close-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.35);
+      transform: scale(1.05);
+    }
+
+    /* Modal Navigation Tabs */
+    .mani-modal-tabs {
+      display: flex;
+      gap: 2px;
+      padding: 0 20px;
+      background: rgba(0, 0, 0, 0.35);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .mani-tab-btn {
+      padding: 12px 18px;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .mani-tab-btn:hover {
+      color: #ffffff;
+    }
+
+    .mani-tab-btn.active {
+      color: #ffffff;
+      border-bottom-color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* Tab Content Areas */
+    .mani-tab-panel {
+      display: none;
+      flex: 1;
+      overflow-y: auto;
+      padding: 22px;
+    }
+
+    .mani-tab-panel.active {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Telemetry HUD Strip */
+    .mani-telemetry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+    }
+
+    .mani-telemetry-cell {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mani-cell-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-dim);
+    }
+
+    .mani-cell-val {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .mani-cell-bar {
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 3px;
+    }
+
+    .mani-cell-fill {
+      height: 100%;
+      background: #ffffff;
+      width: 25%;
+      transition: width 0.4s ease;
+    }
+
+    /* Audio Waveform Visualizer */
+    .mani-waveform-card {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .mani-wave-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .mani-wave-title {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--accent-silver);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mani-wave-canvas-wrap {
+      width: 100%;
+      height: 60px;
+      position: relative;
+    }
+
+    #maniWaveCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .mani-voice-btn {
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mani-voice-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .mani-voice-btn.active {
+      background: #ffffff;
+      color: #000000;
+      border-color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* Chat Transcript Feed */
+    .mani-chat-feed {
+      height: 250px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 14px;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: var(--radius-md);
+      scroll-behavior: smooth;
+    }
+
+    .mani-msg {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      max-width: 90%;
+      animation: msgSlideIn 0.25s ease forwards;
+    }
+
+    @keyframes msgSlideIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .mani-msg.assistant {
+      align-self: flex-start;
+    }
+
+    .mani-msg.user {
+      align-self: flex-end;
+    }
+
+    .mani-msg-meta {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mani-msg.user .mani-msg-meta {
+      justify-content: flex-end;
+    }
+
+    .mani-msg-bubble {
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .mani-msg.assistant .mani-msg-bubble {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #f4f4f6;
+    }
+
+    .mani-msg.user .mani-msg-bubble {
+      background: #ffffff;
+      color: #000000;
+      font-weight: 500;
+    }
+
+    .mani-badge-mini {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      font-size: 0.64rem;
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    /* Quick Action Chips */
+    .mani-chips-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .mani-chip {
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .mani-chip:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* Command Input Bar */
+    .mani-input-bar {
+      display: flex;
+      gap: 10px;
+    }
+
+    .mani-input-bar input {
+      flex: 1;
+      padding: 11px 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .mani-input-bar input:focus {
+      border-color: rgba(255, 255, 255, 0.45);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .mani-send-btn {
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      border: none;
+      color: #000000;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .mani-send-btn:hover {
+      background: #e4e4e7;
+      box-shadow: 0 4px 14px rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+    }
+
+    /* Windows Setup Tab Styling */
+    .mani-setup-section {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mani-setup-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mani-setup-title {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mani-setup-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .mani-code-block-wrap {
+      position: relative;
+      background: #020204;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .mani-code-text {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: #e4e4e7;
+      word-break: break-all;
+      line-height: 1.5;
+    }
+
+    .mani-copy-btn {
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      background: #ffffff;
+      border: none;
+      color: #000000;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .mani-copy-btn:hover {
+      background: #e4e4e7;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    }
+
+    .mani-setup-steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .mani-setup-steps li {
+      font-size: 0.86rem;
+      color: #d4d4d8;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .mani-step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #ffffff;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    @media (max-width: 768px) {
+      .mani-modal-dialog {
+        max-height: 96vh;
+      }
+      .mani-modal-header {
+        padding: 12px 16px;
+      }
+      .mani-tab-panel {
+        padding: 16px 12px;
+      }
+      .mani-telemetry-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .mani-chat-feed {
+        height: 200px;
+      }
+      .mani-code-block-wrap {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .mani-copy-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* ==========================================================================
        EDUCATION & ACADEMICS (VERBATIM CEK / KTU / 7.15 CGPA)
        ========================================================================== */
     .edu-card {
@@ -1600,7 +2186,7 @@
           <!-- Distinct Metric Tiles (Verbatim Stats) -->
           <div class="hero-metrics-bento">
             <div class="bento-card metric-tile reveal stagger-2 in-view">
-              <span class="metric-num counter" data-target="5" data-suffix="+">0</span>
+              <span class="metric-num counter" data-target="6" data-suffix="+">0</span>
               <span class="metric-label">Featured<br />Projects</span>
             </div>
 
@@ -1819,6 +2405,7 @@
         <!-- Filter Tabs -->
         <div class="filter-tabs">
           <button class="filter-btn active" data-filter="all">All Projects</button>
+          <button class="filter-btn" data-filter="ai">Desktop &amp; AI</button>
           <button class="filter-btn" data-filter="web">Web &amp; Full-Stack</button>
           <button class="filter-btn" data-filter="mobile">Mobile &amp; Cross-Platform</button>
           <button class="filter-btn" data-filter="game">Godot Game</button>
@@ -1826,8 +2413,69 @@
       </div>
 
       <div class="projects-container">
-        <!-- Project 1: KSEB Slab Watchdog -->
-        <div class="bento-card project-card reveal stagger-1" data-category="web">
+        <!-- Project 1: M.A.N.I. Personal AI Assistant -->
+        <div class="bento-card project-card reveal stagger-1" data-category="ai desktop python">
+          <div class="project-top-row">
+            <div class="project-title-group">
+              <h3>M.A.N.I. — Personal Voice AI Assistant (Mark VII)</h3>
+              <div class="project-badge-row">
+                <span class="badge-category">AI Desktop Companion</span>
+                <span class="badge-category">Python / Win32</span>
+                <span class="badge-role">Autonomous Agent</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <button type="button" class="project-link-btn demo-btn" id="maniLiveDemoBtn" onclick="openManiModal()" title="Launch Interactive M.A.N.I. Simulator">
+                <span>Live Demo</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"></polygon>
+                </svg>
+              </button>
+              <a href="https://github.com/Anusmrith/m.a.n.i.-AI-assistant" target="_blank" rel="noopener noreferrer"
+                class="project-link-btn" title="View Source Code on GitHub">
+                <span>View Repository</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <span class="project-tagline">"Voice-activated Windows desktop companion inspired by Iron Man's J.A.R.V.I.S., built in Python."</span>
+
+          <p class="project-desc">
+            An intelligent, native Windows desktop AI companion delivering continuous conversational voice control,
+            deep OS hardware telemetry, system automation, and hybrid offline/cloud reasoning. Features an authentic
+            cyberpunk companion HUD with real-time audio waveform resonance and bilingual neural speech synthesis.
+          </p>
+
+          <ul class="project-bullets">
+            <li><strong>Continuous conversation voice recognition</strong>: Say "Mani" once to talk freely without repeating wake-words. Natural turn-taking and continuous listening keep conversations effortless.</li>
+            <li><strong>Full Windows PC automation</strong>: Integrated app launcher, volume control, desktop screenshots, system lock (Win+L), and live battery &amp; hardware telemetry.</li>
+            <li><strong>Bilingual neural voice support</strong>: Natural speech synthesis in Malayalam &amp; British English with real-time barge-in voice interruption handling.</li>
+            <li><strong>Autonomous offline intelligence + Google Gemini API reasoning</strong>: Instant deterministic desktop commands work completely offline, while complex cognitive questions invoke Gemini API for deep multi-turn reasoning.</li>
+            <li><strong>Native Cyberpunk Tkinter desktop companion window</strong>: Floating status HUD featuring live telemetry gauges, audio resonance visuals, and dynamic transcript feeds.</li>
+            <li><strong>1-click setup and launch on Windows</strong>: Turnkey initialization and virtual environment configuration via automated <code>start_mani.bat</code>.</li>
+          </ul>
+
+          <div class="tech-stack-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Windows API</span>
+            <span class="tech-tag">SpeechRecognition</span>
+            <span class="tech-tag">Edge-TTS</span>
+            <span class="tech-tag">Google Gemini API</span>
+            <span class="tech-tag">Tkinter</span>
+            <span class="tech-tag">PyAutoGUI</span>
+            <span class="tech-tag">Psutil</span>
+            <span class="tech-tag">Git &amp; GitHub</span>
+          </div>
+        </div>
+
+        <!-- Project 2: KSEB Slab Watchdog -->
+        <div class="bento-card project-card reveal stagger-2" data-category="web">
           <div class="project-top-row">
             <div class="project-title-group">
               <h3>KSEB Slab Watchdog — Kerala Electricity Tracker &amp; Forecaster</h3>
@@ -2217,6 +2865,220 @@
       <polyline points="18 15 12 9 6 15"></polyline>
     </svg>
   </button>
+
+  <!-- ==========================================================================
+       M.A.N.I. MARK VII INTERACTIVE SIMULATOR MODAL (POPUP HUD)
+       ========================================================================== -->
+  <div class="mani-modal-backdrop" id="maniModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="maniModalTitle">
+    <div class="mani-modal-dialog">
+      <!-- Top Window Header -->
+      <div class="mani-modal-header">
+        <div class="mani-header-left">
+          <div class="mani-window-dots">
+            <span class="mani-dot"></span>
+            <span class="mani-dot"></span>
+            <span class="mani-dot"></span>
+          </div>
+          <div class="mani-brand-badge" id="maniModalTitle">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z"></path>
+              <path d="m12 6 4 6h-8l4-6z"></path>
+              <line x1="12" y1="14" x2="12" y2="18"></line>
+            </svg>
+            <span>M.A.N.I. MARK VII</span>
+          </div>
+          <div class="mani-status-pill">
+            <span class="mani-status-indicator"></span>
+            <span id="maniStatusText">ONLINE // CONTINUOUS LISTENING</span>
+          </div>
+        </div>
+
+        <button type="button" class="mani-close-btn" onclick="closeManiModal()" aria-label="Close M.A.N.I. Simulator">✕</button>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="mani-modal-tabs">
+        <button type="button" class="mani-tab-btn active" id="maniTabBtnSim" onclick="switchManiTab('sim')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span>Live HUD Simulator</span>
+        </button>
+        <button type="button" class="mani-tab-btn" id="maniTabBtnWin" onclick="switchManiTab('win')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="8" height="8"></rect>
+            <rect x="13" y="3" width="8" height="8"></rect>
+            <rect x="3" y="13" width="8" height="8"></rect>
+            <rect x="13" y="13" width="8" height="8"></rect>
+          </svg>
+          <span>Run on Windows</span>
+        </button>
+      </div>
+
+      <!-- TAB 1: Interactive HUD Simulator -->
+      <div class="mani-tab-panel active" id="maniPanelSim">
+        <!-- Telemetry Gauges Grid -->
+        <div class="mani-telemetry-grid">
+          <div class="mani-telemetry-cell">
+            <span class="mani-cell-label">CPU LOAD</span>
+            <span class="mani-cell-val" id="maniCpuVal">18.4%</span>
+            <div class="mani-cell-bar"><div class="mani-cell-fill" id="maniCpuBar" style="width: 18%;"></div></div>
+          </div>
+          <div class="mani-telemetry-cell">
+            <span class="mani-cell-label">RAM COMMITTED</span>
+            <span class="mani-cell-val" id="maniRamVal">4.2 / 16 GB</span>
+            <div class="mani-cell-bar"><div class="mani-cell-fill" id="maniRamBar" style="width: 26%;"></div></div>
+          </div>
+          <div class="mani-telemetry-cell">
+            <span class="mani-cell-label">BATTERY STATUS</span>
+            <span class="mani-cell-val" id="maniBatVal">94% AC Online</span>
+            <div class="mani-cell-bar"><div class="mani-cell-fill" style="width: 94%;"></div></div>
+          </div>
+          <div class="mani-telemetry-cell">
+            <span class="mani-cell-label">INFERENCE LATENCY</span>
+            <span class="mani-cell-val" id="maniLatencyVal">14 ms</span>
+            <div class="mani-cell-bar"><div class="mani-cell-fill" style="width: 15%;"></div></div>
+          </div>
+          <div class="mani-telemetry-cell">
+            <span class="mani-cell-label">VOICE SYNTHESIS</span>
+            <span class="mani-cell-val">Edge-TTS (Neural)</span>
+            <div class="mani-cell-bar"><div class="mani-cell-fill" style="width: 100%;"></div></div>
+          </div>
+        </div>
+
+        <!-- Audio Resonance Waveform Visualizer -->
+        <div class="mani-waveform-card">
+          <div class="mani-wave-top">
+            <div class="mani-wave-title">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                <line x1="12" y1="19" x2="12" y2="23"></line>
+                <line x1="8" y1="23" x2="16" y2="23"></line>
+              </svg>
+              <span id="maniWaveStateLabel">Neural Audio Resonance: Standby (Passive Scan)</span>
+            </div>
+            <button type="button" class="mani-voice-btn" id="maniVoiceToggleBtn" onclick="toggleManiVoice()">
+              <span id="maniVoiceIcon">🔇</span>
+              <span id="maniVoiceLabel">Voice: Muted</span>
+            </button>
+          </div>
+          <div class="mani-wave-canvas-wrap">
+            <canvas id="maniWaveCanvas" width="760" height="60"></canvas>
+          </div>
+        </div>
+
+        <!-- Conversational Transcript Feed -->
+        <div class="mani-chat-feed" id="maniChatFeed">
+          <div class="mani-msg assistant">
+            <div class="mani-msg-meta">
+              <span class="mani-badge-mini">M.A.N.I.</span>
+              <span>Mark VII Voice Assistant</span>
+            </div>
+            <div class="mani-msg-bubble">
+              Good day, Sir. M.A.N.I. Mark VII voice companion online. All Windows PC telemetry hooks, continuous voice recognition pipelines, and Gemini reasoning engines are active. Click a quick command chip or type any query below.
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Action Chips -->
+        <div class="mani-chips-row">
+          <button type="button" class="mani-chip" onclick="executeManiPrompt('What is your system status?')">📊 System Status</button>
+          <button type="button" class="mani-chip" onclick="executeManiPrompt('Who are you?')">🤖 Who are you?</button>
+          <button type="button" class="mani-chip" onclick="executeManiPrompt('Tell me a joke')">😄 Tell me a joke</button>
+          <button type="button" class="mani-chip" onclick="executeManiPrompt('Malayalam Voice Demo')">🔊 മലയാളം (Malayalam Demo)</button>
+          <button type="button" class="mani-chip" onclick="executeManiPrompt('Lock workstation')">🔒 Lock Workstation</button>
+          <button type="button" class="mani-chip" onclick="executeManiPrompt('Take screenshot')">📸 Take Screenshot</button>
+          <button type="button" class="mani-chip" onclick="executeManiPrompt('What can you automate?')">⚡ Windows Automation</button>
+        </div>
+
+        <!-- Command Input Form -->
+        <form class="mani-input-bar" id="maniInputForm" onsubmit="handleManiSubmit(event)">
+          <input type="text" id="maniCommandInput" placeholder="Type a command (e.g., 'What is your system status?', 'Who are you?')..." autocomplete="off" />
+          <button type="submit" class="mani-send-btn">
+            <span>Send</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+      </div>
+
+      <!-- TAB 2: Run on Windows -->
+      <div class="mani-tab-panel" id="maniPanelWin">
+        <div class="mani-setup-section">
+          <div class="mani-setup-card">
+            <div class="mani-setup-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="4 17 10 11 4 5"></polyline>
+                <line x1="12" y1="19" x2="20" y2="19"></line>
+              </svg>
+              <span>1-Click Windows Setup &amp; Launch</span>
+            </div>
+            <p class="mani-setup-desc">
+              Run M.A.N.I. locally on your Windows 10 or 11 machine. Open PowerShell, Command Prompt, or Windows Terminal, and paste this single command:
+            </p>
+            <div class="mani-code-block-wrap">
+              <code class="mani-code-text" id="maniCloneCmd">git clone https://github.com/Anusmrith/m.a.n.i.-AI-assistant.git &amp;&amp; cd m.a.n.i.-AI-assistant &amp;&amp; start_mani.bat</code>
+              <button type="button" class="mani-copy-btn" id="maniCopyCmdBtn" onclick="copyManiLauncherCommand()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span id="maniCopyBtnText">Copy Command</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="mani-setup-card">
+            <div class="mani-setup-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              <span>What Happens Next Automatically</span>
+            </div>
+            <ul class="mani-setup-steps">
+              <li>
+                <span class="mani-step-num">1</span>
+                <div><strong>Virtual Environment</strong>: <code>start_mani.bat</code> automatically sets up an isolated Python virtual environment (<code>.venv</code>).</div>
+              </li>
+              <li>
+                <span class="mani-step-num">2</span>
+                <div><strong>Zero-Fuss Dependencies</strong>: Installs all requirements (<code>SpeechRecognition</code>, <code>edge-tts</code>, <code>pyautogui</code>, <code>psutil</code>, <code>google-genai</code>) without polluting global Python.</div>
+              </li>
+              <li>
+                <span class="mani-step-num">3</span>
+                <div><strong>Launch HUD &amp; Voice Loop</strong>: Pops open the cyberpunk Tkinter desktop companion window and begins continuous voice listening immediately.</div>
+              </li>
+              <li>
+                <span class="mani-step-num">4</span>
+                <div><strong>Optional Gemini Key</strong>: Add your free Google Gemini API key to <code>.env</code> for deep generative reasoning, or run 100% offline for instant local automation.</div>
+              </li>
+            </ul>
+
+            <div style="margin-top: 10px; display: flex; gap: 12px; flex-wrap: wrap;">
+              <a href="https://github.com/Anusmrith/m.a.n.i.-AI-assistant" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                <span>Inspect Repository on GitHub</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+              <button type="button" class="btn btn-secondary" onclick="switchManiTab('sim')">
+                <span>Back to Live HUD Simulator</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
   <!-- Interactive Toast Notification -->
   <div id="toast" role="alert" aria-live="polite">
@@ -2965,7 +3827,316 @@
       });
     }
 
-    // 12. Mobile Navigation Menu Toggle
+    // 13. M.A.N.I. Mark VII Interactive Simulator Controller
+    (function initManiSimulator() {
+      const modalBackdrop = document.getElementById('maniModalBackdrop');
+      const chatFeed = document.getElementById('maniChatFeed');
+      const cmdInput = document.getElementById('maniCommandInput');
+      const waveCanvas = document.getElementById('maniWaveCanvas');
+      const waveLabel = document.getElementById('maniWaveStateLabel');
+      const voiceToggleBtn = document.getElementById('maniVoiceToggleBtn');
+      const voiceIcon = document.getElementById('maniVoiceIcon');
+      const voiceLabel = document.getElementById('maniVoiceLabel');
+      const cpuVal = document.getElementById('maniCpuVal');
+      const cpuBar = document.getElementById('maniCpuBar');
+      const ramVal = document.getElementById('maniRamVal');
+      const ramBar = document.getElementById('maniRamBar');
+      const latencyVal = document.getElementById('maniLatencyVal');
+
+      let waveCtx = null;
+      let waveAnimId = null;
+      let waveTime = 0;
+      let isVoiceResponding = false;
+      let voiceSynthesisEnabled = false;
+      let telemetryInterval = null;
+
+      // Initialize Wave Canvas
+      if (waveCanvas) {
+        waveCtx = waveCanvas.getContext('2d');
+      }
+
+      function renderManiWaveform() {
+        if (!waveCanvas || !waveCtx) return;
+        const width = waveCanvas.width;
+        const height = waveCanvas.height;
+        const centerY = height / 2;
+
+        waveCtx.clearRect(0, 0, width, height);
+
+        // Center line
+        waveCtx.beginPath();
+        waveCtx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+        waveCtx.lineWidth = 1;
+        waveCtx.moveTo(0, centerY);
+        waveCtx.lineTo(width, centerY);
+        waveCtx.stroke();
+
+        // Harmonic waveform parameters
+        const amplitudeMult = isVoiceResponding ? 2.4 : 0.6;
+        const baseAmp = isVoiceResponding ? 18 : 6;
+        const speed = isVoiceResponding ? 0.08 : 0.025;
+
+        // Draw 3 luminous overlapping waves
+        const waves = [
+          { freq: 0.015, amp: baseAmp * amplitudeMult, alpha: 0.85, width: 2 },
+          { freq: 0.028, amp: baseAmp * 0.7 * amplitudeMult, alpha: 0.5, width: 1.5 },
+          { freq: 0.008, amp: baseAmp * 1.2 * amplitudeMult, alpha: 0.35, width: 1 }
+        ];
+
+        waves.forEach((w, idx) => {
+          waveCtx.beginPath();
+          waveCtx.strokeStyle = `rgba(255, 255, 255, ${w.alpha})`;
+          waveCtx.lineWidth = w.width;
+
+          for (let x = 0; x <= width; x += 4) {
+            // Taper waves at boundaries
+            const envelope = Math.sin((x / width) * Math.PI);
+            const y = centerY + Math.sin(x * w.freq + waveTime * speed + idx) * w.amp * envelope +
+                      Math.cos(x * w.freq * 1.5 - waveTime * (speed * 0.7)) * (w.amp * 0.35) * envelope;
+            if (x === 0) waveCtx.moveTo(x, y);
+            else waveCtx.lineTo(x, y);
+          }
+          waveCtx.stroke();
+        });
+
+        waveTime += 1;
+        waveAnimId = requestAnimationFrame(renderManiWaveform);
+      }
+
+      // Live Telemetry Jitter
+      function startTelemetryJitter() {
+        if (telemetryInterval) clearInterval(telemetryInterval);
+        telemetryInterval = setInterval(() => {
+          if (!modalBackdrop.classList.contains('active')) return;
+          const cpu = (14 + Math.random() * 8).toFixed(1);
+          const ramGb = (4.1 + Math.random() * 0.3).toFixed(1);
+          const latency = Math.floor(12 + Math.random() * 6);
+          if (cpuVal) cpuVal.textContent = `${cpu}%`;
+          if (cpuBar) cpuBar.style.width = `${Math.min(100, Math.max(10, cpu * 2))}%`;
+          if (ramVal) ramVal.textContent = `${ramGb} / 16 GB`;
+          if (ramBar) ramBar.style.width = `${Math.min(100, Math.max(15, (ramGb / 16) * 100))}%`;
+          if (latencyVal) latencyVal.textContent = `${latency} ms`;
+        }, 2200);
+      }
+
+      window.openManiModal = function() {
+        if (modalBackdrop) {
+          modalBackdrop.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          if (!waveAnimId) renderManiWaveform();
+          startTelemetryJitter();
+          if (cmdInput) setTimeout(() => cmdInput.focus(), 250);
+        }
+      };
+
+      window.closeManiModal = function() {
+        if (modalBackdrop) {
+          modalBackdrop.classList.remove('active');
+          document.body.style.overflow = '';
+          if (window.speechSynthesis) window.speechSynthesis.cancel();
+          setSpeakingState(false);
+        }
+      };
+
+      // Close on Backdrop Click
+      if (modalBackdrop) {
+        modalBackdrop.addEventListener('click', (e) => {
+          if (e.target === modalBackdrop) {
+            window.closeManiModal();
+          }
+        });
+      }
+
+      // Close on ESC Key
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalBackdrop && modalBackdrop.classList.contains('active')) {
+          window.closeManiModal();
+        }
+      });
+
+      // Tab Switching
+      window.switchManiTab = function(tab) {
+        const btnSim = document.getElementById('maniTabBtnSim');
+        const btnWin = document.getElementById('maniTabBtnWin');
+        const panelSim = document.getElementById('maniPanelSim');
+        const panelWin = document.getElementById('maniPanelWin');
+
+        if (tab === 'sim') {
+          if (btnSim) btnSim.classList.add('active');
+          if (btnWin) btnWin.classList.remove('active');
+          if (panelSim) panelSim.classList.add('active');
+          if (panelWin) panelWin.classList.remove('active');
+        } else {
+          if (btnWin) btnWin.classList.add('active');
+          if (btnSim) btnSim.classList.remove('active');
+          if (panelWin) panelWin.classList.add('active');
+          if (panelSim) panelSim.classList.remove('active');
+        }
+      };
+
+      // Voice Toggle
+      window.toggleManiVoice = function() {
+        voiceSynthesisEnabled = !voiceSynthesisEnabled;
+        if (voiceToggleBtn) {
+          voiceToggleBtn.classList.toggle('active', voiceSynthesisEnabled);
+        }
+        if (voiceIcon) voiceIcon.textContent = voiceSynthesisEnabled ? '🔊' : '🔇';
+        if (voiceLabel) voiceLabel.textContent = voiceSynthesisEnabled ? 'Voice: Active' : 'Voice: Muted';
+        if (window.speechSynthesis && !voiceSynthesisEnabled) {
+          window.speechSynthesis.cancel();
+          setSpeakingState(false);
+        }
+      };
+
+      function setSpeakingState(speaking, textToSpeak) {
+        isVoiceResponding = speaking;
+        if (waveLabel) {
+          waveLabel.textContent = speaking
+            ? 'Neural Audio Resonance: Active Speech Output'
+            : 'Neural Audio Resonance: Standby (Passive Scan)';
+        }
+
+        if (speaking && voiceSynthesisEnabled && window.speechSynthesis && textToSpeak) {
+          try {
+            window.speechSynthesis.cancel();
+            // Remove emojis and parenthetical translations for clean TTS
+            const cleanText = textToSpeak.replace(/[\u{1F300}-\u{1F9FF}]/gu, '').replace(/\(.*?\)/g, '').trim();
+            const utterance = new SpeechSynthesisUtterance(cleanText);
+            const voices = window.speechSynthesis.getVoices();
+            const ukVoice = voices.find(v => v.lang === 'en-GB') || voices.find(v => v.lang.startsWith('en')) || null;
+            if (ukVoice) utterance.voice = ukVoice;
+            utterance.rate = 1.05;
+            utterance.pitch = 0.95;
+            utterance.onend = () => setSpeakingState(false);
+            utterance.onerror = () => setSpeakingState(false);
+            window.speechSynthesis.speak(utterance);
+          } catch (e) {
+            setTimeout(() => setSpeakingState(false), 2000);
+          }
+        } else if (speaking && !voiceSynthesisEnabled) {
+          setTimeout(() => setSpeakingState(false), 2400);
+        }
+      }
+
+      function appendChatMessage(sender, text, isMani = false) {
+        if (!chatFeed) return;
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `mani-msg ${isMani ? 'assistant' : 'user'}`;
+
+        const metaDiv = document.createElement('div');
+        metaDiv.className = 'mani-msg-meta';
+        if (isMani) {
+          metaDiv.innerHTML = '<span class="mani-badge-mini">M.A.N.I.</span> <span>Mark VII Voice Assistant</span>';
+        } else {
+          metaDiv.innerHTML = '<span>You (Voice Input)</span>';
+        }
+
+        const bubbleDiv = document.createElement('div');
+        bubbleDiv.className = 'mani-msg-bubble';
+        bubbleDiv.textContent = text;
+
+        msgDiv.appendChild(metaDiv);
+        msgDiv.appendChild(bubbleDiv);
+        chatFeed.appendChild(msgDiv);
+        chatFeed.scrollTop = chatFeed.scrollHeight;
+      }
+
+      // Scripted Simulated Intelligence Responses
+      const responseBank = {
+        status: "All systems nominal, Sir. Continuous voice recognition buffer at 16kHz, Edge-TTS neural engine connected, Win32 automation hooks active, and battery telemetry reporting 94% on AC charge. Inference latency is resting at 14 milliseconds.",
+        who: "I am M.A.N.I. (Mark VII) — a personal voice-activated Windows desktop companion inspired by Iron Man's J.A.R.V.I.S., engineered in Python by Anusmrith. I run locally on your PC, executing system automation, hardware monitoring, and hybrid offline/Gemini LLM reasoning with an authentic cyberpunk desktop HUD.",
+        joke: "Why do software engineers prefer dark mode? Because light attracts bugs, Sir. Speaking of which, all zero bugs in this Mark VII release are strictly documented as unexpected features.",
+        malayalam: "നമസ്കാരം സർ! ഞാൻ മാണി (M.A.N.I.). എനിക്ക് മലയാളത്തിലും ഇംഗ്ലീഷിലും സംസാരിക്കാനും വിൻഡോസ് കമാൻഡുകൾ പ്രവർത്തിപ്പിക്കാനും സാധിക്കും. നിങ്ങളുടെ സിസ്റ്റം പൂർണ്ണമായും പ്രവർത്തനസജ്ജമാണ്. ഇന്ന് ഞാൻ എന്താണ് ചെയ്യേണ്ടത്? (Malayalam neural synthesis ready.)",
+        lock: "Executing Win+L workstation lock sequence via Windows User32 API... [SIMULATION] Workstation locked securely. Standby biometric watchdogs engaged.",
+        screenshot: "Triggering PyAutoGUI screenshot pipeline... [SIMULATION] Full-resolution desktop frame captured and saved to ~/Pictures/Screenshots/MANI_MarkVII_Capture.png.",
+        automate: "I execute complete Windows PC automation: instant application launching (VS Code, Chrome, Godot), system audio volume control, hardware telemetry scraping, screenshot captures, system lock, Google searches, and bilingual voice conversation with interruption barge-in support."
+      };
+
+      function processManiQuery(query) {
+        const q = query.toLowerCase().trim();
+        let response = "";
+
+        if (q.includes('status') || q.includes('system') || q.includes('battery') || q.includes('hardware')) {
+          response = responseBank.status;
+        } else if (q.includes('who are you') || q.includes('who') || q.includes('what are you') || q.includes('about')) {
+          response = responseBank.who;
+        } else if (q.includes('joke') || q.includes('funny') || q.includes('laugh')) {
+          response = responseBank.joke;
+        } else if (q.includes('malayalam') || q.includes('മലയാളം') || q.includes('language') || q.includes('bilingual')) {
+          response = responseBank.malayalam;
+        } else if (q.includes('lock') || q.includes('secure') || q.includes('sleep')) {
+          response = responseBank.lock;
+        } else if (q.includes('screenshot') || q.includes('capture') || q.includes('snip')) {
+          response = responseBank.screenshot;
+        } else if (q.includes('automate') || q.includes('features') || q.includes('capabilities') || q.includes('what can you do')) {
+          response = responseBank.automate;
+        } else if (q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('mani')) {
+          response = "Hello Sir! M.A.N.I. Mark VII listening continuously. What would you like to automate or inspect?";
+        } else if (q.includes('gemini') || q.includes('ai') || q.includes('model')) {
+          response = "M.A.N.I. employs a hybrid intelligence model: local deterministic Python automation executes in <15ms with zero cloud lag, while complex cognitive questions invoke Google Gemini API for deep reasoning.";
+        } else if (q.includes('creator') || q.includes('anusmrith') || q.includes('author')) {
+          response = "I was engineered by Anusmrith M M, a Computer Science & Engineering undergraduate at the College of Engineering Karunagappally (CEK).";
+        } else {
+          response = `Command recognized: "${query}". Processing via local Windows automation layer... All operations executed successfully, Sir.`;
+        }
+
+        setSpeakingState(true, response);
+        setTimeout(() => {
+          appendChatMessage('M.A.N.I.', response, true);
+        }, 320);
+      }
+
+      window.executeManiPrompt = function(promptText) {
+        appendChatMessage('You', promptText, false);
+        processManiQuery(promptText);
+      };
+
+      window.handleManiSubmit = function(e) {
+        if (e) e.preventDefault();
+        if (!cmdInput) return;
+        const text = cmdInput.value.trim();
+        if (!text) return;
+        cmdInput.value = '';
+        appendChatMessage('You', text, false);
+        processManiQuery(text);
+      };
+
+      // 1-Click Copy Windows Command
+      window.copyManiLauncherCommand = function() {
+        const cmd = "git clone https://github.com/Anusmrith/m.a.n.i.-AI-assistant.git && cd m.a.n.i.-AI-assistant && start_mani.bat";
+        const copyBtnText = document.getElementById('maniCopyBtnText');
+
+        function setSuccess() {
+          if (copyBtnText) copyBtnText.textContent = "✓ Copied!";
+          showToast('Launcher command copied to clipboard!');
+          setTimeout(() => {
+            if (copyBtnText) copyBtnText.textContent = "Copy Command";
+          }, 2600);
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(cmd).then(setSuccess).catch(() => {
+            const ta = document.createElement('textarea');
+            ta.value = cmd;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            setSuccess();
+          });
+        } else {
+          const ta = document.createElement('textarea');
+          ta.value = cmd;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          setSuccess();
+        }
+      };
+    })();
+
+    // 14. Mobile Navigation Menu Toggle
     const menuToggle = document.getElementById('menuToggle');
     const navLinksList = document.getElementById('navLinks');
 
