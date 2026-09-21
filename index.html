@@ -1610,6 +1610,79 @@
       transform: translateY(-1px);
     }
 
+    /* Voice Command Mode Picker Drawer */
+    .mani-voice-picker-modal {
+      display: none;
+      background: rgba(14, 14, 22, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-md);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85);
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      animation: msgSlideIn 0.2s ease forwards;
+    }
+
+    .mani-voice-picker-modal.active {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .mani-voice-picker-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .mani-voice-picker-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.95rem;
+      padding: 0 4px;
+      line-height: 1;
+    }
+
+    .mani-voice-picker-close:hover {
+      color: #ffffff;
+    }
+
+    .mani-voice-options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 6px;
+    }
+
+    .mani-voice-opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #e4e4e7;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .mani-voice-opt-btn:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
     /* Windows Setup Tab Styling */
     .mani-setup-section {
       display: flex;
@@ -1718,24 +1791,185 @@
     }
 
     @media (max-width: 768px) {
+      .mani-modal-backdrop {
+        padding: 0;
+        align-items: flex-end;
+      }
       .mani-modal-dialog {
-        max-height: 96vh;
+        width: 100%;
+        max-width: 100%;
+        height: 93dvh;
+        max-height: 93dvh;
+        border-radius: 20px 20px 0 0;
+        border-bottom: none;
+        border-left: none;
+        border-right: none;
+        transform: translateY(100%);
+      }
+      .mani-modal-backdrop.active .mani-modal-dialog {
+        transform: translateY(0);
       }
       .mani-modal-header {
-        padding: 12px 16px;
+        padding: 10px 14px 12px;
+        gap: 8px;
+      }
+      .mani-header-left {
+        gap: 8px;
+        flex: 1;
+        min-width: 0;
+      }
+      .mani-window-dots {
+        display: none;
+      }
+      .mani-brand-badge {
+        font-size: 0.85rem;
+        white-space: nowrap;
+      }
+      .mani-status-pill {
+        padding: 2px 7px;
+        font-size: 0.64rem;
+        max-width: 130px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .mani-close-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.95rem;
+        flex-shrink: 0;
+      }
+      .mani-modal-tabs {
+        padding: 0 10px;
+        display: flex;
+      }
+      .mani-tab-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 10px 6px;
+        font-size: 0.74rem;
+        gap: 5px;
+        white-space: nowrap;
       }
       .mani-tab-panel {
-        padding: 16px 12px;
+        padding: 12px 12px 16px;
+        gap: 12px;
       }
+      /* Swipeable horizontal telemetry strip */
       .mani-telemetry-grid {
-        grid-template-columns: repeat(2, 1fr);
+        display: flex;
+        overflow-x: auto;
+        gap: 8px;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
       }
+      .mani-telemetry-grid::-webkit-scrollbar {
+        display: none;
+      }
+      .mani-telemetry-cell {
+        flex: 0 0 115px;
+        padding: 7px 10px;
+        gap: 2px;
+      }
+      .mani-cell-label {
+        font-size: 0.6rem;
+      }
+      .mani-cell-val {
+        font-size: 0.76rem;
+      }
+      /* Compact waveform visualizer */
+      .mani-waveform-card {
+        padding: 8px 12px;
+        gap: 6px;
+      }
+      .mani-wave-title {
+        font-size: 0.68rem;
+        max-width: calc(100% - 92px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .mani-voice-btn {
+        padding: 3px 8px;
+        font-size: 0.68rem;
+      }
+      .mani-wave-canvas-wrap {
+        height: 36px;
+      }
+      /* Chat Feed */
       .mani-chat-feed {
-        height: 200px;
+        height: auto;
+        min-height: 120px;
+        max-height: 28vh;
+        flex: 1;
+        padding: 10px;
+        gap: 8px;
+      }
+      .mani-msg {
+        max-width: 95%;
+      }
+      .mani-msg-bubble {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+      }
+      /* Swipeable single-row action chips */
+      .mani-chips-row {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 6px;
+        padding: 2px 2px 6px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+      .mani-chips-row::-webkit-scrollbar {
+        display: none;
+      }
+      .mani-chip {
+        flex-shrink: 0;
+        padding: 5px 11px;
+        font-size: 0.72rem;
+      }
+      /* Clean mobile command input bar */
+      .mani-input-bar {
+        gap: 6px;
+      }
+      .mani-mic-btn {
+        padding: 8px 11px;
+        gap: 0;
+      }
+      .mani-mic-label {
+        display: none;
+      }
+      .mani-input-bar input {
+        min-width: 0;
+        padding: 9px 12px;
+        font-size: 0.82rem;
+      }
+      .mani-send-btn {
+        padding: 8px 14px;
+        font-size: 0.78rem;
+        gap: 4px;
+      }
+      /* Windows setup tab */
+      .mani-setup-card {
+        padding: 12px 14px;
+        gap: 8px;
+      }
+      .mani-setup-title {
+        font-size: 0.92rem;
+      }
+      .mani-setup-desc {
+        font-size: 0.8rem;
       }
       .mani-code-block-wrap {
         flex-direction: column;
         align-items: flex-start;
+        padding: 10px 12px;
+      }
+      .mani-code-text {
+        font-size: 0.74rem;
       }
       .mani-copy-btn {
         width: 100%;
@@ -1955,6 +2189,14 @@
     .stagger-4 { transition-delay: 0.32s; }
     .stagger-5 { transition-delay: 0.4s; }
 
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+
     /* Responsive Styles */
     @media (max-width: 992px) {
       .hero-stage {
@@ -1999,6 +2241,13 @@
       }
       .project-top-row {
         flex-direction: column;
+      }
+      .project-card {
+        padding: 22px 18px;
+      }
+      #projects {
+        opacity: 1 !important;
+        transform: none !important;
       }
 
       /* Mobile Game Section Optimization */
@@ -2434,8 +2683,8 @@
     <!-- ==========================================================================
          FEATURED PROJECTS (100% VERBATIM DESCRIPTIONS, BULLETS & LINKS)
          ========================================================================== -->
-    <section id="projects" class="reveal">
-      <div class="section-header">
+    <section id="projects">
+      <div class="section-header reveal">
         <div>
           <h2 class="section-title">
             <span class="section-title-icon">🚀</span>
@@ -3000,9 +3249,9 @@
               </svg>
               <span id="maniWaveStateLabel">Neural Audio Resonance: Standby (Passive Scan)</span>
             </div>
-            <button type="button" class="mani-voice-btn" id="maniVoiceToggleBtn" onclick="toggleManiVoice()">
-              <span id="maniVoiceIcon">🔇</span>
-              <span id="maniVoiceLabel">Voice: Muted</span>
+            <button type="button" class="mani-voice-btn active" id="maniVoiceToggleBtn" onclick="toggleManiVoice()">
+              <span id="maniVoiceIcon">🔊</span>
+              <span id="maniVoiceLabel">Voice: Active</span>
             </button>
           </div>
           <div class="mani-wave-canvas-wrap">
@@ -3032,6 +3281,34 @@
           <button type="button" class="mani-chip" onclick="executeManiPrompt('Lock workstation')">🔒 Lock Workstation</button>
           <button type="button" class="mani-chip" onclick="executeManiPrompt('Take screenshot')">📸 Take Screenshot</button>
           <button type="button" class="mani-chip" onclick="executeManiPrompt('What can you automate?')">⚡ Windows Automation</button>
+        </div>
+
+        <!-- Voice Command Selection Helper (Supports real speech & interactive simulated voice) -->
+        <div class="mani-voice-picker-modal" id="maniVoicePickerModal">
+          <div class="mani-voice-picker-header">
+            <span>🎙️ SELECT VOICE COMMAND</span>
+            <button type="button" class="mani-voice-picker-close" onclick="closeVoicePicker()" aria-label="Close voice menu">✕</button>
+          </div>
+          <div class="mani-voice-options-grid">
+            <button type="button" class="mani-voice-opt-btn" onclick="executeVoiceSample('What is your system status?')">
+              <span>📊</span> "What is your system status?"
+            </button>
+            <button type="button" class="mani-voice-opt-btn" onclick="executeVoiceSample('Who are you?')">
+              <span>🤖</span> "Who are you?"
+            </button>
+            <button type="button" class="mani-voice-opt-btn" onclick="executeVoiceSample('Malayalam Voice Demo')">
+              <span>🔊</span> "Malayalam Voice Demo (മലയാളം)"
+            </button>
+            <button type="button" class="mani-voice-opt-btn" onclick="executeVoiceSample('What can you automate?')">
+              <span>⚡</span> "What can you automate on Windows?"
+            </button>
+            <button type="button" class="mani-voice-opt-btn" onclick="executeVoiceSample('Lock workstation')">
+              <span>🔒</span> "Lock workstation"
+            </button>
+            <button type="button" class="mani-voice-opt-btn" onclick="executeVoiceSample('Tell me a joke')">
+              <span>😄</span> "Tell me a joke"
+            </button>
+          </div>
         </div>
 
         <!-- Command Input Form -->
@@ -3704,21 +3981,49 @@
       gameLoop();
     })();
 
-    // 6. Scroll Reveal via IntersectionObserver
+    // 6. Scroll Reveal via IntersectionObserver with Mobile Resiliency
     (function initScrollReveal() {
       const revealElements = document.querySelectorAll('.reveal');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
+
+      function revealEl(el) {
+        el.classList.add('in-view');
+      }
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting || entry.intersectionRatio > 0) {
+              revealEl(entry.target);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.02,
+          rootMargin: '0px 0px -20px 0px'
+        });
+
+        revealElements.forEach(el => observer.observe(el));
+      } else {
+        revealElements.forEach(revealEl);
+      }
+
+      // Safety fallback to guarantee mobile visibility even if observer is delayed
+      function checkRevealFallback() {
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        revealElements.forEach(el => {
+          if (!el.classList.contains('in-view')) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < vh + 80 && rect.bottom > 0) {
+              revealEl(el);
+            }
           }
         });
-      }, {
-        threshold: 0.12,
-        rootMargin: '0px 0px -40px 0px'
-      });
+      }
 
-      revealElements.forEach(el => observer.observe(el));
+      window.addEventListener('scroll', checkRevealFallback, { passive: true });
+      window.addEventListener('resize', checkRevealFallback, { passive: true });
+      setTimeout(checkRevealFallback, 150);
+      setTimeout(checkRevealFallback, 600);
     })();
 
     // 7. Dynamic Stat Number Counter Animation (Verbatim Targets: 5, 2027, 7.15)
@@ -3755,12 +4060,12 @@
 
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting && !animated) {
+          if ((entry.isIntersecting || entry.intersectionRatio > 0) && !animated) {
             animated = true;
             startCounters();
           }
         });
-      }, { threshold: 0.5 });
+      }, { threshold: 0.2 });
 
       const heroStats = document.querySelector('.hero-metrics-bento');
       if (heroStats) observer.observe(heroStats);
@@ -3795,6 +4100,7 @@
           const categories = category.split(/\s+/);
           if (filter === 'all' || categories.includes(filter)) {
             card.classList.remove('hide');
+            card.classList.add('in-view');
             card.style.opacity = '0';
             card.style.transform = 'translateY(14px)';
             setTimeout(() => {
@@ -3901,9 +4207,9 @@
       let waveTime = 0;
       let isVoiceResponding = false;
       let isListeningForVoice = false;
-      let voiceSynthesisEnabled = false;
+      let voiceSynthesisEnabled = true;
       let telemetryInterval = null;
-      let recognition = null;
+      let activeRecognition = null;
 
       // Initialize Wave Canvas
       if (waveCanvas) {
@@ -3912,6 +4218,10 @@
 
       function renderManiWaveform() {
         if (!waveCanvas || !waveCtx) return;
+        if (waveCanvas.clientWidth > 0 && waveCanvas.width !== waveCanvas.clientWidth) {
+          waveCanvas.width = waveCanvas.clientWidth;
+          waveCanvas.height = waveCanvas.clientHeight || 60;
+        }
         const width = waveCanvas.width;
         const height = waveCanvas.height;
         const centerY = height / 2;
@@ -3974,10 +4284,31 @@
         }, 2200);
       }
 
+      function unlockSpeechAudio() {
+        if (!window.speechSynthesis) return;
+        try {
+          if (window.speechSynthesis.paused) {
+            window.speechSynthesis.resume();
+          }
+          const dummy = new SpeechSynthesisUtterance(' ');
+          dummy.volume = 0.01;
+          dummy.rate = 10;
+          window.speechSynthesis.speak(dummy);
+        } catch (e) {}
+      }
+
+      // Pre-warm browser speech synthesis voices
+      if (typeof window !== 'undefined' && window.speechSynthesis) {
+        window.speechSynthesis.onvoiceschanged = () => {
+          try { window.speechSynthesis.getVoices(); } catch(e) {}
+        };
+      }
+
       window.openManiModal = function() {
         if (modalBackdrop) {
           modalBackdrop.classList.add('active');
           document.body.style.overflow = 'hidden';
+          unlockSpeechAudio();
           if (!waveAnimId) renderManiWaveform();
           startTelemetryJitter();
           if (cmdInput) setTimeout(() => cmdInput.focus(), 250);
@@ -3989,10 +4320,11 @@
           modalBackdrop.classList.remove('active');
           document.body.style.overflow = '';
           if (window.speechSynthesis) window.speechSynthesis.cancel();
-          if (recognition && isListeningForVoice) {
-            try { recognition.stop(); } catch(e) {}
+          if (activeRecognition && isListeningForVoice) {
+            try { activeRecognition.stop(); } catch(e) {}
           }
           stopVoiceListening();
+          window.closeVoicePicker();
           setSpeakingState(false);
         }
       };
@@ -4034,56 +4366,38 @@
       };
 
       // ========================================================
-      // Web Speech API: Real-time Voice Command Recognition
+      // Web Speech API: Real-time & Simulated Voice Command Engine
       // ========================================================
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (SpeechRecognition) {
-        try {
-          recognition = new SpeechRecognition();
-          recognition.continuous = false;
-          recognition.interimResults = true;
-          recognition.lang = 'en-US';
-
-          recognition.onstart = function() {
-            isListeningForVoice = true;
-            if (micBtn) micBtn.classList.add('listening');
-            if (micLabel) micLabel.textContent = 'Listening...';
-            if (waveLabel) waveLabel.textContent = '🎙️ Neural Voice Capture: Listening to your command...';
-            isVoiceResponding = true;
-            if (cmdInput) cmdInput.placeholder = 'Listening... speak now (e.g., "What is your system status?")...';
-          };
-
-          recognition.onresult = function(event) {
-            let transcript = '';
-            for (let i = event.resultIndex; i < event.results.length; ++i) {
-              transcript += event.results[i][0].transcript;
-            }
-            if (cmdInput) cmdInput.value = transcript;
-          };
-
-          recognition.onerror = function(event) {
-            console.warn('[M.A.N.I. Voice Error]', event.error);
-            stopVoiceListening();
-            if (event.error === 'not-allowed') {
-              appendChatMessage('System', 'Microphone access was denied. Please allow microphone permissions in your browser to speak commands.', false);
-            } else if (event.error !== 'no-speech') {
-              appendChatMessage('System', `Microphone notice: ${event.error}. You can also type commands directly.`, false);
-            }
-          };
-
-          recognition.onend = function() {
-            stopVoiceListening();
-            if (cmdInput && cmdInput.value.trim()) {
-              const spokenText = cmdInput.value.trim();
-              cmdInput.value = '';
-              appendChatMessage('You', `🎙️ ${spokenText}`, false);
-              processManiQuery(spokenText);
-            }
-          };
-        } catch (e) {
-          console.error('[SpeechRecognition Init Error]', e);
+      window.openVoicePicker = function() {
+        const picker = document.getElementById('maniVoicePickerModal');
+        if (picker) {
+          picker.classList.add('active');
         }
-      }
+        if (waveLabel) waveLabel.textContent = '🎙️ Voice Command Mode: Tap a spoken command below';
+      };
+
+      window.closeVoicePicker = function() {
+        const picker = document.getElementById('maniVoicePickerModal');
+        if (picker) picker.classList.remove('active');
+      };
+
+      window.executeVoiceSample = function(promptText) {
+        window.closeVoicePicker();
+        unlockSpeechAudio();
+        if (!voiceSynthesisEnabled) {
+          window.toggleManiVoice();
+        }
+
+        if (cmdInput) cmdInput.value = promptText;
+        if (waveLabel) waveLabel.textContent = `🎙️ Recognizing: "${promptText}"`;
+        isVoiceResponding = true;
+
+        setTimeout(() => {
+          if (cmdInput) cmdInput.value = '';
+          appendChatMessage('You', `🎙️ ${promptText}`, false);
+          processManiQuery(promptText);
+        }, 280);
+      };
 
       function stopVoiceListening() {
         isListeningForVoice = false;
@@ -4097,29 +4411,94 @@
         if (cmdInput) cmdInput.placeholder = "Speak via mic or type a command (e.g., 'system status', 'who are you')...";
       }
 
-      window.toggleManiVoiceRecognition = function() {
-        if (!SpeechRecognition) {
-          appendChatMessage('System', 'Web Speech recognition is not supported in this browser. Please use Chrome, Edge, or Safari, or type commands directly below.', false);
-          return;
+      function startLiveSpeechRecognition(SpeechClass) {
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+        setSpeakingState(false);
+
+        try {
+          const rec = new SpeechClass();
+          rec.continuous = false;
+          rec.interimResults = true;
+          rec.maxAlternatives = 1;
+          rec.lang = 'en-US';
+
+          let finalSpokenText = '';
+
+          rec.onstart = function() {
+            isListeningForVoice = true;
+            if (micBtn) micBtn.classList.add('listening');
+            if (micLabel) micLabel.textContent = 'Listening...';
+            if (waveLabel) waveLabel.textContent = '🎙️ Neural Voice Capture: Listening to your command...';
+            isVoiceResponding = true;
+            if (cmdInput) {
+              cmdInput.value = '';
+              cmdInput.placeholder = '🎙️ Listening... speak now (e.g., "What is your system status?")...';
+            }
+          };
+
+          rec.onresult = function(event) {
+            let transcript = '';
+            for (let i = 0; i < event.results.length; ++i) {
+              transcript += event.results[i][0].transcript;
+            }
+            finalSpokenText = transcript;
+            if (cmdInput) cmdInput.value = transcript;
+          };
+
+          rec.onerror = function(event) {
+            console.warn('[M.A.N.I. Voice Error]', event.error);
+            stopVoiceListening();
+            if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+              appendChatMessage('System', '🎙️ Live microphone is restricted on non-HTTPS origins (mobile browsers require HTTPS for microphone access). Opening Voice Command menu below:', false);
+              window.openVoicePicker();
+            } else if (event.error === 'no-speech') {
+              appendChatMessage('System', 'No speech was detected. Tap mic to try again or select a voice command below:', false);
+              window.openVoicePicker();
+            } else {
+              window.openVoicePicker();
+            }
+          };
+
+          rec.onend = function() {
+            stopVoiceListening();
+            const text = (finalSpokenText || (cmdInput ? cmdInput.value : '')).trim();
+            if (text) {
+              if (cmdInput) cmdInput.value = '';
+              appendChatMessage('You', `🎙️ ${text}`, false);
+              processManiQuery(text);
+            }
+          };
+
+          activeRecognition = rec;
+          rec.start();
+        } catch (e) {
+          console.warn('[Speech Recognition Init Error]', e);
+          window.openVoicePicker();
         }
-        if (!recognition) return;
+      }
+
+      window.toggleManiVoiceRecognition = function() {
+        unlockSpeechAudio();
+        if (!voiceSynthesisEnabled) {
+          window.toggleManiVoice();
+        }
+
+        const SpeechClass = window.SpeechRecognition || window.webkitSpeechRecognition;
 
         if (isListeningForVoice) {
-          try { recognition.stop(); } catch(e) {}
-          stopVoiceListening();
-        } else {
-          if (window.speechSynthesis) window.speechSynthesis.cancel();
-          setSpeakingState(false);
-          try {
-            recognition.start();
-          } catch (e) {
-            try {
-              recognition.abort();
-              setTimeout(() => {
-                try { recognition.start(); } catch(err) {}
-              }, 150);
-            } catch (err) {}
+          if (activeRecognition) {
+            try { activeRecognition.stop(); } catch(e) {}
           }
+          stopVoiceListening();
+          return;
+        }
+
+        const isSecure = window.isSecureContext || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+
+        if (SpeechClass && isSecure) {
+          startLiveSpeechRecognition(SpeechClass);
+        } else {
+          window.openVoicePicker();
         }
       };
 
@@ -4151,9 +4530,21 @@
             // Remove emojis and parenthetical translations for clean TTS
             const cleanText = textToSpeak.replace(/[\u{1F300}-\u{1F9FF}]/gu, '').replace(/\(.*?\)/g, '').trim();
             const utterance = new SpeechSynthesisUtterance(cleanText);
-            const voices = window.speechSynthesis.getVoices();
-            const ukVoice = voices.find(v => v.lang === 'en-GB') || voices.find(v => v.lang.startsWith('en')) || null;
-            if (ukVoice) utterance.voice = ukVoice;
+            const voices = window.speechSynthesis.getVoices() || [];
+
+            const isMalayalam = /[\u0D00-\u0D7F]/.test(cleanText);
+            if (isMalayalam) {
+              utterance.lang = 'ml-IN';
+              const mlVoice = voices.find(v => v.lang.startsWith('ml'));
+              if (mlVoice) utterance.voice = mlVoice;
+            } else {
+              utterance.lang = 'en-GB';
+              const preferredVoice = voices.find(v => v.lang === 'en-GB') ||
+                                     voices.find(v => v.lang === 'en-US') ||
+                                     voices.find(v => v.lang.startsWith('en'));
+              if (preferredVoice) utterance.voice = preferredVoice;
+            }
+
             utterance.rate = 1.05;
             utterance.pitch = 0.95;
             utterance.onend = () => setSpeakingState(false);
@@ -4236,12 +4627,9 @@
       }
 
       window.executeManiPrompt = function(promptText) {
-        if (recognition) {
-          if (promptText.includes('Malayalam') || promptText.includes('മലയാളം')) {
-            recognition.lang = 'ml-IN';
-          } else {
-            recognition.lang = 'en-US';
-          }
+        unlockSpeechAudio();
+        if (!voiceSynthesisEnabled) {
+          window.toggleManiVoice();
         }
         appendChatMessage('You', promptText, false);
         processManiQuery(promptText);
@@ -4252,6 +4640,7 @@
         if (!cmdInput) return;
         const text = cmdInput.value.trim();
         if (!text) return;
+        unlockSpeechAudio();
         cmdInput.value = '';
         appendChatMessage('You', text, false);
         processManiQuery(text);
