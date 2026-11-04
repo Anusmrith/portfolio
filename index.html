@@ -1,19 +1,23 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>About Anusmrith — Creative Developer Portfolio</title>
-  <meta name="description" content="Portfolio of Anusmrith M M — Computer Science undergraduate, deep learning researcher, Flutter mobile developer, and creative technologist." />
-  
-  <!-- Senbuzy Google Typography -->
+  <meta name="description"
+    content="Portfolio of Anusmrith M M — Computer Science undergraduate, deep learning researcher, Flutter mobile developer, and creative technologist." />
+
+  <!-- portfolio Google Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Mansalva&family=Cormorant+Upright:wght@400;500;600&family=Chiron+GoRound+TC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Mansalva&family=Cormorant+Upright:wght@400;500;600&family=Chiron+GoRound+TC:wght@300;400;500;700&display=swap"
+    rel="stylesheet" />
 
   <style>
     /* ==========================================================================
-       SENBUZY EXACT COLOR PALETTE & ARCHITECTURAL STYLESHEET
+       portfolio EXACT COLOR PALETTE & ARCHITECTURAL STYLESHEET
        ========================================================================== */
     :root {
       --ink: #f4f1ea;
@@ -57,7 +61,10 @@
     /* Ambient Silky Canvas Scene */
     .scene-bg {
       position: fixed;
-      inset: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
       z-index: 0;
       pointer-events: none;
     }
@@ -69,7 +76,10 @@
 
     .scrim {
       position: fixed;
-      inset: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
       z-index: 1;
       pointer-events: none;
       background: linear-gradient(to right, #0a0e1600 20%, #0a0e16bf 58%, #0a0e16 92%);
@@ -108,12 +118,15 @@
     }
 
     /* ==========================================================================
-       SENBUZY ARCHITECTURAL CORNER CHROME & CROSSHAIRS
+       portfolio ARCHITECTURAL CORNER CHROME & CROSSHAIRS
        ========================================================================== */
     .hero-chrome {
       --m: clamp(16px, 2.4vh, 30px);
       position: fixed;
-      inset: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
       z-index: 12;
       pointer-events: none;
       font-family: 'Helvetica Neue', 'Chiron GoRound TC', -apple-system, system-ui, sans-serif;
@@ -133,10 +146,29 @@
       font-weight: 300;
     }
 
-    .hero-mark.tl { top: var(--m); left: var(--m); transform: translate(-50%, -50%); }
-    .hero-mark.tr { top: var(--m); right: var(--m); transform: translate(50%, -50%); }
-    .hero-mark.bl { bottom: var(--m); left: var(--m); transform: translate(-50%, 50%); }
-    .hero-mark.br { bottom: var(--m); right: var(--m); transform: translate(50%, 50%); }
+    .hero-mark.tl {
+      top: var(--m);
+      left: var(--m);
+      transform: translate(-50%, -50%);
+    }
+
+    .hero-mark.tr {
+      top: var(--m);
+      right: var(--m);
+      transform: translate(50%, -50%);
+    }
+
+    .hero-mark.bl {
+      bottom: var(--m);
+      left: var(--m);
+      transform: translate(-50%, 50%);
+    }
+
+    .hero-mark.br {
+      bottom: var(--m);
+      right: var(--m);
+      transform: translate(50%, 50%);
+    }
 
     .hero-meta {
       position: absolute;
@@ -151,12 +183,30 @@
       display: block;
       text-transform: none;
       letter-spacing: 0.12em;
-      color: rgba(244, 241, 234, 0.78);
+      color: rgba(244, 241, 234, 0.75);
       font-weight: 500;
     }
 
-    .hm-tl { top: calc(var(--m) + 16px); left: calc(var(--m) + 20px); }
-    .hm-bl { bottom: calc(var(--m) + 16px); left: calc(var(--m) + 20px); }
+    .hm-tl {
+      top: calc(var(--m) + 16px);
+      left: calc(var(--m) + 20px);
+    }
+
+    .hm-tr {
+      top: calc(var(--m) + 52px);
+      right: calc(var(--m) + 20px);
+      text-align: right;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    .hm-bl {
+      bottom: calc(var(--m) + 16px);
+      left: calc(var(--m) + 20px);
+    }
+
     .hm-right {
       top: 50%;
       right: calc(var(--m) + 7px);
@@ -165,7 +215,29 @@
       letter-spacing: 0.3em;
     }
 
-    /* Fixed Top Navigation Bar (Repositioned to eliminate text collision) */
+    @media (max-width: 860px) {
+      .resume-stage {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+      .resume-avatar-col {
+        position: static;
+        max-width: 260px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hm-right {
+        display: none;
+      }
+
+      .hm-tr {
+        display: none;
+      }
+    }
+
+    /* Fixed Top Navigation Buttons */
     .top-nav-bar {
       position: fixed;
       top: clamp(16px, 2.4vh, 30px);
@@ -174,34 +246,6 @@
       display: flex;
       align-items: center;
       gap: 10px;
-    }
-
-    /* Dedicated Portfolio Year Badge under navigation with zero overlap */
-    .hm-tr-badge {
-      position: fixed;
-      top: calc(clamp(16px, 2.4vh, 30px) + 48px);
-      right: calc(clamp(16px, 2.4vh, 30px) + 22px);
-      z-index: 105;
-      font-family: 'Helvetica Neue', system-ui, sans-serif;
-      font-size: 10.5px;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: rgba(244, 241, 234, 0.4);
-      pointer-events: none;
-      text-align: right;
-    }
-
-    @media (max-width: 768px) {
-      .hm-right { display: none; }
-      .hm-tr-badge { display: none; }
-      .top-nav-bar {
-        gap: 6px;
-        right: calc(clamp(16px, 2.4vh, 30px) + 12px);
-      }
-      .pill-btn {
-        padding: 6px 12px;
-        font-size: 11px;
-      }
     }
 
     .github-link {
@@ -269,139 +313,35 @@
     }
 
     /* ==========================================================================
-       SECTION 1: HERO WITH LEFT-SIDE PORTRAIT PHOTO (Senbuzy Layout)
+       SECTION 1: HERO & "ABOUT SEN" EDITORIAL TYPOGRAPHY
        ========================================================================== */
     .hero {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: center;
-      padding: 12vh 24px 8vh;
+      padding-bottom: 7vh;
       position: relative;
     }
 
-    .hero-stage {
-      display: grid;
-      grid-template-columns: min(290px, 28vw) 1.25fr;
-      gap: clamp(32px, 5vw, 68px);
-      align-items: center;
-      max-width: min(1080px, 92vw);
-      width: 100%;
-      margin: 0 auto;
-      animation: fadeDown 1.8s ease both;
-    }
-
-    /* Left Side: Real Photo Portrait Showcase */
-    .hero-portrait-stage {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .hero-portrait-card {
-      width: 100%;
-      max-width: 280px;
-      border: 1px solid rgba(244, 241, 234, 0.16);
-      background: rgba(13, 17, 26, 0.75);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-radius: 20px;
-      padding: 14px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 24px rgba(255, 217, 179, 0.12);
-      transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-    }
-
-    .hero-portrait-card:hover {
-      border-color: rgba(255, 217, 179, 0.4);
-      transform: translateY(-4px);
-      box-shadow: 0 32px 70px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 217, 179, 0.2);
-    }
-
-    .portrait-photo-box {
-      width: 100%;
-      aspect-ratio: 735 / 960;
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid rgba(244, 241, 234, 0.12);
-      background: #080c14;
-      position: relative;
-    }
-
-    .portrait-photo-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 15%;
-      display: block;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
-      filter: contrast(104%);
-    }
-
-    .hero-portrait-card:hover .portrait-photo-img {
-      transform: scale(1.04);
-    }
-
-    .portrait-meta-strip {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 12px;
-      padding: 6px 4px 2px;
-      font-family: 'Helvetica Neue', system-ui, sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .portrait-status-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-      box-shadow: 0 0 8px rgba(255, 217, 179, 0.85);
-      display: inline-block;
-      margin-right: 6px;
-    }
-
-    .portrait-name {
-      color: var(--ink);
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-    }
-
-    .portrait-tag {
-      color: var(--muted);
-      font-size: 10px;
-    }
-
-    /* Right Side: Editorial Headline & Copy */
     .about {
-      text-align: left;
+      text-align: center;
+      padding: 0 24px;
+      animation: fadeDown 1.8s ease both;
     }
 
     .about-intro {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .about-kicker {
-      font-family: 'Helvetica Neue', system-ui, sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 8px;
+      align-items: center;
     }
 
     .about-title {
       font-family: 'Mansalva', cursive;
       font-weight: 400;
-      font-size: clamp(38px, 6vw, 76px);
-      line-height: 1.05;
+      font-size: clamp(34px, 7.5vw, 84px);
+      line-height: 1;
       letter-spacing: 0.01em;
       color: var(--ink);
       margin-bottom: 0.3em;
@@ -409,27 +349,32 @@
     }
 
     .about-body {
-      margin: 0.4em 0 1.4em;
-      max-width: 620px;
+      margin: 0.6em auto 0;
+      max-width: min(720px, 88vw);
       font-family: 'Cormorant Upright', 'Chiron GoRound TC', Georgia, serif;
       font-weight: 500;
-      font-size: clamp(16px, 1.45vw, 21px);
-      line-height: 1.55;
+      font-size: clamp(15px, 1.4vw, 21px);
+      line-height: 1.5;
       letter-spacing: 0.02em;
       color: var(--ink);
       text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
     }
 
-    .about-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
+    .about-link {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(244, 241, 234, 0.45);
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .about-link:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
     }
 
     /* Scroll Cue */
     .scroll-cue {
-      margin-top: 5vh;
+      margin-top: 4vh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -468,58 +413,172 @@
     }
 
     @keyframes cueDot {
-      0% { transform: translateY(-10px); opacity: 0; }
-      25% { opacity: 1; }
-      75% { opacity: 1; }
-      100% { transform: translateY(44px); opacity: 0; }
+      0% {
+        transform: translateY(-10px);
+        opacity: 0;
+      }
+
+      25% {
+        opacity: 1;
+      }
+
+      75% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(44px);
+        opacity: 0;
+      }
     }
 
     @keyframes cueLabelPulse {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
-    }
 
-    /* Mobile Hero adjustments */
-    @media (max-width: 860px) {
-      .hero-stage {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 28px;
-        padding-top: 8vh;
+      0%,
+      100% {
+        opacity: 0.6;
       }
-      .hero-portrait-stage {
-        margin: 0 auto;
-      }
-      .hero-portrait-card {
-        max-width: 180px;
-      }
-      .about {
-        text-align: center;
-      }
-      .about-intro {
-        align-items: center;
-      }
-      .about-actions {
-        justify-content: center;
+
+      50% {
+        opacity: 1;
       }
     }
 
     /* ==========================================================================
-       SECTION 2: RESUME TIMELINE (Corrected spelling: Resume, No Accents)
+    /* ==========================================================================
+       SECTION 2: RESUME SECTION WITH STICKY 3D AVATAR SHOWCASE
        ========================================================================== */
     .resume {
       padding: 16vh 24px 14vh;
       position: relative;
     }
 
+    .resume-stage {
+      display: grid;
+      grid-template-columns: min(320px, 30vw) 1fr;
+      gap: clamp(36px, 5vw, 72px);
+      align-items: flex-start;
+      max-width: min(1080px, 92vw);
+      margin: 0 auto;
+    }
+
+    /* Left Column: Sticky 3D Avatar Card (Fills empty space on left) */
+    .resume-avatar-col {
+      position: sticky;
+      top: 14vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .resume-avatar-card {
+      border: 1px solid rgba(244, 241, 234, 0.16);
+      background: rgba(13, 17, 26, 0.76);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 24px rgba(255, 217, 179, 0.1);
+      transition: all 0.35s ease;
+    }
+
+    .resume-avatar-card:hover {
+      border-color: rgba(255, 217, 179, 0.4);
+      box-shadow: 0 32px 70px rgba(0, 0, 0, 0.9), 0 0 32px rgba(255, 217, 179, 0.18);
+      transform: translateY(-3px);
+    }
+
+    .resume-avatar-box {
+      width: 100%;
+      aspect-ratio: 764 / 960;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(244, 241, 234, 0.12);
+      background: #080c14;
+      position: relative;
+    }
+
+    .resume-avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 12%;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .resume-avatar-card:hover .resume-avatar-img {
+      transform: scale(1.05);
+    }
+
+    .resume-avatar-badge {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(10, 14, 22, 0.88);
+      border: 1px solid rgba(255, 217, 179, 0.35);
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-family: 'Helvetica Neue', system-ui, sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      white-space: nowrap;
+      backdrop-filter: blur(4px);
+    }
+
+    .resume-avatar-info {
+      margin-top: 14px;
+      padding: 4px 4px 2px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .resume-avatar-name {
+      font-family: 'Cormorant Upright', Georgia, serif;
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+
+    .resume-avatar-bio {
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--muted);
+      font-family: 'Chiron GoRound TC', -apple-system, sans-serif;
+    }
+
+    .resume-avatar-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .resume-dl-btn {
+      margin-top: 10px;
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* Right Column: Timeline */
+    .resume-timeline-col {
+      width: 100%;
+    }
+
     .resume-header-row {
-      width: min(560px, 92vw);
-      margin: 0 6vw 0 auto;
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
       gap: 16px;
       flex-wrap: wrap;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 24px;
     }
 
     .resume-title {
@@ -533,8 +592,8 @@
 
     .timeline {
       position: relative;
-      width: min(560px, 92vw);
-      margin: 7vh 6vw 0 auto;
+      width: 100%;
+      margin-top: 20px;
     }
 
     .timeline:before {
@@ -550,11 +609,11 @@
     .tl-entry {
       position: relative;
       padding-left: 36px;
-      padding-bottom: 18vh;
+      padding-bottom: 22vh;
     }
 
     .tl-entry:last-child {
-      padding-bottom: 8vh;
+      padding-bottom: 12vh;
     }
 
     .tl-dot {
@@ -1126,8 +1185,15 @@
 
     /* Keyframe Animations */
     @keyframes fadeDown {
-      0% { opacity: 0; transform: translateY(-16px); }
-      100% { opacity: 1; transform: translateY(0); }
+      0% {
+        opacity: 0;
+        transform: translateY(-16px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @media (max-width: 640px) {
@@ -1135,21 +1201,26 @@
         inset: 12px;
         border-radius: 16px;
       }
+
       .wk-detail-article {
         padding: 24px 16px 40px;
       }
+
       .wk-card {
         padding: 26px 18px;
       }
+
       .wk-line-btn {
         flex-direction: column;
         align-items: flex-start;
         gap: 6px;
       }
+
       .credit {
         flex-direction: column;
         gap: 6px;
       }
+
       .credit-sep {
         display: none;
       }
@@ -1158,7 +1229,7 @@
 </head>
 
 <body>
-  <!-- Senbuzy Architectural Corner Frame & Crosshairs -->
+  <!-- portfolio Architectural Corner Frame & Crosshairs -->
   <div class="hero-chrome" aria-hidden="true">
     <div class="hero-frame"></div>
     <span class="hero-mark tl">+</span>
@@ -1167,8 +1238,9 @@
     <span class="hero-mark br">+</span>
     <div class="hero-meta hm-tl">
       <span class="hm-name">Anusmrith M M</span>
-      <span>Computer Science &bull; Portfolio 2026</span>
+      <span>Computer Science · Developer</span>
     </div>
+    <div class="hero-meta hm-tr">Portfolio — 2026</div>
     <div class="hero-meta hm-bl">Code · Art · Play</div>
     <div class="hero-meta hm-right">CEK · Kerala, India</div>
   </div>
@@ -1181,57 +1253,34 @@
   <div class="hero-gradient" aria-hidden="true"></div>
   <div class="glass-rail" aria-hidden="true"></div>
 
-  <!-- Top Right Navigation & Links (Positioned with zero collision) -->
-  <header class="top-nav-bar">
-    <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer" class="github-link" aria-label="GitHub Profile" title="Open GitHub Profile">
+  <!-- Top Right Navigation & Links -->
+  <div class="top-nav-bar">
+    <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer" class="github-link"
+      aria-label="GitHub Profile" title="Open GitHub Profile">
       <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+        <path
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
       </svg>
     </a>
     <a href="#resume" class="pill-btn">Resume</a>
     <a href="#works" class="pill-btn">Works</a>
     <button class="pill-btn accent" id="copyEmailTopBtn">Contact</button>
-  </header>
-  <div class="hm-tr-badge" aria-hidden="true">Portfolio &mdash; 2026</div>
+  </div>
 
   <main class="content">
     <!-- ==========================================================================
-         HERO SECTION: Left-Side Real Photo Portrait + Mansalva Headline
+         HERO SECTION: "About Anusmrith" + Mansalva Heading + Scroll Cue
          ========================================================================== -->
     <section class="hero" id="home">
-      <div class="hero-stage">
-        <!-- Left Side: Real Photo Portrait Showcase -->
-        <div class="hero-portrait-stage">
-          <div class="hero-portrait-card">
-            <div class="portrait-photo-box">
-              <img src="assets/profile.jpg" alt="Anusmrith M M - Software Developer" class="portrait-photo-img" />
-            </div>
-            <div class="portrait-meta-strip">
-              <span class="portrait-name">
-                <span class="portrait-status-dot"></span>
-                Anusmrith M M
-              </span>
-              <span class="portrait-tag">Kerala, India</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Side: Editorial Headline & Copy -->
-        <div class="about">
-          <div class="about-intro">
-            <span class="about-kicker">Creative Technologist &bull; CEK CS</span>
-            <h1 class="about-title">About Anusmrith</h1>
-            <p class="about-body">
-              I'm Anusmrith — a computer science undergraduate living where code meets creativity. I spend my days around deep learning architectures, mobile engineering with Flutter, responsive web design, and game development with Godot. I love studying and combining skills across different fields — to build, create, and explore more possibilities.
-            </p>
-            <div class="about-actions">
-              <a href="#resume" class="pill-btn">Explore Resume</a>
-              <a href="assets/resume.pdf" download="resume-anusmrith.pdf" target="_blank" class="pill-btn accent">
-                <span>Download Resume (PDF)</span>
-                <span aria-hidden="true">&nearr;</span>
-              </a>
-            </div>
-          </div>
+      <div class="about">
+        <div class="about-intro">
+          <h1 class="about-title">About Anusmrith</h1>
+          <p class="about-body">
+            I'm Anusmrith — a computer science undergraduate living where code meets creativity. I spend my days around
+            deep learning architectures, mobile engineering with Flutter, responsive web design, and game development
+            with Godot. I love studying and combining skills across different fields — to build, create, and explore
+            more possibilities.
+          </p>
         </div>
       </div>
 
@@ -1244,87 +1293,127 @@
     </section>
 
     <!-- ==========================================================================
-         RESUME TIMELINE SECTION (Corrected spelling: Resume, No Accents)
+         RÉSUMÉ TIMELINE SECTION (portfolio Vertical Line Aesthetic)
          ========================================================================== -->
     <section class="resume" id="resume">
-      <div class="resume-header-row">
-        <h2 class="resume-title">Resume</h2>
-        <a href="assets/resume.pdf" download="resume-anusmrith.pdf" target="_blank" class="pill-btn accent">
-          <span>Download PDF</span>
-          <span aria-hidden="true">&nearr;</span>
-        </a>
-      </div>
+      <div class="resume-stage">
+        <!-- Left Column: Sticky 3D Avatar Card (Fills the left space!) -->
+        <div class="resume-avatar-col">
+          <div class="resume-avatar-card">
+            <div class="resume-avatar-box">
+              <img src="assets/avatar.jpg" alt="Anusmrith M M - 3D Character Avatar" class="resume-avatar-img" />
+              <span class="resume-avatar-badge">Digital Persona</span>
+            </div>
+            <div class="resume-avatar-info">
+              <h3 class="resume-avatar-name">Anusmrith M M</h3>
+              <p class="resume-avatar-bio">Computer Science Undergraduate &bull; CEK KTU</p>
+              <div class="resume-avatar-tags">
+                <span class="wk-badge">Deep Learning</span>
+                <span class="wk-badge">Flutter</span>
+                <span class="wk-badge">Godot</span>
+              </div>
+              <a href="assets/resume.pdf" download="resume-anusmrith.pdf" target="_blank" class="pill-btn accent resume-dl-btn">
+                <span>Download Resume (PDF)</span>
+                <span aria-hidden="true">&nearr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
 
-      <div class="timeline">
-        <!-- Milestone 1: College of Engineering Karunagappally -->
+        <!-- Right Column: Header & Timeline -->
+        <div class="resume-timeline-col">
+          <div class="resume-header-row">
+            <h2 class="resume-title">Resume</h2>
+            <a href="assets/resume.pdf" download="resume-anusmrith.pdf" target="_blank" class="pill-btn accent">
+              <span>Download PDF</span>
+              <span aria-hidden="true">&nearr;</span>
+            </a>
+          </div>
+
+          <div class="timeline">
+
+        <!-- Entry 1: Current College Degree -->
         <div class="tl-entry">
           <span class="tl-dot"></span>
-          <div class="tl-period">2023 &ndash; Present</div>
+          <div class="tl-period">2023 &ndash; 2027</div>
           <div class="tl-head">
-            <div class="tl-place">College of Engineering Karunagappally (KTU)</div>
+            <div class="tl-place">College of Engineering Karunagappally</div>
             <div class="tl-logo-chip" title="Anusmrith M M">
               <img src="assets/profile.jpg" alt="Anusmrith M M" />
             </div>
           </div>
-          <div class="tl-role">B.Tech in Computer Science &amp; Engineering &bull; Kerala, India</div>
+          <div class="tl-role">B.Tech in Computer Science &amp; Engineering &bull; CGPA 7.15 / 10</div>
           <ul class="tl-points">
-            <li>Specialization: Deep learning transformer architectures, Flutter mobile development, and full-stack web engineering.</li>
-            <li>Relevant Coursework: Data Structures &amp; Algorithms, Database Management Systems (DBMS), Operating Systems, Object-Oriented Programming (OOP), Computer Networks.</li>
-            <li>Published 10+ open-source software repositories and technical research utilities on GitHub.</li>
+            <li>Specialization: Deep learning transformer architectures, Flutter mobile development, and responsive web
+              utilities.</li>
+            <li>Published 10+ open-source software and research repositories on GitHub.</li>
+            <li>APJ Abdul Kalam Technological University (KTU), Kerala, India.</li>
           </ul>
         </div>
 
-        <!-- Milestone 2: Web Development Internship -->
+        <!-- Entry 2: AI & LLM Systems -->
         <div class="tl-entry">
           <span class="tl-dot"></span>
-          <div class="tl-period">June 2025</div>
+          <div class="tl-period">2025 &ndash; Present</div>
           <div class="tl-head">
-            <div class="tl-place">Scipy Technologies</div>
+            <div class="tl-place">Autonomous AI &amp; Transformer Models</div>
           </div>
-          <div class="tl-role">Web Development Intern &bull; Kerala, India</div>
+          <div class="tl-role">Independent Researcher &bull; Python, PyTorch &amp; LLM Systems</div>
           <ul class="tl-points">
-            <li>Engineered responsive web interface modules utilizing semantic HTML5, CSS3 flexbox/grid, and modern JavaScript.</li>
-            <li>Implemented client-side scripting routines, DOM manipulation algorithms, and modular form validation logic.</li>
-            <li>Adopted professional software development workflows, standard Git version control branching, and code quality reviews.</li>
+            <li><strong>Vishwas AI:</strong> Autonomous claim verification engine with live multi-source web validation
+              via Tavily Search API.</li>
+            <li><strong>V-BOT:</strong> Decoder-only neural transformer language model coded and trained from scratch in
+              PyTorch.</li>
+            <li><strong>Easeprompt:</strong> Meta-prompt synthesis engine enforcing the ART (Act as, Request, Terms)
+              framework.</li>
           </ul>
         </div>
 
-        <!-- Milestone 3: AI & Full-Stack Projects -->
+        <!-- Entry 3: Mobile & Full-Stack Apps -->
         <div class="tl-entry">
           <span class="tl-dot"></span>
-          <div class="tl-period">2024 &ndash; 2026</div>
+          <div class="tl-period">2024 &ndash; 2025</div>
           <div class="tl-head">
-            <div class="tl-place">Technical Research &amp; Open Source Projects</div>
+            <div class="tl-place">Full-Stack &amp; Mobile Engineering</div>
           </div>
-          <div class="tl-role">Deep Learning &bull; Full-Stack Systems &bull; Game Development</div>
+          <div class="tl-role">Application Developer &bull; Flutter, Supabase &amp; Web Platforms</div>
           <ul class="tl-points">
-            <li><strong>V-BOT:</strong> Architected a decoder-only neural transformer language model from scratch in PyTorch with custom Byte-Level BPE tokenizer.</li>
-            <li><strong>AttendWise:</strong> Built cross-platform smart attendance tracker &amp; recovery risk calculator using Supabase authentication and PostgreSQL RLS.</li>
-            <li><strong>Vishwas AI:</strong> Autonomous claim verification engine with live multi-source web validation via Tavily Search API.</li>
-            <li><strong>Easeprompt:</strong> Prompt expansion &amp; optimization studio enforcing the ART (Act as, Request, Terms) framework.</li>
-            <li><strong>Blackout:</strong> 2D platformer action game built in Godot Engine with kinematic physics and GDScript signal handling.</li>
+            <li><strong>Digital Pooja Veppu:</strong> Cyber Sannidhanam festive audio-visual web experience with
+              synthesized brass bells and canvas physics.</li>
+            <li><strong>AttendWise:</strong> Institutional smart attendance portal with Supabase real-time database and
+              Capacitor mobile packaging.</li>
+            <li><strong>KSEB Slab Watchdog:</strong> Progressive Web App (PWA) calculating Kerala electricity tariff
+              forecasts and penalty warnings.</li>
+            <li><strong>NutriDecide:</strong> Cross-platform food intelligence mobile app developed in Flutter and
+              Firebase Firestore.</li>
           </ul>
         </div>
 
-        <!-- Milestone 4: Higher Secondary Education & Leadership -->
+        <!-- Entry 4: Game Dev & Foundations -->
         <div class="tl-entry">
           <span class="tl-dot"></span>
-          <div class="tl-period">2020 &ndash; 2022</div>
+          <div class="tl-period">2023 &ndash; 2024</div>
           <div class="tl-head">
-            <div class="tl-place">VPMSNDP HSS Kazhimbram (DHSE Kerala)</div>
+            <div class="tl-place">Game Logic &amp; Creative Computing</div>
           </div>
-          <div class="tl-role">Higher Secondary Education &bull; Biology Science (90.58%)</div>
+          <div class="tl-role">Game Developer &bull; Godot Engine &amp; Desktop Voice AI</div>
           <ul class="tl-points">
-            <li>Certifications: Introduction to AI Concepts (Microsoft Learn).</li>
-            <li>Leadership &amp; Volunteering: Volunteer Coordinator at FOSS FEST 2025; Active Delegate at ICGAIFE 3.0.</li>
-            <li>Languages: English (Professional), Malayalam (Native), Tamil (Conversational).</li>
+            <li><strong>Blackout:</strong> 2D top-down action adventure game engineered in Godot Engine using GDScript
+              with kinematic physics.</li>
+            <li><strong>Skill Quest:</strong> In-browser interactive retro arcade mini-game with real-time collision
+              dynamics and touch controls.</li>
+            <li><strong>M.A.N.I. Assistant:</strong> Local desktop speech automation system performing voice-controlled
+              Windows workflows.</li>
           </ul>
+        </div>
+      
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ==========================================================================
-         WORKS SECTION (Senbuzy 4 Curated Category Cards)
+         WORKS SECTION (portfolio 4 Curated Category Cards)
          ========================================================================== -->
     <section class="works" id="works">
       <div class="works-container">
@@ -1377,8 +1466,8 @@
                     Easeprompt &mdash; Meta-Prompt Expansion Studio &amp; ART Framework
                   </span>
                   <div class="wk-line-meta">
-                    <span class="wk-line-num">Prompt Studio</span>
-                    <span class="wk-line-tag">AI Tool</span>
+                    <span class="wk-line-num">FastAPI / Gemini API</span>
+                    <span class="wk-line-tag">Prompt Studio</span>
                     <span class="wk-line-arrow">&nearr;</span>
                   </div>
                 </button>
@@ -1399,7 +1488,8 @@
             </ul>
 
             <div class="wk-foot">
-              Tech: Python 3.11+ &bull; PyTorch &bull; Multi-Head Attention &bull; Tavily Search API &bull; Groq / Gemini APIs &bull; SpeechRecognition
+              Tech: Python 3.11+ &bull; PyTorch &bull; Multi-Head Attention &bull; Tavily Search API &bull; Groq /
+              Gemini APIs &bull; SpeechRecognition
             </div>
           </article>
 
@@ -1408,7 +1498,7 @@
             <div class="wk-card-head">
               <span class="wk-card-no">02</span>
               <h3 class="wk-card-title">Mobile &amp; Web Applications</h3>
-              <span class="wk-card-tagline">Flutter &bull; Supabase &bull; Progressive Web Apps &bull; REST APIs</span>
+              <span class="wk-card-tagline">Flutter &bull; Supabase &bull; Firebase &bull; Progressive Web Apps</span>
             </div>
 
             <ul class="wk-list">
@@ -1457,7 +1547,7 @@
                     NutriDecide &mdash; Cross-Platform Food Intelligence App
                   </span>
                   <div class="wk-line-meta">
-                    <span class="wk-line-num">Flutter / Dart</span>
+                    <span class="wk-line-num">Flutter / Firebase</span>
                     <span class="wk-line-tag">Mobile App</span>
                     <span class="wk-line-arrow">&nearr;</span>
                   </div>
@@ -1479,7 +1569,8 @@
             </ul>
 
             <div class="wk-foot">
-              Tech: Flutter &bull; Dart &bull; Supabase PostgreSQL (RLS) &bull; Capacitor 8 &bull; Vite 6 &bull; PWA Offline
+              Tech: Flutter &bull; Dart &bull; Firebase Firestore &bull; Supabase PostgreSQL &bull; Capacitor 8 &bull;
+              Vite 6 &bull; PWA
             </div>
           </article>
 
@@ -1520,11 +1611,12 @@
             </ul>
 
             <div class="wk-foot">
-              Tech: Godot Engine 4.x &bull; GDScript &bull; 2D Kinematic Physics &bull; HTML5 Canvas &bull; Web Audio Synthesizer
+              Tech: Godot Engine 4.x &bull; GDScript &bull; 2D Kinematic Physics &bull; HTML5 Canvas &bull; Web Audio
+              Synthesizer
             </div>
           </article>
 
-          <!-- CARD 04: Technical Matrix & Tooling (SQL, FastAPI, Firebase removed per user instructions) -->
+          <!-- CARD 04: Technical Matrix & Tooling -->
           <article class="wk-card">
             <div class="wk-card-head">
               <span class="wk-card-no">04</span>
@@ -1581,15 +1673,15 @@
     <footer class="footer" id="contact">
       <div class="footer-links">
         <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer" class="pill-btn">GitHub</a>
-        <a href="https://www.linkedin.com/in/anusmrith-m-m" target="_blank" rel="noopener noreferrer" class="pill-btn">LinkedIn</a>
-        <a href="assets/resume.pdf" download="resume-anusmrith.pdf" target="_blank" class="pill-btn">Download Resume (PDF)</a>
+        <a href="https://www.linkedin.com/in/anusmrithmm/" target="_blank" rel="noopener noreferrer"
+          class="pill-btn">LinkedIn</a>
         <button class="pill-btn accent" id="copyEmailBottomBtn">Copy Email (anusmrithchanju@gmail.com)</button>
       </div>
 
       <div class="credit">
         <span class="credit-label">Designed &amp; Developed with Care</span>
         <span class="credit-sep">·</span>
-        <span class="credit-tools">Inspired by Senbuzy &bull; Anusmrith M M &copy; 2026</span>
+        <span class="credit-tools">Anusmrith M M &copy; 2026</span>
       </div>
     </footer>
   </main>
@@ -1633,7 +1725,7 @@
        CLIENT SCRIPTS: SILKY WAVE CANVAS + DETAIL MODAL + MINI-GAME + COPY EMAIL
        ========================================================================== -->
   <script>
-    // 1. Silky Generative Waves Background (Senbuzy aesthetic)
+    // 1. Silky Generative Waves Background (portfolio aesthetic)
     (function initSilkyFluidCanvas() {
       const canvas = document.getElementById('fluid-bg');
       if (!canvas) return;
@@ -1657,7 +1749,7 @@
       function renderWaves() {
         ctx.clearRect(0, 0, width, height);
 
-        // 4 ultra-delicate Senbuzy silky lines
+        // 4 ultra-delicate portfolio silky lines
         const waveCount = 4;
         for (let w = 0; w < waveCount; w++) {
           ctx.beginPath();
@@ -1711,7 +1803,7 @@
       "vishwas-ai": {
         title: "Vishwas AI — Claim Verification & Hallucination Auditor",
         sub: "Machine Learning &bull; Autonomous Verification Pipeline",
-        tags: ["Python 3.11+", "Tavily Search API", "Groq / OpenAI / Anthropic", "NLP", "Hallucination Auditing"],
+        tags: ["Python 3.11+", "Tavily Search API", "Groq / OpenAI / Anthropic", "FastAPI", "NLP", "Hallucination Auditing"],
         desc: "Autonomous LLM claim-verification and hallucination-auditing pipeline. Automatically deconstructs complex LLM output text into atomic factual assertions, executes targeted multi-angle live web queries using the Tavily Search API, evaluates source cross-corroboration, and computes a calibrated confidence trust score with transparent audit logs.",
         links: [
           { label: "View GitHub Repository ↗", url: "https://github.com/Anusmrith/VishwasAi" }
@@ -1729,7 +1821,7 @@
       "easeprompt": {
         title: "Easeprompt — Meta-Prompt Expansion Studio & ART Framework",
         sub: "Developer Tool &bull; Prompt Architecture Studio",
-        tags: ["Python 3.10+", "ART Framework", "Google Gemini API", "Prompt Engineering"],
+        tags: ["Python 3.10+", "FastAPI", "ART Framework", "Google Gemini API", "Prompt Engineering"],
         desc: "Intelligent meta-prompt expansion engine enforcing the ART (Act as, Request, Terms) framework. Transforms ambiguous one-liner prompts into production-ready system instructions with role definitions, boundary constraints, and structured output formatting for high-reliability AI workflows.",
         links: [
           { label: "View GitHub Repository ↗", url: "https://github.com/Anusmrith/Easeprompt" }
@@ -1776,9 +1868,9 @@
       },
       "nutridecide": {
         title: "NutriDecide — Cross-Platform Food Intelligence App",
-        sub: "Mobile Engineering &bull; Flutter & Dart",
-        tags: ["Flutter", "Dart", "REST APIs", "Mobile UI"],
-        desc: "Cross-platform mobile application providing real-time nutritional metrics, dietary decision assistance, and meal health scoring built with Flutter and Dart.",
+        sub: "Mobile Engineering &bull; Flutter & Firebase",
+        tags: ["Flutter", "Dart", "Firebase Firestore", "REST APIs", "Mobile UI"],
+        desc: "Cross-platform mobile application providing real-time nutritional metrics, dietary decision assistance, and meal health scoring built with Flutter, Dart, and Firebase Cloud Firestore.",
         links: [
           { label: "View GitHub Repository ↗", url: "https://github.com/Anusmrith/NutriDecide" }
         ]
@@ -1929,7 +2021,7 @@
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
       const scoreDisp = document.getElementById('gameScoreDisplay');
-      
+
       const W = canvas.width = 960;
       const H = canvas.height = 340;
       const groundY = H - 50;
@@ -2114,4 +2206,5 @@
     document.getElementById('copyEmailBottomBtn').addEventListener('click', copyEmailToClipboard);
   </script>
 </body>
+
 </html>
