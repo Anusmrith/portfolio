@@ -1398,11 +1398,8 @@
           </div>
           <div class="tl-role">Game Developer &bull; Godot Engine &amp; Desktop Voice AI</div>
           <ul class="tl-points">
-            <li><strong>Blackout:</strong> 2D top-down action adventure game engineered in Godot Engine using GDScript
-              with kinematic physics.</li>
-            <li><strong>Skill Quest:</strong> In-browser interactive retro arcade mini-game with real-time collision
-              dynamics and touch controls.</li>
-            <li><strong>M.A.N.I. Assistant:</strong> Local desktop speech automation system performing voice-controlled
+            <li><strong>Blackout:</strong> 2D action adventure game engineered in Godot Engine using GDScript with kinematic physics, released on itch.io.</li>
+                        <li><strong>M.A.N.I. Assistant:</strong> Local desktop speech automation system performing voice-controlled
               Windows workflows.</li>
           </ul>
         </div>
@@ -1421,7 +1418,7 @@
           <div>
             <h2 class="works-title">Works</h2>
           </div>
-          <span class="works-subtitle">Curated Projects &bull; 10 Selected Works</span>
+          <span class="works-subtitle">Curated Projects &bull; 9 Selected Works</span>
         </header>
 
         <div class="wk-sections-grid">
@@ -1579,7 +1576,7 @@
             <div class="wk-card-head">
               <span class="wk-card-no">03</span>
               <h3 class="wk-card-title">Game Logic &amp; Creative Computing</h3>
-              <span class="wk-card-tagline">Godot Engine &bull; GDScript &bull; 2D Physics &bull; Canvas API</span>
+              <span class="wk-card-tagline">Godot Engine &bull; GDScript &bull; 2D Kinematics &bull; itch.io</span>
             </div>
 
             <ul class="wk-list">
@@ -1589,21 +1586,8 @@
                     Blackout &mdash; 2D Action-Adventure Physics Game
                   </span>
                   <div class="wk-line-meta">
-                    <span class="wk-line-num">Godot / GDScript</span>
-                    <span class="wk-line-tag">Indie Game</span>
-                    <span class="wk-line-arrow">&nearr;</span>
-                  </div>
-                </button>
-              </li>
-
-              <li class="wk-line">
-                <button class="wk-line-btn" data-slug="skill-quest">
-                  <span class="wk-line-name">
-                    Skill Quest &mdash; Interactive Browser Arcade Quest
-                  </span>
-                  <div class="wk-line-meta">
-                    <span class="wk-line-num">Canvas / Physics</span>
-                    <span class="wk-line-tag">Play Live &#x1F3AE;</span>
+                    <span class="wk-line-num">Play on itch.io &bull; Godot 4</span>
+                    <span class="wk-line-tag">itch.io &nearr;</span>
                     <span class="wk-line-arrow">&nearr;</span>
                   </div>
                 </button>
@@ -1611,8 +1595,7 @@
             </ul>
 
             <div class="wk-foot">
-              Tech: Godot Engine 4.x &bull; GDScript &bull; 2D Kinematic Physics &bull; HTML5 Canvas &bull; Web Audio
-              Synthesizer
+              Tech: Godot Engine 4.x &bull; GDScript &bull; 2D Kinematic Physics &bull; itch.io Web Distribution
             </div>
           </article>
 
@@ -1629,7 +1612,7 @@
                 <button class="wk-line-btn" data-slug="skills-languages">
                   <span class="wk-line-name">Programming Languages</span>
                   <div class="wk-line-meta">
-                    <span class="wk-line-num">Python · JavaScript · Dart · C · GDScript</span>
+                    <span class="wk-line-num">Python &bull; JavaScript &bull; HTML &bull; CSS &bull; C &bull; GDScript</span>
                     <span class="wk-line-tag">Core Syntax</span>
                     <span class="wk-line-arrow">&nearr;</span>
                   </div>
@@ -1640,7 +1623,7 @@
                 <button class="wk-line-btn" data-slug="skills-frameworks">
                   <span class="wk-line-name">Frameworks &amp; Libraries</span>
                   <div class="wk-line-meta">
-                    <span class="wk-line-num">Flutter · PyTorch · Godot Engine · Vite 6</span>
+                    <span class="wk-line-num">Flutter &bull; PyTorch &bull; Godot Engine</span>
                     <span class="wk-line-tag">Ecosystem</span>
                     <span class="wk-line-arrow">&nearr;</span>
                   </div>
@@ -1651,7 +1634,7 @@
                 <button class="wk-line-btn" data-slug="skills-tools">
                   <span class="wk-line-name">Cloud &amp; Development Environments</span>
                   <div class="wk-line-meta">
-                    <span class="wk-line-num">Git · GitHub · Supabase · Vercel · Linux · VS Code</span>
+                    <span class="wk-line-num">Git &bull; GitHub &bull; Supabase &bull; Vercel &bull; VS Code</span>
                     <span class="wk-line-tag">Workflow</span>
                     <span class="wk-line-arrow">&nearr;</span>
                   </div>
@@ -1700,19 +1683,6 @@
       </header>
 
       <div class="wk-detail-desc" id="modalDesc"></div>
-
-      <!-- Embedded Interactive Mini-Game container (shown only when playing Skill Quest) -->
-      <div class="game-embed-box" id="modalGameBox" style="display: none;">
-        <div class="game-hud">
-          <span>Collect Skill Nodes &bull; Jump Over Bugs</span>
-          <span class="game-score">Score: <strong id="gameScoreDisplay">0</strong></span>
-        </div>
-        <canvas id="game-canvas" width="960" height="340"></canvas>
-        <div class="touch-controls-bar">
-          <button class="touch-btn" id="gameJumpBtn">JUMP / TAP TO START</button>
-          <button class="touch-btn" id="gameRestartBtn">RESTART</button>
-        </div>
-      </div>
 
       <div class="wk-detail-actions" id="modalActions"></div>
     </article>
@@ -1886,25 +1856,19 @@
       },
       "blackout-game": {
         title: "Blackout — 2D Action-Adventure Physics Game",
-        sub: "Game Development &bull; Godot Engine",
-        tags: ["Godot Engine 4.x", "GDScript", "2D Physics", "KinematicBody2D", "Dynamic Lighting"],
-        desc: "2D top-down action adventure game developed in Godot Engine using GDScript. Features dynamic 2D lighting, raycast field-of-view, kinematic character controllers, collision detection, and custom audio management.",
+        sub: "Game Development &bull; Godot Engine &bull; Playable on itch.io",
+        tags: ["Godot Engine 4.x", "GDScript", "2D Physics", "KinematicBody2D", "itch.io", "Indie Game"],
+        desc: "2D top-down action adventure game developed in Godot Engine using GDScript. Features dynamic 2D lighting, raycast field-of-view, kinematic character controllers, collision detection, and custom audio management. Available to play live on itch.io.",
         links: [
+          { label: "Play Live on itch.io ↗", url: "https://anusmrith.itch.io/blackout" },
           { label: "View GitHub Repository ↗", url: "https://github.com/Anusmrith/blackoutgame" }
         ]
-      },
-      "skill-quest": {
-        title: "Skill Quest — Interactive Browser Arcade Quest",
-        sub: "Interactive Game &bull; HTML5 Canvas Physics",
-        tags: ["HTML5 Canvas API", "Physics Engine", "Collision Detection", "Web Audio API", "Arcade"],
-        desc: "In-browser arcade obstacle runner designed for portfolio visitors. Features real-time collision detection, jumping gravity physics, collectible skill nodes (Python, PyTorch, Flutter, Godot), procedural obstacle generation, live scoring, and on-screen mobile touch controls.",
-        is_game: true
       },
       "skills-languages": {
         title: "Programming Languages Matrix",
         sub: "Foundational Syntax &bull; Core Stack",
-        tags: ["Python 3.11+", "JavaScript (ES6+)", "Dart", "C Language", "GDScript"],
-        desc: "Proficient in Python (modern 3.11+, PyTorch tensor manipulation, backend routines), JavaScript / TypeScript (DOM manipulation, canvas rendering, Web APIs), Dart (Flutter reactive UI architecture), C (memory management, low-level pointers & algorithms), and Godot GDScript.",
+        tags: ["Python 3.11+", "JavaScript", "HTML5", "CSS3", "C Language", "GDScript"],
+        desc: "Proficient in Python (modern 3.11+, PyTorch tensor manipulation, backend routines), JavaScript (ES6+, DOM manipulation, Web APIs), HTML5 & semantic markup, CSS3 (responsive layouts & animations), C (memory management, low-level pointers & algorithms), and Godot GDScript.",
         links: [
           { label: "Explore Repositories on GitHub ↗", url: "https://github.com/Anusmrith" }
         ]
@@ -1912,8 +1876,8 @@
       "skills-frameworks": {
         title: "Frameworks & Specialized Libraries",
         sub: "Software Ecosystem &bull; Development Tools",
-        tags: ["Flutter", "PyTorch", "Godot Engine (2D Kinematics)", "Vite 6", "Node.js (Basics)"],
-        desc: "Hands-on experience with Flutter (cross-platform state management & UI), PyTorch (transformer attention mechanisms, tensor modeling), Godot Engine GDScript, Vite 6, and modern web application frameworks.",
+        tags: ["Flutter", "PyTorch", "Godot Engine (2D Kinematics)"],
+        desc: "Hands-on experience with Flutter (cross-platform state management & UI), PyTorch (transformer attention mechanisms, tensor modeling), and Godot Engine GDScript.",
         links: [
           { label: "Explore Repositories on GitHub ↗", url: "https://github.com/Anusmrith" }
         ]
@@ -1921,8 +1885,8 @@
       "skills-tools": {
         title: "Cloud & Development Environments",
         sub: "DevOps &bull; Workflow & Tooling",
-        tags: ["Git", "GitHub", "Supabase (Auth, RLS)", "PostgreSQL", "Vercel", "Linux / Bash", "VS Code"],
-        desc: "Experienced with Git version control, GitHub team workflows, Supabase PostgreSQL with Row-Level Security (RLS), Linux command line, Vercel deployments, and VS Code development tooling.",
+        tags: ["Git", "GitHub", "Supabase (Auth, RLS)", "PostgreSQL", "Vercel", "VS Code"],
+        desc: "Experienced with Git version control, GitHub team workflows, Supabase PostgreSQL with Row-Level Security (RLS), Vercel deployments, and VS Code development tooling.",
         links: [
           { label: "View GitHub Profile ↗", url: "https://github.com/Anusmrith" }
         ]
@@ -1938,7 +1902,7 @@
     const modalTags = document.getElementById('modalTags');
     const modalDesc = document.getElementById('modalDesc');
     const modalActions = document.getElementById('modalActions');
-    const modalGameBox = document.getElementById('modalGameBox');
+    
 
     function openWorkModal(slug) {
       const data = worksDictionary[slug];
@@ -1974,12 +1938,7 @@
       }
 
       // Handle interactive game embed
-      if (data.is_game) {
-        modalGameBox.style.display = 'block';
-        initSkillQuest();
-      } else {
-        modalGameBox.style.display = 'none';
-      }
+      
 
       backdrop.classList.add('open');
       modal.classList.add('open');
@@ -1992,9 +1951,7 @@
       modal.classList.remove('open');
       modal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
-      if (gameRunning) {
-        gameRunning = false;
-      }
+
     }
 
     // Bind line clicks
@@ -2013,177 +1970,6 @@
       }
     });
 
-    // 4. Interactive Skill Quest Mini-Game Engine
-    let gameRunning = false;
-    let gameScore = 0;
-    function initSkillQuest() {
-      const canvas = document.getElementById('game-canvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const scoreDisp = document.getElementById('gameScoreDisplay');
-
-      const W = canvas.width = 960;
-      const H = canvas.height = 340;
-      const groundY = H - 50;
-
-      let player = {
-        x: 80,
-        y: groundY - 32,
-        w: 32,
-        h: 32,
-        vy: 0,
-        jumpPower: -13,
-        gravity: 0.68,
-        onGround: true
-      };
-
-      let obstacles = [];
-      let collectibles = [];
-      let speed = 5.5;
-      let frameCount = 0;
-      gameScore = 0;
-      gameRunning = true;
-
-      function spawnObjects() {
-        if (frameCount % 100 === 0) {
-          obstacles.push({
-            x: W + 20,
-            y: groundY - 28,
-            w: 24,
-            h: 28,
-            color: '#ff6b6b'
-          });
-        }
-        if (frameCount % 140 === 0) {
-          collectibles.push({
-            x: W + 20,
-            y: groundY - 80 - Math.random() * 60,
-            w: 20,
-            h: 20,
-            color: '#ffd9b3',
-            tag: ['Python', 'PyTorch', 'Flutter', 'Godot'][Math.floor(Math.random() * 4)]
-          });
-        }
-      }
-
-      function jump() {
-        if (player.onGround) {
-          player.vy = player.jumpPower;
-          player.onGround = false;
-        }
-      }
-
-      window.addEventListener('keydown', (e) => {
-        if (e.code === 'Space' || e.code === 'ArrowUp') {
-          if (modal.classList.contains('open') && modalGameBox.style.display !== 'none') {
-            e.preventDefault();
-            jump();
-          }
-        }
-      });
-
-      document.getElementById('gameJumpBtn').onclick = jump;
-      document.getElementById('gameRestartBtn').onclick = () => {
-        obstacles = [];
-        collectibles = [];
-        gameScore = 0;
-        player.y = groundY - 32;
-        player.vy = 0;
-        player.onGround = true;
-        gameRunning = true;
-      };
-
-      function loop() {
-        if (!gameRunning) return;
-
-        frameCount++;
-        ctx.fillStyle = '#05080e';
-        ctx.fillRect(0, 0, W, H);
-
-        // Ground line
-        ctx.strokeStyle = 'rgba(244, 241, 234, 0.2)';
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(0, groundY);
-        ctx.lineTo(W, groundY);
-        ctx.stroke();
-
-        // Player physics
-        player.vy += player.gravity;
-        player.y += player.vy;
-        if (player.y >= groundY - player.h) {
-          player.y = groundY - player.h;
-          player.vy = 0;
-          player.onGround = true;
-        }
-
-        // Draw Player (Champagne cube)
-        ctx.fillStyle = '#ffd9b3';
-        ctx.shadowColor = 'rgba(255, 217, 179, 0.5)';
-        ctx.shadowBlur = 10;
-        ctx.fillRect(player.x, player.y, player.w, player.h);
-        ctx.shadowBlur = 0;
-
-        spawnObjects();
-
-        // Update & Draw Obstacles (Red Bugs)
-        for (let i = obstacles.length - 1; i >= 0; i--) {
-          const ob = obstacles[i];
-          ob.x -= speed;
-          ctx.fillStyle = ob.color;
-          ctx.fillRect(ob.x, ob.y, ob.w, ob.h);
-
-          // Collision detection
-          if (
-            player.x < ob.x + ob.w &&
-            player.x + player.w > ob.x &&
-            player.y < ob.y + ob.h &&
-            player.y + player.h > ob.y
-          ) {
-            // Collision hit
-            gameScore = Math.max(0, gameScore - 20);
-            obstacles.splice(i, 1);
-            scoreDisp.textContent = gameScore;
-            continue;
-          }
-
-          if (ob.x + ob.w < 0) {
-            obstacles.splice(i, 1);
-            gameScore += 10;
-            scoreDisp.textContent = gameScore;
-          }
-        }
-
-        // Update & Draw Collectibles
-        for (let i = collectibles.length - 1; i >= 0; i--) {
-          const col = collectibles[i];
-          col.x -= speed;
-          ctx.fillStyle = col.color;
-          ctx.beginPath();
-          ctx.arc(col.x + col.w / 2, col.y + col.h / 2, col.w / 2, 0, Math.PI * 2);
-          ctx.fill();
-
-          if (
-            player.x < col.x + col.w &&
-            player.x + player.w > col.x &&
-            player.y < col.y + col.h &&
-            player.y + player.h > col.y
-          ) {
-            collectibles.splice(i, 1);
-            gameScore += 50;
-            scoreDisp.textContent = gameScore;
-            continue;
-          }
-
-          if (col.x + col.w < 0) {
-            collectibles.splice(i, 1);
-          }
-        }
-
-        requestAnimationFrame(loop);
-      }
-      loop();
-    }
 
     // 5. Toast & Email Copy
     function copyEmailToClipboard() {
