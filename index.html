@@ -500,65 +500,15 @@
       width: 100%;
       aspect-ratio: 735 / 1024;
       max-height: 440px;
-      perspective: 1200px;
-      position: relative;
-      cursor: pointer;
-    }
-
-    .avatar-flipper {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      transform-style: preserve-3d;
-      transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-      border-radius: var(--radius-md);
-    }
-
-    .avatar-flipper.flipped {
-      transform: rotateY(180deg);
-    }
-
-    .avatar-card-face {
-      position: absolute;
-      inset: 0;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
       border-radius: var(--radius-md);
       overflow: hidden;
       border: 1px solid rgba(245, 158, 11, 0.28);
       background: #09090d;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65), 0 0 20px rgba(245, 158, 11, 0.1);
-    }
-
-    .avatar-back {
-      transform: rotateY(180deg);
-      border-color: rgba(244, 63, 94, 0.35);
-    }
-
-    .avatar-badge-pill {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: rgba(14, 10, 18, 0.85);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(245, 158, 11, 0.4);
-      color: #fbbf24;
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: var(--radius-full);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-      pointer-events: none;
       display: flex;
       align-items: center;
-      gap: 5px;
-    }
-
-    .avatar-back .avatar-badge-pill {
-      border-color: rgba(244, 63, 94, 0.45);
-      color: #fb7185;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7), 0 0 24px rgba(245, 158, 11, 0.12);
     }
 
     .photo-display-img {
@@ -567,52 +517,44 @@
       object-fit: cover;
       object-position: center 15%;
       display: block;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+      filter: contrast(105%);
     }
 
     .hero-photo-card:hover .photo-display-img {
       transform: scale(1.03);
+      filter: contrast(108%);
     }
 
-    /* Segmented Flip Toggle Bar */
-    .avatar-toggle-bar {
-      display: flex;
-      width: 100%;
-      margin-top: 12px;
-      background: rgba(18, 14, 22, 0.85);
-      border: 1px solid rgba(245, 158, 11, 0.25);
-      border-radius: var(--radius-full);
-      padding: 4px;
+    /* Ambient 3D Avatar Background in Hero Card */
+    .hero-avatar-ambient-bg {
+      position: absolute;
+      right: -25px;
+      bottom: -30px;
+      width: 440px;
+      height: 560px;
+      background: url('assets/avatar.jpg') no-repeat center 18%;
+      background-size: cover;
+      opacity: 0.20;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: var(--radius-lg);
+      filter: drop-shadow(0 0 45px rgba(245, 158, 11, 0.45)) contrast(115%) saturate(110%);
+      mask-image: radial-gradient(ellipse 95% 85% at 68% 45%, black 28%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 95% 85% at 68% 45%, black 28%, transparent 75%);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-main-card:hover .hero-avatar-ambient-bg {
+      opacity: 0.32;
+      transform: scale(1.03) translateY(-4px);
+      filter: drop-shadow(0 0 55px rgba(244, 63, 94, 0.55)) contrast(120%) saturate(115%);
+    }
+
+    .hero-content-wrap,
+    .hero-actions {
       position: relative;
-      cursor: pointer;
-      overflow: hidden;
-      transition: all 0.25s ease;
-    }
-
-    .avatar-toggle-bar:hover {
-      border-color: rgba(244, 63, 94, 0.5);
-      box-shadow: 0 0 16px rgba(244, 63, 94, 0.2);
-    }
-
-    .toggle-opt {
-      flex: 1;
-      text-align: center;
-      padding: 6px 10px;
-      font-family: var(--font-mono);
-      font-size: 0.74rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      border-radius: var(--radius-full);
-      transition: all 0.3s ease;
       z-index: 1;
-      position: relative;
-      user-select: none;
-    }
-
-    .toggle-opt.active {
-      color: #ffffff;
-      background: linear-gradient(135deg, #f59e0b, #f43f5e);
-      box-shadow: 0 2px 10px rgba(245, 158, 11, 0.4);
     }
 
     .photo-meta-plate {
@@ -2475,7 +2417,7 @@
     <nav class="navbar" id="navbar">
       <a href="#home" class="nav-brand">
         <div class="nav-avatar-wrap">
-          <img src="assets/avatar.jpg" alt="Anusmrith M M" class="nav-avatar-img" />
+          <img src="assets/profile.jpg" alt="Anusmrith M M" class="nav-avatar-img" />
         </div>
         <span>Anusmrith M M</span>
       </a>
@@ -2509,7 +2451,8 @@
 
         <!-- Main Hero Card -->
         <div class="bento-card hero-main-card reveal in-view">
-          <div>
+          <div class="hero-avatar-ambient-bg" aria-hidden="true"></div>
+          <div class="hero-content-wrap">
             <div class="status-pill">
               <span class="pulse-dot"></span>
               <span>Available for Internships &amp; Projects</span>
@@ -2572,25 +2515,8 @@
         <div class="hero-side-stage">
           <!-- Dedicated Portrait Showcase (100% Uncropped, 3:4 Aspect Ratio) -->
           <div class="bento-card hero-photo-card reveal stagger-1 in-view">
-            <div class="photo-display-box" id="avatarBox" title="Click to flip between 3D Avatar and Real Photo">
-              <div class="avatar-flipper" id="avatarFlipper">
-                <!-- Front: 3D Avatar -->
-                <div class="avatar-card-face avatar-front">
-                  <img src="assets/avatar.jpg" alt="Anusmrith M M - 3D Avatar" class="photo-display-img" />
-                  <span class="avatar-badge-pill">✨ 3D Avatar</span>
-                </div>
-                <!-- Back: Real Photograph -->
-                <div class="avatar-card-face avatar-back">
-                  <img src="assets/profile.jpg" alt="Anusmrith M M - Real Photograph" class="photo-display-img" />
-                  <span class="avatar-badge-pill">📷 Real Photo</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Avatar 3D Flip Toggle Bar -->
-            <div class="avatar-toggle-bar" id="avatarToggleBtn" role="button" tabindex="0" aria-label="Toggle between 3D Avatar and Real Photograph">
-              <span class="toggle-opt active" id="optAvatar">✨ 3D Avatar</span>
-              <span class="toggle-opt" id="optPhoto">📷 Real Photo</span>
+            <div class="photo-display-box">
+              <img src="assets/profile.jpg" alt="Anusmrith M M - Student Developer" class="photo-display-img" />
             </div>
 
             <!-- Clean Info Plate -->
@@ -4270,39 +4196,6 @@
       const heroStats = document.querySelector('.hero-metrics-bento');
       if (heroStats) observer.observe(heroStats);
     })();
-
-    // Avatar 3D Flip Toggle (3D Avatar <-> Real Photograph)
-    const avatarFlipper = document.getElementById('avatarFlipper');
-    const avatarBox = document.getElementById('avatarBox');
-    const avatarToggleBtn = document.getElementById('avatarToggleBtn');
-    const optAvatar = document.getElementById('optAvatar');
-    const optPhoto = document.getElementById('optPhoto');
-
-    function toggleAvatarFlip() {
-      if (!avatarFlipper) return;
-      avatarFlipper.classList.toggle('flipped');
-      const isFlipped = avatarFlipper.classList.contains('flipped');
-      if (optAvatar && optPhoto) {
-        if (isFlipped) {
-          optAvatar.classList.remove('active');
-          optPhoto.classList.add('active');
-        } else {
-          optPhoto.classList.remove('active');
-          optAvatar.classList.add('active');
-        }
-      }
-    }
-
-    if (avatarBox) avatarBox.addEventListener('click', toggleAvatarFlip);
-    if (avatarToggleBtn) {
-      avatarToggleBtn.addEventListener('click', toggleAvatarFlip);
-      avatarToggleBtn.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggleAvatarFlip();
-        }
-      });
-    }
 
     // 8. Interactive 3D Bento Hover & Dynamic Flashlight Spotlight
     const bentoCards = document.querySelectorAll('.bento-card');
