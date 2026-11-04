@@ -36,10 +36,14 @@
 
     html {
       scroll-behavior: smooth;
-      overscroll-behavior: none;
       color-scheme: dark;
       background: #0a0e16;
       color: var(--ink);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    section[id] {
+      scroll-margin-top: 70px;
     }
 
     body {
@@ -215,26 +219,460 @@
       letter-spacing: 0.3em;
     }
 
+    /* Tablet & Medium Screens (<= 860px) */
     @media (max-width: 860px) {
+      .glass-rail {
+        display: none;
+      }
+
       .resume-stage {
         grid-template-columns: 1fr;
-        gap: 28px;
+        gap: 32px;
       }
 
       .resume-avatar-col {
         position: static;
-        max-width: 260px;
+        max-width: 280px;
         margin: 0 auto;
+      }
+
+      .tl-entry {
+        padding-bottom: 70px;
       }
     }
 
-    @media (max-width: 640px) {
-      .hm-right {
+    /* Mobile Screens (<= 680px) */
+    @media (max-width: 680px) {
+      .hero-chrome {
+        --m: 8px;
+      }
+
+      .hero-mark {
+        font-size: 10px;
+      }
+
+      /* Hide static corner stamps that overlap with UI navigation and content on mobile */
+      .hm-right,
+      .hm-tr,
+      .hm-tl,
+      .hm-bl {
         display: none;
       }
 
-      .hm-tr {
+      /* Top Navigation Bar - compact and cleanly spaced */
+      .top-nav-bar {
+        top: 10px;
+        right: 10px;
+        gap: 6px;
+      }
+
+      .pill-btn {
+        padding: 6px 11px;
+        font-size: 11px;
+        letter-spacing: 0.04em;
+      }
+
+      .github-link {
+        width: 32px;
+        height: 32px;
+      }
+
+      .github-link svg {
+        width: 15px;
+        height: 15px;
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        min-height: 100svh;
+        min-height: 100dvh;
+        justify-content: center;
+        padding: 80px 14px 40px;
+      }
+
+      .about {
+        padding: 0 8px;
+        max-width: 100%;
+      }
+
+      .about-title {
+        font-size: clamp(32px, 8.8vw, 56px);
+        margin-bottom: 0.35em;
+      }
+
+      .about-body {
+        font-size: clamp(14px, 4.2vw, 17px);
+        line-height: 1.6;
+        max-width: 100%;
+        margin-top: 0.4em;
+      }
+
+      .scroll-cue {
+        margin-top: 3.5vh;
+      }
+
+      /* Resume Section */
+      .resume {
+        padding: 60px 14px 40px;
+      }
+
+      .resume-stage {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        max-width: 100%;
+      }
+
+      .resume-avatar-col {
+        position: static;
+        width: 100%;
+        max-width: 260px;
+        margin: 0 auto 8px;
+      }
+
+      .resume-avatar-card {
+        padding: 12px;
+        border-radius: 16px;
+      }
+
+      .resume-avatar-name {
+        font-size: 1.25rem;
+      }
+
+      .resume-avatar-bio {
+        font-size: 11.5px;
+      }
+
+      .resume-avatar-tags {
+        gap: 4px;
+      }
+
+      .resume-avatar-tags .wk-badge {
+        font-size: 9.5px;
+        padding: 4px 8px;
+      }
+
+      .resume-header-row {
+        margin-bottom: 18px;
+        padding-bottom: 14px;
+      }
+
+      .resume-title {
+        font-size: clamp(28px, 7vw, 42px);
+      }
+
+      /* Eliminates the 22vh blank space between timeline items */
+      .timeline {
+        margin-top: 14px;
+      }
+
+      .timeline:before {
+        left: 4px;
+      }
+
+      .tl-entry {
+        padding-left: 20px;
+        padding-bottom: 40px;
+      }
+
+      .tl-entry:last-child {
+        padding-bottom: 12px;
+      }
+
+      .tl-dot {
+        left: 0;
+        top: 6px;
+        width: 9px;
+        height: 9px;
+      }
+
+      .tl-period {
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        margin-bottom: 0.4em;
+      }
+
+      .tl-head {
+        gap: 8px;
+      }
+
+      .tl-place {
+        font-size: 18px;
+        line-height: 1.25;
+      }
+
+      .tl-logo-chip {
+        width: 32px;
+        height: 32px;
+        border-radius: 7px;
+      }
+
+      .tl-role {
+        font-size: 12.5px;
+        margin-top: 0.25em;
+        line-height: 1.45;
+        word-break: break-word;
+      }
+
+      .tl-points {
+        margin-top: 0.7em;
+        gap: 0.55em;
+      }
+
+      .tl-points li {
+        font-size: 12.5px;
+        line-height: 1.55;
+        padding-left: 1em;
+        word-break: break-word;
+      }
+
+      /* Works Gallery */
+      .works {
+        padding: 40px 0 60px;
+      }
+
+      .works-container {
+        padding: 0 14px;
+        max-width: 100%;
+      }
+
+      .works-header {
+        margin-bottom: 24px;
+        padding-bottom: 14px;
+        gap: 8px;
+      }
+
+      .works-title {
+        font-size: clamp(30px, 7.5vw, 46px);
+      }
+
+      .works-subtitle {
+        font-size: 11px;
+        letter-spacing: 0.16em;
+      }
+
+      .wk-sections-grid {
+        gap: 18px;
+      }
+
+      .wk-card {
+        padding: 20px 14px;
+        border-radius: 14px;
+      }
+
+      .wk-card-head {
+        margin-bottom: 16px;
+      }
+
+      .wk-card-no {
+        font-size: 11px;
+        margin-bottom: 0.35em;
+      }
+
+      .wk-card-title {
+        font-size: 22px;
+        line-height: 1.2;
+      }
+
+      .wk-card-tagline {
+        font-size: 11.5px;
+        line-height: 1.4;
+      }
+
+      .wk-line-btn {
+        padding: 12px 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
+
+      .wk-line-btn:hover,
+      .wk-line-btn:focus-visible {
+        padding-left: 0;
+      }
+
+      .wk-line-name {
+        font-size: 13.5px;
+        line-height: 1.35;
+        width: 100%;
+      }
+
+      .wk-line-meta {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        text-align: left;
+        gap: 6px 8px;
+        align-items: center;
+        margin-top: 2px;
+      }
+
+      .wk-line-num {
+        font-size: 11.5px;
+        white-space: normal;
+        word-break: break-word;
+        line-height: 1.4;
+      }
+
+      .wk-line-tag {
+        font-size: 10.5px;
+        white-space: nowrap;
+      }
+
+      .wk-line-tag:before {
         display: none;
+      }
+
+      .wk-line-arrow {
+        display: none;
+      }
+
+      .wk-foot {
+        margin-top: 14px;
+        padding-top: 12px;
+        font-size: 11px;
+        line-height: 1.5;
+        word-break: break-word;
+      }
+
+      /* Detail Modal */
+      .wk-detail {
+        inset: 10px;
+        border-radius: 14px;
+      }
+
+      .wk-detail-article {
+        padding: 22px 14px 34px;
+        max-width: 100%;
+      }
+
+      .wk-detail-close {
+        top: 10px;
+        right: 10px;
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+      }
+
+      .wk-detail-head {
+        padding-bottom: 16px;
+        margin-bottom: 18px;
+      }
+
+      .wk-detail-title {
+        font-size: 22px;
+        line-height: 1.2;
+        padding-right: 36px;
+        word-break: break-word;
+      }
+
+      .wk-detail-sub {
+        font-size: 11.5px;
+        line-height: 1.4;
+      }
+
+      .wk-detail-tags {
+        gap: 5px;
+        margin-top: 1em;
+      }
+
+      .wk-badge {
+        font-size: 10.5px;
+        padding: 4px 9px;
+      }
+
+      .wk-detail-desc {
+        font-size: 13px;
+        line-height: 1.65;
+        word-break: break-word;
+      }
+
+      .wk-detail-actions {
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 20px;
+        width: 100%;
+      }
+
+      .wk-detail-link {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        padding: 11px 16px;
+        font-size: 12.5px;
+        box-sizing: border-box;
+        white-space: normal;
+      }
+
+      /* Footer */
+      .footer {
+        padding: 50px 14px 36px;
+      }
+
+      .footer-links {
+        gap: 8px;
+      }
+
+      .credit {
+        flex-direction: column;
+        gap: 5px;
+        font-size: 9.5px;
+        letter-spacing: 0.16em;
+        line-height: 1.6;
+        white-space: normal;
+      }
+
+      .credit-sep {
+        display: none;
+      }
+
+      .credit-tools {
+        font-size: 10.5px;
+      }
+
+      .toast-msg {
+        width: calc(100% - 28px);
+        max-width: 340px;
+        font-size: 11.5px;
+        padding: 8px 16px;
+        bottom: 16px;
+      }
+    }
+
+    /* Small Compact Phones (<= 400px) */
+    @media (max-width: 400px) {
+      .top-nav-bar {
+        top: 8px;
+        right: 8px;
+        gap: 4px;
+      }
+
+      .pill-btn {
+        padding: 5px 8px;
+        font-size: 10.5px;
+      }
+
+      .github-link {
+        width: 28px;
+        height: 28px;
+      }
+
+      .github-link svg {
+        width: 13px;
+        height: 13px;
+      }
+
+      .about-title {
+        font-size: 28px;
+      }
+
+      .about-body {
+        font-size: 13.5px;
+      }
+
+      .resume-avatar-col {
+        max-width: 240px;
       }
     }
 
@@ -1197,35 +1635,7 @@
       }
     }
 
-    @media (max-width: 640px) {
-      .wk-detail {
-        inset: 12px;
-        border-radius: 16px;
-      }
 
-      .wk-detail-article {
-        padding: 24px 16px 40px;
-      }
-
-      .wk-card {
-        padding: 26px 18px;
-      }
-
-      .wk-line-btn {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-      }
-
-      .credit {
-        flex-direction: column;
-        gap: 6px;
-      }
-
-      .credit-sep {
-        display: none;
-      }
-    }
   </style>
 </head>
 
