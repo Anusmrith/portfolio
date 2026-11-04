@@ -20,25 +20,33 @@
        ARCHITECTURAL MONOCHROME DESIGN SYSTEM (STRICT BLACK & WHITE / SILVER)
        ========================================================================== */
     :root {
-      --bg-dark: #050508;
-      --bg-surface: #0a0a0f;
-      --bg-card: rgba(14, 14, 20, 0.72);
-      --bg-card-hover: rgba(22, 22, 30, 0.88);
-      --border-card: rgba(255, 255, 255, 0.08);
-      --border-card-hover: rgba(255, 255, 255, 0.38);
+      --bg-dark: #08060a;
+      --bg-surface: #0e0a12;
+      --bg-card: rgba(18, 14, 22, 0.74);
+      --bg-card-hover: rgba(28, 20, 34, 0.88);
+      --border-card: rgba(245, 158, 11, 0.14);
+      --border-card-hover: rgba(244, 63, 94, 0.45);
+
+      --amber-primary: #f59e0b;
+      --amber-light: #fbbf24;
+      --amber-dim: #d97706;
+      --coral-primary: #f43f5e;
+      --coral-light: #fb7185;
+      --coral-dim: #e11d48;
 
       --accent-white: #ffffff;
-      --accent-silver: #e4e4e7;
-      --accent-muted: #a1a1aa;
-      --accent-dim: #71717a;
-      --accent-dark: #18181b;
+      --accent-silver: #fef3c7;
+      --accent-muted: #d4a373;
+      --accent-dim: #9a6b47;
+      --accent-dark: #1f1624;
 
-      --glow-subtle: rgba(255, 255, 255, 0.12);
-      --glow-card: 0 0 24px rgba(255, 255, 255, 0.06);
+      --glow-subtle: rgba(245, 158, 11, 0.16);
+      --glow-coral: rgba(244, 63, 94, 0.25);
+      --glow-card: 0 0 28px rgba(245, 158, 11, 0.1);
 
-      --text-main: #f4f4f6;
-      --text-muted: #a1a1aa;
-      --text-dim: #71717a;
+      --text-main: #fcfcfc;
+      --text-muted: #c4b5a5;
+      --text-dim: #8c7b6d;
 
       --font-heading: 'Space Grotesk', sans-serif;
       --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -50,8 +58,8 @@
       --radius-xl: 28px;
       --radius-full: 9999px;
 
-      --shadow-bento: 0 16px 36px -12px rgba(0, 0, 0, 0.85), 0 0 1px 1px rgba(255, 255, 255, 0.06);
-      --shadow-hover: 0 24px 48px -12px rgba(0, 0, 0, 0.95), 0 0 28px rgba(255, 255, 255, 0.1);
+      --shadow-bento: 0 16px 36px -12px rgba(0, 0, 0, 0.88), 0 0 1px 1px rgba(245, 158, 11, 0.09);
+      --shadow-hover: 0 24px 48px -12px rgba(0, 0, 0, 0.95), 0 0 32px rgba(244, 63, 94, 0.2);
       --transition-spring: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -92,9 +100,9 @@
       left: 0;
       height: 3px;
       width: 0%;
-      background: linear-gradient(90deg, #71717a, #ffffff, #e4e4e7);
+      background: linear-gradient(90deg, #f59e0b, #f43f5e, #fb7185);
       z-index: 9999;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      box-shadow: 0 0 14px rgba(244, 63, 94, 0.8);
       transition: width 0.05s linear;
     }
 
@@ -113,7 +121,7 @@
     .vignette-overlay {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at 50% 25%, transparent 20%, rgba(5, 5, 8, 0.75) 85%);
+      background: radial-gradient(circle at 50% 25%, transparent 20%, rgba(7, 6, 8, 0.82) 85%);
       pointer-events: none;
       z-index: 1;
     }
@@ -144,20 +152,20 @@
       justify-content: space-between;
       gap: 28px;
       padding: 10px 22px;
-      background: rgba(10, 10, 15, 0.78);
+      background: rgba(14, 10, 18, 0.82);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.2);
       border-radius: var(--radius-full);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.75), 0 0 20px rgba(245, 158, 11, 0.08);
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
       max-width: 980px;
       width: 100%;
     }
 
     .navbar:hover {
-      border-color: rgba(255, 255, 255, 0.28);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.05);
+      border-color: rgba(244, 63, 94, 0.45);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85), 0 0 25px rgba(244, 63, 94, 0.18);
     }
 
     .nav-brand {
@@ -173,15 +181,17 @@
     }
 
     .nav-avatar-wrap {
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       border-radius: var(--radius-full);
-      border: 1.5px solid rgba(255, 255, 255, 0.4);
+      border: 1.5px solid #f59e0b;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #18181b;
+      background: #09090d;
+      flex-shrink: 0;
     }
 
     .nav-avatar-img {
@@ -269,7 +279,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.06), transparent 45%);
+      background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(245, 158, 11, 0.12), rgba(244, 63, 94, 0.06) 35%, transparent 65%);
       opacity: 0;
       transition: opacity 0.3s ease;
       pointer-events: none;
@@ -344,13 +354,13 @@
       align-items: center;
       gap: 9px;
       padding: 6px 14px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.3);
       border-radius: var(--radius-full);
       font-size: 0.82rem;
       font-family: var(--font-mono);
       font-weight: 500;
-      color: var(--accent-silver);
+      color: #fef3c7;
       margin-bottom: 24px;
       width: fit-content;
     }
@@ -358,9 +368,9 @@
     .pulse-dot {
       width: 7px;
       height: 7px;
-      background-color: #ffffff;
+      background-color: #f59e0b;
       border-radius: 50%;
-      box-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.95);
       animation: pulseAnim 2.2s infinite ease-in-out;
     }
 
@@ -386,10 +396,11 @@
     }
 
     .hero-title .gradient-text {
-      background: linear-gradient(135deg, #ffffff 30%, #a1a1aa 100%);
+      background: linear-gradient(135deg, #f59e0b 15%, #f43f5e 65%, #fb7185 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
+      filter: drop-shadow(0 0 20px rgba(244, 63, 94, 0.25));
     }
 
     .hero-subtitle {
@@ -431,28 +442,31 @@
     }
 
     .btn-primary {
-      background: #ffffff;
-      color: #000000;
-      box-shadow: 0 4px 18px rgba(255, 255, 255, 0.2);
+      background: linear-gradient(135deg, #f59e0b 0%, #f43f5e 100%);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.35), 0 0 15px rgba(244, 63, 94, 0.25);
     }
 
     .btn-primary:hover {
-      background: #e4e4e7;
+      background: linear-gradient(135deg, #fbbf24 0%, #fb7185 100%);
+      color: #ffffff;
       transform: translateY(-2px);
-      box-shadow: 0 8px 26px rgba(255, 255, 255, 0.35);
+      box-shadow: 0 8px 30px rgba(245, 158, 11, 0.5), 0 0 25px rgba(244, 63, 94, 0.4);
     }
 
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(245, 158, 11, 0.06);
       color: var(--text-main);
-      border-color: rgba(255, 255, 255, 0.14);
+      border-color: rgba(245, 158, 11, 0.2);
     }
 
     .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.38);
+      background: rgba(244, 63, 94, 0.16);
+      border-color: rgba(244, 63, 94, 0.5);
       color: #ffffff;
       transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(244, 63, 94, 0.25);
     }
 
     .btn-ghost {
@@ -486,14 +500,65 @@
       width: 100%;
       aspect-ratio: 735 / 1024;
       max-height: 440px;
+      perspective: 1200px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .avatar-flipper {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: var(--radius-md);
+    }
+
+    .avatar-flipper.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .avatar-card-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
       border-radius: var(--radius-md);
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(245, 158, 11, 0.28);
       background: #09090d;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65), 0 0 20px rgba(245, 158, 11, 0.1);
+    }
+
+    .avatar-back {
+      transform: rotateY(180deg);
+      border-color: rgba(244, 63, 94, 0.35);
+    }
+
+    .avatar-badge-pill {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(14, 10, 18, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #fbbf24;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      pointer-events: none;
       display: flex;
       align-items: center;
-      justify-content: center;
-      position: relative;
+      gap: 5px;
+    }
+
+    .avatar-back .avatar-badge-pill {
+      border-color: rgba(244, 63, 94, 0.45);
+      color: #fb7185;
     }
 
     .photo-display-img {
@@ -502,13 +567,52 @@
       object-fit: cover;
       object-position: center 15%;
       display: block;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
-      filter: grayscale(18%) contrast(104%);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .hero-photo-card:hover .photo-display-img {
       transform: scale(1.03);
-      filter: grayscale(0%) contrast(106%);
+    }
+
+    /* Segmented Flip Toggle Bar */
+    .avatar-toggle-bar {
+      display: flex;
+      width: 100%;
+      margin-top: 12px;
+      background: rgba(18, 14, 22, 0.85);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: var(--radius-full);
+      padding: 4px;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+
+    .avatar-toggle-bar:hover {
+      border-color: rgba(244, 63, 94, 0.5);
+      box-shadow: 0 0 16px rgba(244, 63, 94, 0.2);
+    }
+
+    .toggle-opt {
+      flex: 1;
+      text-align: center;
+      padding: 6px 10px;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-radius: var(--radius-full);
+      transition: all 0.3s ease;
+      z-index: 1;
+      position: relative;
+      user-select: none;
+    }
+
+    .toggle-opt.active {
+      color: #ffffff;
+      background: linear-gradient(135deg, #f59e0b, #f43f5e);
+      box-shadow: 0 2px 10px rgba(245, 158, 11, 0.4);
     }
 
     .photo-meta-plate {
@@ -567,7 +671,8 @@
       font-family: var(--font-heading);
       font-size: 1.85rem;
       font-weight: 800;
-      color: #ffffff;
+      color: #fbbf24;
+      text-shadow: 0 0 16px rgba(245, 158, 11, 0.4);
       line-height: 1.1;
       margin-bottom: 4px;
     }
@@ -875,28 +980,29 @@
       align-items: center;
       gap: 9px;
       padding: 8px 12px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: rgba(245, 158, 11, 0.05);
+      border: 1px solid rgba(245, 158, 11, 0.16);
       border-radius: var(--radius-sm);
       font-size: 0.86rem;
       font-family: var(--font-mono);
-      color: var(--text-main);
+      color: #fef3c7;
       transition: all 0.25s ease;
     }
 
     .skill-pill:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.35);
+      background: rgba(244, 63, 94, 0.16);
+      border-color: rgba(244, 63, 94, 0.45);
       color: #ffffff;
       transform: translateX(4px);
+      box-shadow: 0 0 14px rgba(244, 63, 94, 0.2);
     }
 
     .pill-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #ffffff;
-      box-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
+      background: #f59e0b;
+      box-shadow: 0 0 8px rgba(245, 158, 11, 0.9);
     }
 
     /* ==========================================================================
@@ -928,10 +1034,11 @@
     }
 
     .filter-btn.active {
-      background: #ffffff;
-      color: #000000;
-      border-color: #ffffff;
+      background: linear-gradient(135deg, #f59e0b, #f43f5e);
+      color: #ffffff;
+      border-color: transparent;
       font-weight: 600;
+      box-shadow: 0 0 18px rgba(245, 158, 11, 0.45);
     }
 
     .projects-container {
@@ -1034,15 +1141,16 @@
     }
 
     .project-link-btn.demo-btn {
-      background: #ffffff;
-      color: #000000;
-      border-color: #ffffff;
+      background: linear-gradient(135deg, #f59e0b, #f43f5e);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
     }
 
     .project-link-btn.demo-btn:hover {
-      background: #e4e4e7;
-      color: #000000;
-      box-shadow: 0 4px 14px rgba(255, 255, 255, 0.28);
+      background: linear-gradient(135deg, #fbbf24, #fb7185);
+      color: #ffffff;
+      box-shadow: 0 6px 22px rgba(245, 158, 11, 0.55);
     }
 
     .project-tagline {
@@ -1099,20 +1207,24 @@
     }
 
     .tech-tag {
-      padding: 4px 10px;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      font-size: 0.78rem;
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.22);
       font-family: var(--font-mono);
-      color: var(--text-muted);
-      transition: all 0.2s ease;
+      font-size: 0.74rem;
+      font-weight: 500;
+      color: #fef3c7;
+      transition: all 0.25s ease;
     }
 
     .tech-tag:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(244, 63, 94, 0.2);
+      border-color: rgba(244, 63, 94, 0.55);
       color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 0 12px rgba(244, 63, 94, 0.3);
     }
 
     /* ==========================================================================
@@ -2363,7 +2475,7 @@
     <nav class="navbar" id="navbar">
       <a href="#home" class="nav-brand">
         <div class="nav-avatar-wrap">
-          <img src="assets/profile.jpg" alt="Anusmrith M M" class="nav-avatar-img" />
+          <img src="assets/avatar.jpg" alt="Anusmrith M M" class="nav-avatar-img" />
         </div>
         <span>Anusmrith M M</span>
       </a>
@@ -2460,8 +2572,25 @@
         <div class="hero-side-stage">
           <!-- Dedicated Portrait Showcase (100% Uncropped, 3:4 Aspect Ratio) -->
           <div class="bento-card hero-photo-card reveal stagger-1 in-view">
-            <div class="photo-display-box">
-              <img src="assets/profile.jpg" alt="Anusmrith M M - Student Developer" class="photo-display-img" />
+            <div class="photo-display-box" id="avatarBox" title="Click to flip between 3D Avatar and Real Photo">
+              <div class="avatar-flipper" id="avatarFlipper">
+                <!-- Front: 3D Avatar -->
+                <div class="avatar-card-face avatar-front">
+                  <img src="assets/avatar.jpg" alt="Anusmrith M M - 3D Avatar" class="photo-display-img" />
+                  <span class="avatar-badge-pill">✨ 3D Avatar</span>
+                </div>
+                <!-- Back: Real Photograph -->
+                <div class="avatar-card-face avatar-back">
+                  <img src="assets/profile.jpg" alt="Anusmrith M M - Real Photograph" class="photo-display-img" />
+                  <span class="avatar-badge-pill">📷 Real Photo</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Avatar 3D Flip Toggle Bar -->
+            <div class="avatar-toggle-bar" id="avatarToggleBtn" role="button" tabindex="0" aria-label="Toggle between 3D Avatar and Real Photograph">
+              <span class="toggle-opt active" id="optAvatar">✨ 3D Avatar</span>
+              <span class="toggle-opt" id="optPhoto">📷 Real Photo</span>
             </div>
 
             <!-- Clean Info Plate -->
@@ -3525,7 +3654,7 @@
       function renderWaves() {
         ctx.clearRect(0, 0, width, height);
 
-        // Render 5 elegant flowing monochrome curves
+        // Render 5 elegant flowing Sunset Amber & Coral curves
         const waveCount = 5;
         for (let w = 0; w < waveCount; w++) {
           ctx.beginPath();
@@ -3548,14 +3677,18 @@
           ctx.lineTo(width, height);
           ctx.closePath();
 
-          // Subtle gradient fills
-          const alpha = 0.018 + w * 0.012;
-          ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+          // Sunset Amber (245, 158, 11) & Coral (244, 63, 94) gradient fills
+          const isAmber = w % 2 === 0;
+          const r = isAmber ? 245 : 244;
+          const g = isAmber ? 158 : 63;
+          const b = isAmber ? 11 : 94;
+          const alpha = 0.022 + w * 0.012;
+          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
           ctx.fill();
 
-          // Luminous crest line
-          ctx.lineWidth = 1;
-          ctx.strokeStyle = `rgba(255, 255, 255, ${0.06 + w * 0.03})`;
+          // Luminous crest line in amber/coral
+          ctx.lineWidth = 1.2;
+          ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${0.14 + w * 0.04})`;
           ctx.stroke();
         }
 
@@ -4137,6 +4270,39 @@
       const heroStats = document.querySelector('.hero-metrics-bento');
       if (heroStats) observer.observe(heroStats);
     })();
+
+    // Avatar 3D Flip Toggle (3D Avatar <-> Real Photograph)
+    const avatarFlipper = document.getElementById('avatarFlipper');
+    const avatarBox = document.getElementById('avatarBox');
+    const avatarToggleBtn = document.getElementById('avatarToggleBtn');
+    const optAvatar = document.getElementById('optAvatar');
+    const optPhoto = document.getElementById('optPhoto');
+
+    function toggleAvatarFlip() {
+      if (!avatarFlipper) return;
+      avatarFlipper.classList.toggle('flipped');
+      const isFlipped = avatarFlipper.classList.contains('flipped');
+      if (optAvatar && optPhoto) {
+        if (isFlipped) {
+          optAvatar.classList.remove('active');
+          optPhoto.classList.add('active');
+        } else {
+          optPhoto.classList.remove('active');
+          optAvatar.classList.add('active');
+        }
+      }
+    }
+
+    if (avatarBox) avatarBox.addEventListener('click', toggleAvatarFlip);
+    if (avatarToggleBtn) {
+      avatarToggleBtn.addEventListener('click', toggleAvatarFlip);
+      avatarToggleBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleAvatarFlip();
+        }
+      });
+    }
 
     // 8. Interactive 3D Bento Hover & Dynamic Flashlight Spotlight
     const bentoCards = document.querySelectorAll('.bento-card');
