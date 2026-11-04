@@ -57,10 +57,7 @@
     /* Ambient Silky Canvas Scene */
     .scene-bg {
       position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+      inset: 0;
       z-index: 0;
       pointer-events: none;
     }
@@ -72,10 +69,7 @@
 
     .scrim {
       position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+      inset: 0;
       z-index: 1;
       pointer-events: none;
       background: linear-gradient(to right, #0a0e1600 20%, #0a0e16bf 58%, #0a0e16 92%);
@@ -119,10 +113,7 @@
     .hero-chrome {
       --m: clamp(16px, 2.4vh, 30px);
       position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+      inset: 0;
       z-index: 12;
       pointer-events: none;
       font-family: 'Helvetica Neue', 'Chiron GoRound TC', -apple-system, system-ui, sans-serif;
@@ -160,12 +151,11 @@
       display: block;
       text-transform: none;
       letter-spacing: 0.12em;
-      color: rgba(244, 241, 234, 0.75);
+      color: rgba(244, 241, 234, 0.78);
       font-weight: 500;
     }
 
     .hm-tl { top: calc(var(--m) + 16px); left: calc(var(--m) + 20px); }
-    .hm-tr { top: calc(var(--m) + 16px); right: calc(var(--m) + 20px); text-align: right; }
     .hm-bl { bottom: calc(var(--m) + 16px); left: calc(var(--m) + 20px); }
     .hm-right {
       top: 50%;
@@ -175,12 +165,7 @@
       letter-spacing: 0.3em;
     }
 
-    @media (max-width: 640px) {
-      .hm-right { display: none; }
-      .hm-tr { display: none; }
-    }
-
-    /* Fixed Top Navigation Buttons */
+    /* Fixed Top Navigation Bar (Repositioned to eliminate text collision) */
     .top-nav-bar {
       position: fixed;
       top: clamp(16px, 2.4vh, 30px);
@@ -189,6 +174,34 @@
       display: flex;
       align-items: center;
       gap: 10px;
+    }
+
+    /* Dedicated Portfolio Year Badge under navigation with zero overlap */
+    .hm-tr-badge {
+      position: fixed;
+      top: calc(clamp(16px, 2.4vh, 30px) + 48px);
+      right: calc(clamp(16px, 2.4vh, 30px) + 22px);
+      z-index: 105;
+      font-family: 'Helvetica Neue', system-ui, sans-serif;
+      font-size: 10.5px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(244, 241, 234, 0.4);
+      pointer-events: none;
+      text-align: right;
+    }
+
+    @media (max-width: 768px) {
+      .hm-right { display: none; }
+      .hm-tr-badge { display: none; }
+      .top-nav-bar {
+        gap: 6px;
+        right: calc(clamp(16px, 2.4vh, 30px) + 12px);
+      }
+      .pill-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+      }
     }
 
     .github-link {
@@ -256,35 +269,139 @@
     }
 
     /* ==========================================================================
-       SECTION 1: HERO & "ABOUT SEN" EDITORIAL TYPOGRAPHY
+       SECTION 1: HERO WITH LEFT-SIDE PORTRAIT PHOTO (Senbuzy Layout)
        ========================================================================== */
     .hero {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: center;
       align-items: center;
-      padding-bottom: 7vh;
+      padding: 12vh 24px 8vh;
       position: relative;
     }
 
-    .about {
-      text-align: center;
-      padding: 0 24px;
+    .hero-stage {
+      display: grid;
+      grid-template-columns: min(290px, 28vw) 1.25fr;
+      gap: clamp(32px, 5vw, 68px);
+      align-items: center;
+      max-width: min(1080px, 92vw);
+      width: 100%;
+      margin: 0 auto;
       animation: fadeDown 1.8s ease both;
     }
 
-    .about-intro {
+    /* Left Side: Real Photo Portrait Showcase */
+    .hero-portrait-stage {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
+    .hero-portrait-card {
+      width: 100%;
+      max-width: 280px;
+      border: 1px solid rgba(244, 241, 234, 0.16);
+      background: rgba(13, 17, 26, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 20px;
+      padding: 14px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 24px rgba(255, 217, 179, 0.12);
+      transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .hero-portrait-card:hover {
+      border-color: rgba(255, 217, 179, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 32px 70px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 217, 179, 0.2);
+    }
+
+    .portrait-photo-box {
+      width: 100%;
+      aspect-ratio: 735 / 960;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(244, 241, 234, 0.12);
+      background: #080c14;
+      position: relative;
+    }
+
+    .portrait-photo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+      filter: contrast(104%);
+    }
+
+    .hero-portrait-card:hover .portrait-photo-img {
+      transform: scale(1.04);
+    }
+
+    .portrait-meta-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 12px;
+      padding: 6px 4px 2px;
+      font-family: 'Helvetica Neue', system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .portrait-status-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(255, 217, 179, 0.85);
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    .portrait-name {
+      color: var(--ink);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+    }
+
+    .portrait-tag {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    /* Right Side: Editorial Headline & Copy */
+    .about {
+      text-align: left;
+    }
+
+    .about-intro {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .about-kicker {
+      font-family: 'Helvetica Neue', system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
     .about-title {
       font-family: 'Mansalva', cursive;
       font-weight: 400;
-      font-size: clamp(34px, 7.5vw, 84px);
-      line-height: 1;
+      font-size: clamp(38px, 6vw, 76px);
+      line-height: 1.05;
       letter-spacing: 0.01em;
       color: var(--ink);
       margin-bottom: 0.3em;
@@ -292,32 +409,27 @@
     }
 
     .about-body {
-      margin: 0.6em auto 0;
-      max-width: min(720px, 88vw);
+      margin: 0.4em 0 1.4em;
+      max-width: 620px;
       font-family: 'Cormorant Upright', 'Chiron GoRound TC', Georgia, serif;
       font-weight: 500;
-      font-size: clamp(15px, 1.4vw, 21px);
-      line-height: 1.5;
+      font-size: clamp(16px, 1.45vw, 21px);
+      line-height: 1.55;
       letter-spacing: 0.02em;
       color: var(--ink);
       text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
     }
 
-    .about-link {
-      color: inherit;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(244, 241, 234, 0.45);
-      transition: color 0.2s ease, border-color 0.2s ease;
-    }
-
-    .about-link:hover {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
+    .about-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     /* Scroll Cue */
     .scroll-cue {
-      margin-top: 4vh;
+      margin-top: 5vh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -367,28 +479,61 @@
       50% { opacity: 1; }
     }
 
+    /* Mobile Hero adjustments */
+    @media (max-width: 860px) {
+      .hero-stage {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 28px;
+        padding-top: 8vh;
+      }
+      .hero-portrait-stage {
+        margin: 0 auto;
+      }
+      .hero-portrait-card {
+        max-width: 180px;
+      }
+      .about {
+        text-align: center;
+      }
+      .about-intro {
+        align-items: center;
+      }
+      .about-actions {
+        justify-content: center;
+      }
+    }
+
     /* ==========================================================================
-       SECTION 2: RÉSUMÉ TIMELINE
+       SECTION 2: RESUME TIMELINE (Corrected spelling: Resume, No Accents)
        ========================================================================== */
     .resume {
-      padding: 18vh 24px 14vh;
+      padding: 16vh 24px 14vh;
       position: relative;
     }
 
-    .resume-title {
-      width: min(520px, 90vw);
+    .resume-header-row {
+      width: min(560px, 92vw);
       margin: 0 6vw 0 auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .resume-title {
       text-align: left;
       font-family: 'Cormorant Upright', Georgia, serif;
       font-weight: 600;
-      font-size: clamp(32px, 5.2vw, 60px);
+      font-size: clamp(34px, 5.2vw, 62px);
       letter-spacing: 0.02em;
       color: var(--ink);
     }
 
     .timeline {
       position: relative;
-      width: min(520px, 90vw);
+      width: min(560px, 92vw);
       margin: 7vh 6vw 0 auto;
     }
 
@@ -405,11 +550,11 @@
     .tl-entry {
       position: relative;
       padding-left: 36px;
-      padding-bottom: 22vh;
+      padding-bottom: 18vh;
     }
 
     .tl-entry:last-child {
-      padding-bottom: 12vh;
+      padding-bottom: 8vh;
     }
 
     .tl-dot {
@@ -1022,9 +1167,8 @@
     <span class="hero-mark br">+</span>
     <div class="hero-meta hm-tl">
       <span class="hm-name">Anusmrith M M</span>
-      <span>Computer Science · Developer</span>
+      <span>Computer Science &bull; Portfolio 2026</span>
     </div>
-    <div class="hero-meta hm-tr">Portfolio — 2026</div>
     <div class="hero-meta hm-bl">Code · Art · Play</div>
     <div class="hero-meta hm-right">CEK · Kerala, India</div>
   </div>
@@ -1037,29 +1181,57 @@
   <div class="hero-gradient" aria-hidden="true"></div>
   <div class="glass-rail" aria-hidden="true"></div>
 
-  <!-- Top Right Navigation & Links -->
-  <div class="top-nav-bar">
+  <!-- Top Right Navigation & Links (Positioned with zero collision) -->
+  <header class="top-nav-bar">
     <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer" class="github-link" aria-label="GitHub Profile" title="Open GitHub Profile">
       <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
         <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
       </svg>
     </a>
-    <a href="#resume" class="pill-btn">Résumé</a>
+    <a href="#resume" class="pill-btn">Resume</a>
     <a href="#works" class="pill-btn">Works</a>
     <button class="pill-btn accent" id="copyEmailTopBtn">Contact</button>
-  </div>
+  </header>
+  <div class="hm-tr-badge" aria-hidden="true">Portfolio &mdash; 2026</div>
 
   <main class="content">
     <!-- ==========================================================================
-         HERO SECTION: "About Anusmrith" + Mansalva Heading + Scroll Cue
+         HERO SECTION: Left-Side Real Photo Portrait + Mansalva Headline
          ========================================================================== -->
     <section class="hero" id="home">
-      <div class="about">
-        <div class="about-intro">
-          <h1 class="about-title">About Anusmrith</h1>
-          <p class="about-body">
-            I'm Anusmrith — a computer science undergraduate living where code meets creativity. I spend my days around deep learning architectures, mobile engineering with Flutter, responsive web design, and game development with Godot. I love studying and combining skills across different fields — to build, create, and explore more possibilities.
-          </p>
+      <div class="hero-stage">
+        <!-- Left Side: Real Photo Portrait Showcase -->
+        <div class="hero-portrait-stage">
+          <div class="hero-portrait-card">
+            <div class="portrait-photo-box">
+              <img src="assets/profile.jpg" alt="Anusmrith M M - Software Developer" class="portrait-photo-img" />
+            </div>
+            <div class="portrait-meta-strip">
+              <span class="portrait-name">
+                <span class="portrait-status-dot"></span>
+                Anusmrith M M
+              </span>
+              <span class="portrait-tag">Kerala, India</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Editorial Headline & Copy -->
+        <div class="about">
+          <div class="about-intro">
+            <span class="about-kicker">Creative Technologist &bull; CEK CS</span>
+            <h1 class="about-title">About Anusmrith</h1>
+            <p class="about-body">
+              I'm Anusmrith — a computer science undergraduate living where code meets creativity. I spend my days around deep learning architectures, mobile engineering with Flutter, responsive web design, and game development with Godot. I love studying and combining skills across different fields — to build, create, and explore more possibilities.
+            </p>
+            <div class="about-actions">
+              <a href="#resume" class="pill-btn">Explore Resume</a>
+              <a href="assets/resume.pdf" download="resume-anusmrith.pdf" target="_blank" class="pill-btn accent">
+                <span>Download Resume (PDF)</span>
+                <span aria-hidden="true">&nearr;</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1072,73 +1244,80 @@
     </section>
 
     <!-- ==========================================================================
-         RÉSUMÉ TIMELINE SECTION (Senbuzy Vertical Line Aesthetic)
+         RESUME TIMELINE SECTION (Corrected spelling: Resume, No Accents)
          ========================================================================== -->
     <section class="resume" id="resume">
-      <h2 class="resume-title">Résumé</h2>
+      <div class="resume-header-row">
+        <h2 class="resume-title">Resume</h2>
+        <a href="assets/resume.pdf" download="resume-anusmrith.pdf" target="_blank" class="pill-btn accent">
+          <span>Download PDF</span>
+          <span aria-hidden="true">&nearr;</span>
+        </a>
+      </div>
 
       <div class="timeline">
-        <!-- Entry 1: Current College Degree -->
+        <!-- Milestone 1: College of Engineering Karunagappally -->
         <div class="tl-entry">
           <span class="tl-dot"></span>
-          <div class="tl-period">2023 &ndash; 2027</div>
+          <div class="tl-period">2023 &ndash; Present</div>
           <div class="tl-head">
-            <div class="tl-place">College of Engineering Karunagappally</div>
+            <div class="tl-place">College of Engineering Karunagappally (KTU)</div>
             <div class="tl-logo-chip" title="Anusmrith M M">
               <img src="assets/profile.jpg" alt="Anusmrith M M" />
             </div>
           </div>
-          <div class="tl-role">B.Tech in Computer Science &amp; Engineering &bull; CGPA 7.15 / 10</div>
+          <div class="tl-role">B.Tech in Computer Science &amp; Engineering &bull; Kerala, India</div>
           <ul class="tl-points">
-            <li>Specialization: Deep learning transformer architectures, Flutter mobile development, and responsive web utilities.</li>
-            <li>Published 10+ open-source software and research repositories on GitHub.</li>
-            <li>APJ Abdul Kalam Technological University (KTU), Kerala, India.</li>
+            <li>Specialization: Deep learning transformer architectures, Flutter mobile development, and full-stack web engineering.</li>
+            <li>Relevant Coursework: Data Structures &amp; Algorithms, Database Management Systems (DBMS), Operating Systems, Object-Oriented Programming (OOP), Computer Networks.</li>
+            <li>Published 10+ open-source software repositories and technical research utilities on GitHub.</li>
           </ul>
         </div>
 
-        <!-- Entry 2: AI & LLM Systems -->
+        <!-- Milestone 2: Web Development Internship -->
         <div class="tl-entry">
           <span class="tl-dot"></span>
-          <div class="tl-period">2025 &ndash; Present</div>
+          <div class="tl-period">June 2025</div>
           <div class="tl-head">
-            <div class="tl-place">Autonomous AI &amp; Transformer Models</div>
+            <div class="tl-place">Scipy Technologies</div>
           </div>
-          <div class="tl-role">Independent Researcher &bull; Python, PyTorch &amp; LLM Systems</div>
+          <div class="tl-role">Web Development Intern &bull; Kerala, India</div>
           <ul class="tl-points">
+            <li>Engineered responsive web interface modules utilizing semantic HTML5, CSS3 flexbox/grid, and modern JavaScript.</li>
+            <li>Implemented client-side scripting routines, DOM manipulation algorithms, and modular form validation logic.</li>
+            <li>Adopted professional software development workflows, standard Git version control branching, and code quality reviews.</li>
+          </ul>
+        </div>
+
+        <!-- Milestone 3: AI & Full-Stack Projects -->
+        <div class="tl-entry">
+          <span class="tl-dot"></span>
+          <div class="tl-period">2024 &ndash; 2026</div>
+          <div class="tl-head">
+            <div class="tl-place">Technical Research &amp; Open Source Projects</div>
+          </div>
+          <div class="tl-role">Deep Learning &bull; Full-Stack Systems &bull; Game Development</div>
+          <ul class="tl-points">
+            <li><strong>V-BOT:</strong> Architected a decoder-only neural transformer language model from scratch in PyTorch with custom Byte-Level BPE tokenizer.</li>
+            <li><strong>AttendWise:</strong> Built cross-platform smart attendance tracker &amp; recovery risk calculator using Supabase authentication and PostgreSQL RLS.</li>
             <li><strong>Vishwas AI:</strong> Autonomous claim verification engine with live multi-source web validation via Tavily Search API.</li>
-            <li><strong>V-BOT:</strong> Decoder-only neural transformer language model coded and trained from scratch in PyTorch.</li>
-            <li><strong>Easeprompt:</strong> Meta-prompt synthesis engine enforcing the ART (Act as, Request, Terms) framework.</li>
+            <li><strong>Easeprompt:</strong> Prompt expansion &amp; optimization studio enforcing the ART (Act as, Request, Terms) framework.</li>
+            <li><strong>Blackout:</strong> 2D platformer action game built in Godot Engine with kinematic physics and GDScript signal handling.</li>
           </ul>
         </div>
 
-        <!-- Entry 3: Mobile & Full-Stack Apps -->
+        <!-- Milestone 4: Higher Secondary Education & Leadership -->
         <div class="tl-entry">
           <span class="tl-dot"></span>
-          <div class="tl-period">2024 &ndash; 2025</div>
+          <div class="tl-period">2020 &ndash; 2022</div>
           <div class="tl-head">
-            <div class="tl-place">Full-Stack &amp; Mobile Engineering</div>
+            <div class="tl-place">VPMSNDP HSS Kazhimbram (DHSE Kerala)</div>
           </div>
-          <div class="tl-role">Application Developer &bull; Flutter, Supabase &amp; Web Platforms</div>
+          <div class="tl-role">Higher Secondary Education &bull; Biology Science (90.58%)</div>
           <ul class="tl-points">
-            <li><strong>Digital Pooja Veppu:</strong> Cyber Sannidhanam festive audio-visual web experience with synthesized brass bells and canvas physics.</li>
-            <li><strong>AttendWise:</strong> Institutional smart attendance portal with Supabase real-time database and Capacitor mobile packaging.</li>
-            <li><strong>KSEB Slab Watchdog:</strong> Progressive Web App (PWA) calculating Kerala electricity tariff forecasts and penalty warnings.</li>
-            <li><strong>NutriDecide:</strong> Cross-platform food intelligence mobile app developed in Flutter and Firebase Firestore.</li>
-          </ul>
-        </div>
-
-        <!-- Entry 4: Game Dev & Foundations -->
-        <div class="tl-entry">
-          <span class="tl-dot"></span>
-          <div class="tl-period">2023 &ndash; 2024</div>
-          <div class="tl-head">
-            <div class="tl-place">Game Logic &amp; Creative Computing</div>
-          </div>
-          <div class="tl-role">Game Developer &bull; Godot Engine &amp; Desktop Voice AI</div>
-          <ul class="tl-points">
-            <li><strong>Blackout:</strong> 2D top-down action adventure game engineered in Godot Engine using GDScript with kinematic physics.</li>
-            <li><strong>Skill Quest:</strong> In-browser interactive retro arcade mini-game with real-time collision dynamics and touch controls.</li>
-            <li><strong>M.A.N.I. Assistant:</strong> Local desktop speech automation system performing voice-controlled Windows workflows.</li>
+            <li>Certifications: Introduction to AI Concepts (Microsoft Learn).</li>
+            <li>Leadership &amp; Volunteering: Volunteer Coordinator at FOSS FEST 2025; Active Delegate at ICGAIFE 3.0.</li>
+            <li>Languages: English (Professional), Malayalam (Native), Tamil (Conversational).</li>
           </ul>
         </div>
       </div>
@@ -1198,8 +1377,8 @@
                     Easeprompt &mdash; Meta-Prompt Expansion Studio &amp; ART Framework
                   </span>
                   <div class="wk-line-meta">
-                    <span class="wk-line-num">FastAPI / Gemini API</span>
-                    <span class="wk-line-tag">Prompt Studio</span>
+                    <span class="wk-line-num">Prompt Studio</span>
+                    <span class="wk-line-tag">AI Tool</span>
                     <span class="wk-line-arrow">&nearr;</span>
                   </div>
                 </button>
@@ -1229,7 +1408,7 @@
             <div class="wk-card-head">
               <span class="wk-card-no">02</span>
               <h3 class="wk-card-title">Mobile &amp; Web Applications</h3>
-              <span class="wk-card-tagline">Flutter &bull; Supabase &bull; Firebase &bull; Progressive Web Apps</span>
+              <span class="wk-card-tagline">Flutter &bull; Supabase &bull; Progressive Web Apps &bull; REST APIs</span>
             </div>
 
             <ul class="wk-list">
@@ -1278,7 +1457,7 @@
                     NutriDecide &mdash; Cross-Platform Food Intelligence App
                   </span>
                   <div class="wk-line-meta">
-                    <span class="wk-line-num">Flutter / Firebase</span>
+                    <span class="wk-line-num">Flutter / Dart</span>
                     <span class="wk-line-tag">Mobile App</span>
                     <span class="wk-line-arrow">&nearr;</span>
                   </div>
@@ -1300,7 +1479,7 @@
             </ul>
 
             <div class="wk-foot">
-              Tech: Flutter &bull; Dart &bull; Firebase Firestore &bull; Supabase PostgreSQL &bull; Capacitor 8 &bull; Vite 6 &bull; PWA
+              Tech: Flutter &bull; Dart &bull; Supabase PostgreSQL (RLS) &bull; Capacitor 8 &bull; Vite 6 &bull; PWA Offline
             </div>
           </article>
 
@@ -1345,7 +1524,7 @@
             </div>
           </article>
 
-          <!-- CARD 04: Technical Matrix & Tooling -->
+          <!-- CARD 04: Technical Matrix & Tooling (SQL, FastAPI, Firebase removed per user instructions) -->
           <article class="wk-card">
             <div class="wk-card-head">
               <span class="wk-card-no">04</span>
@@ -1358,7 +1537,7 @@
                 <button class="wk-line-btn" data-slug="skills-languages">
                   <span class="wk-line-name">Programming Languages</span>
                   <div class="wk-line-meta">
-                    <span class="wk-line-num">Python · Dart · C · JS · SQL</span>
+                    <span class="wk-line-num">Python · JavaScript · Dart · C · GDScript</span>
                     <span class="wk-line-tag">Core Syntax</span>
                     <span class="wk-line-arrow">&nearr;</span>
                   </div>
@@ -1369,7 +1548,7 @@
                 <button class="wk-line-btn" data-slug="skills-frameworks">
                   <span class="wk-line-name">Frameworks &amp; Libraries</span>
                   <div class="wk-line-meta">
-                    <span class="wk-line-num">Flutter · PyTorch · FastAPI · Godot</span>
+                    <span class="wk-line-num">Flutter · PyTorch · Godot Engine · Vite 6</span>
                     <span class="wk-line-tag">Ecosystem</span>
                     <span class="wk-line-arrow">&nearr;</span>
                   </div>
@@ -1380,7 +1559,7 @@
                 <button class="wk-line-btn" data-slug="skills-tools">
                   <span class="wk-line-name">Cloud &amp; Development Environments</span>
                   <div class="wk-line-meta">
-                    <span class="wk-line-num">Git · GitHub · Supabase · Firebase · Vercel</span>
+                    <span class="wk-line-num">Git · GitHub · Supabase · Vercel · Linux · VS Code</span>
                     <span class="wk-line-tag">Workflow</span>
                     <span class="wk-line-arrow">&nearr;</span>
                   </div>
@@ -1402,8 +1581,9 @@
     <footer class="footer" id="contact">
       <div class="footer-links">
         <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer" class="pill-btn">GitHub</a>
-        <a href="https://www.linkedin.com/in/anusmrith-m-m-9081812b2" target="_blank" rel="noopener noreferrer" class="pill-btn">LinkedIn</a>
-        <button class="pill-btn accent" id="copyEmailBottomBtn">Copy Email (anusmrith211@gmail.com)</button>
+        <a href="https://www.linkedin.com/in/anusmrith-m-m" target="_blank" rel="noopener noreferrer" class="pill-btn">LinkedIn</a>
+        <a href="assets/resume.pdf" download="resume-anusmrith.pdf" target="_blank" class="pill-btn">Download Resume (PDF)</a>
+        <button class="pill-btn accent" id="copyEmailBottomBtn">Copy Email (anusmrithchanju@gmail.com)</button>
       </div>
 
       <div class="credit">
@@ -1531,7 +1711,7 @@
       "vishwas-ai": {
         title: "Vishwas AI — Claim Verification & Hallucination Auditor",
         sub: "Machine Learning &bull; Autonomous Verification Pipeline",
-        tags: ["Python 3.11+", "Tavily Search API", "Groq / OpenAI / Anthropic", "FastAPI", "NLP", "Hallucination Auditing"],
+        tags: ["Python 3.11+", "Tavily Search API", "Groq / OpenAI / Anthropic", "NLP", "Hallucination Auditing"],
         desc: "Autonomous LLM claim-verification and hallucination-auditing pipeline. Automatically deconstructs complex LLM output text into atomic factual assertions, executes targeted multi-angle live web queries using the Tavily Search API, evaluates source cross-corroboration, and computes a calibrated confidence trust score with transparent audit logs.",
         links: [
           { label: "View GitHub Repository ↗", url: "https://github.com/Anusmrith/VishwasAi" }
@@ -1549,7 +1729,7 @@
       "easeprompt": {
         title: "Easeprompt — Meta-Prompt Expansion Studio & ART Framework",
         sub: "Developer Tool &bull; Prompt Architecture Studio",
-        tags: ["Python 3.10+", "FastAPI", "ART Framework", "Google Gemini API", "Prompt Engineering"],
+        tags: ["Python 3.10+", "ART Framework", "Google Gemini API", "Prompt Engineering"],
         desc: "Intelligent meta-prompt expansion engine enforcing the ART (Act as, Request, Terms) framework. Transforms ambiguous one-liner prompts into production-ready system instructions with role definitions, boundary constraints, and structured output formatting for high-reliability AI workflows.",
         links: [
           { label: "View GitHub Repository ↗", url: "https://github.com/Anusmrith/Easeprompt" }
@@ -1596,9 +1776,9 @@
       },
       "nutridecide": {
         title: "NutriDecide — Cross-Platform Food Intelligence App",
-        sub: "Mobile Engineering &bull; Flutter & Firebase",
-        tags: ["Flutter", "Dart", "Firebase Firestore", "REST APIs", "Mobile UI"],
-        desc: "Cross-platform mobile application providing real-time nutritional metrics, dietary decision assistance, and meal health scoring built with Flutter, Dart, and Firebase Cloud Firestore.",
+        sub: "Mobile Engineering &bull; Flutter & Dart",
+        tags: ["Flutter", "Dart", "REST APIs", "Mobile UI"],
+        desc: "Cross-platform mobile application providing real-time nutritional metrics, dietary decision assistance, and meal health scoring built with Flutter and Dart.",
         links: [
           { label: "View GitHub Repository ↗", url: "https://github.com/Anusmrith/NutriDecide" }
         ]
@@ -1631,8 +1811,8 @@
       "skills-languages": {
         title: "Programming Languages Matrix",
         sub: "Foundational Syntax &bull; Core Stack",
-        tags: ["Python 3.11+", "Dart", "C Language", "JavaScript (ES6+)", "SQL"],
-        desc: "Proficient in Python (modern 3.11+, PyTorch tensor manipulation, FastAPI async servers), Dart (Flutter reactive UI architecture), C (memory management, low-level pointers & data structures), JavaScript / TypeScript (DOM manipulation, canvas rendering, Web APIs), and relational SQL.",
+        tags: ["Python 3.11+", "JavaScript (ES6+)", "Dart", "C Language", "GDScript"],
+        desc: "Proficient in Python (modern 3.11+, PyTorch tensor manipulation, backend routines), JavaScript / TypeScript (DOM manipulation, canvas rendering, Web APIs), Dart (Flutter reactive UI architecture), C (memory management, low-level pointers & algorithms), and Godot GDScript.",
         links: [
           { label: "Explore Repositories on GitHub ↗", url: "https://github.com/Anusmrith" }
         ]
@@ -1640,8 +1820,8 @@
       "skills-frameworks": {
         title: "Frameworks & Specialized Libraries",
         sub: "Software Ecosystem &bull; Development Tools",
-        tags: ["Flutter", "PyTorch", "FastAPI", "Godot GDScript", "Vite 6"],
-        desc: "Hands-on experience with Flutter (cross-platform state management & UI), PyTorch (transformer attention mechanisms, tensor modeling), FastAPI (high-speed async APIs), Vite, and Godot Engine GDScript.",
+        tags: ["Flutter", "PyTorch", "Godot Engine (2D Kinematics)", "Vite 6", "Node.js (Basics)"],
+        desc: "Hands-on experience with Flutter (cross-platform state management & UI), PyTorch (transformer attention mechanisms, tensor modeling), Godot Engine GDScript, Vite 6, and modern web application frameworks.",
         links: [
           { label: "Explore Repositories on GitHub ↗", url: "https://github.com/Anusmrith" }
         ]
@@ -1649,8 +1829,8 @@
       "skills-tools": {
         title: "Cloud & Development Environments",
         sub: "DevOps &bull; Workflow & Tooling",
-        tags: ["Git", "GitHub", "Supabase", "Firebase", "Vercel", "Linux / Bash", "VS Code"],
-        desc: "Experienced with Git version control, GitHub team workflows, Firebase Cloud Firestore & Auth, Supabase PostgreSQL with RLS, Linux command line, Vercel deployments, and VS Code development tooling.",
+        tags: ["Git", "GitHub", "Supabase (Auth, RLS)", "PostgreSQL", "Vercel", "Linux / Bash", "VS Code"],
+        desc: "Experienced with Git version control, GitHub team workflows, Supabase PostgreSQL with Row-Level Security (RLS), Linux command line, Vercel deployments, and VS Code development tooling.",
         links: [
           { label: "View GitHub Profile ↗", url: "https://github.com/Anusmrith" }
         ]
@@ -1915,7 +2095,7 @@
 
     // 5. Toast & Email Copy
     function copyEmailToClipboard() {
-      const email = 'anusmrith211@gmail.com';
+      const email = 'anusmrithchanju@gmail.com';
       navigator.clipboard.writeText(email).then(() => {
         showToast('Email copied: ' + email);
       }).catch(() => {
