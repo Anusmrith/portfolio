@@ -35,7 +35,6 @@
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      /* Only fade modal when opening/closing; NO background-color transition so stages change in atomic sync */
       transition: opacity 0.3s ease, visibility 0.3s ease;
       overflow: hidden;
       user-select: none;
@@ -63,7 +62,7 @@
       pointer-events: auto !important;
     }
 
-    /* All hierarchy levels (modal, stage viewport, slide frame, and slide) share identical background color in lockstep */
+    /* All hierarchy levels share identical background color in lockstep */
     .canva-modal.stage-1,
     .canva-modal.stage-1 .canva-stage-viewport,
     .canva-modal.stage-1 .canva-slide-frame,
@@ -209,7 +208,7 @@
       -webkit-user-select: none !important;
     }
 
-    /* Comic Speech Bubble Overlays — Exactly centered on the white belly of each speech bubble */
+    /* Comic Speech Bubble Overlays — Perfectly centered inside the white capsule body */
     .canva-bubble-overlay {
       position: absolute;
       z-index: 70;
@@ -223,31 +222,30 @@
       outline: none !important;
       border: none !important;
       box-shadow: none !important;
-      overflow: hidden;
     }
 
-    /* Slide 1 Bubble: Resume (True Belly Center: cx=34.27%, cy=64.37%) */
+    /* Slide 1 Bubble: Resume (True Capsule Centroid: cx=34.27%, cy=65.80%) */
     .bubble-pos-1 {
       left: 34.27%;
-      top: 64.37%;
-      width: 19.5%;
-      height: 9%;
+      top: 65.80%;
+      width: 18.5%;
+      height: 5.8%;
     }
 
-    /* Slide 2 Bubble: Works (True Belly Center: cx=67.89%, cy=70.95%) */
+    /* Slide 2 Bubble: Works (True Capsule Centroid: cx=67.50%, cy=69.51%) */
     .bubble-pos-2 {
-      left: 67.89%;
-      top: 70.95%;
-      width: 19.5%;
-      height: 9%;
+      left: 67.50%;
+      top: 69.51%;
+      width: 18.5%;
+      height: 5.8%;
     }
 
-    /* Slide 3 Bubble: Contact (True Belly Center: cx=31.28%, cy=82.30%) */
+    /* Slide 3 Bubble: Contact (True Capsule Centroid: cx=31.28%, cy=83.78%) */
     .bubble-pos-3 {
       left: 31.28%;
-      top: 82.30%;
-      width: 20%;
-      height: 9%;
+      top: 83.78%;
+      width: 18.5%;
+      height: 5.8%;
     }
 
     /* Comic Action Buttons (Resume / Works) - Dead Center, Clean Comic Typography */
@@ -287,9 +285,8 @@
       gap: clamp(4px, 0.4vw, 8px);
       width: 100%;
       height: 100%;
-      padding: 0 6px;
+      padding: 0 4px;
       box-sizing: border-box;
-      overflow: hidden;
     }
 
     .comic-contact-item {
@@ -299,11 +296,11 @@
       background: rgba(0, 0, 0, 0.04);
       border: 1.2px solid #1a1a1a;
       border-radius: 999px;
-      padding: clamp(3px, 0.35vw, 6px) clamp(6px, 0.6vw, 10px);
+      padding: clamp(2px, 0.3vw, 5px) clamp(5px, 0.5vw, 9px);
       color: #1a1a1a;
       text-decoration: none;
       font-family: 'Chiron GoRound TC', -apple-system, sans-serif;
-      font-size: clamp(9px, 0.8vw, 12px);
+      font-size: clamp(8px, 0.75vw, 11px);
       font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
@@ -331,81 +328,75 @@
         z-index: 999;
       }
 
-      /* Scale Canva frame so avatar and text box fill the mobile viewport comfortably */
       .canva-slide-frame {
-        transform: scale(1.42);
+        transform: scale(1.28);
         transform-origin: center center;
       }
 
       .bubble-pos-1 {
         left: 34.27%;
-        top: 64.37%;
-        width: 20%;
-        height: 9.2%;
+        top: 65.80%;
+        width: 19%;
+        height: 6.5%;
       }
       .bubble-pos-1 .comic-btn-action {
-        font-size: clamp(14px, 3.8vw, 18px);
+        font-size: clamp(12px, 3.2vw, 15px);
         font-weight: 800;
       }
 
       .bubble-pos-2 {
-        left: 67.89%;
-        top: 70.95%;
-        width: 20%;
-        height: 9.2%;
+        left: 67.50%;
+        top: 69.51%;
+        width: 19%;
+        height: 6.5%;
       }
       .bubble-pos-2 .comic-btn-action {
-        font-size: clamp(14px, 3.8vw, 18px);
+        font-size: clamp(12px, 3.2vw, 15px);
         font-weight: 800;
       }
 
       .bubble-pos-3 {
         left: 31.28%;
-        top: 82.30%;
-        width: 20.2%;
-        height: 9.2%;
+        top: 83.78%;
+        width: 19.5%;
+        height: 6.5%;
       }
 
       .comic-contact-group {
-        gap: 2.5px;
-        padding: 0 2px;
+        gap: 2px;
+        padding: 0 1px;
         width: 100%;
         height: 100%;
         box-sizing: border-box;
-        overflow: hidden;
       }
 
       .comic-contact-item {
-        font-size: clamp(7px, 1.8vw, 8.5px);
-        padding: 2.5px 5px;
-        border-width: 1px;
-        letter-spacing: -0.01em;
+        font-size: clamp(6.2px, 1.5vw, 7.5px);
+        padding: 1.5px 3.5px;
+        border-width: 0.9px;
+        letter-spacing: -0.015em;
         line-height: 1;
         flex: 0 1 auto;
+        white-space: nowrap;
       }
     }
 
-    /* Small mobile screens (<= 380px, e.g. iPhone SE, Galaxy A-series) */
     @media (max-width: 380px) {
       .canva-slide-frame {
-        transform: scale(1.36);
+        transform: scale(1.22);
       }
-
       .bubble-pos-1 .comic-btn-action,
       .bubble-pos-2 .comic-btn-action {
-        font-size: clamp(12px, 3.5vw, 15px);
+        font-size: clamp(11px, 3.2vw, 14px);
       }
-
       .comic-contact-group {
         gap: 1.5px;
-        padding: 0 1px;
+        padding: 0;
       }
-
       .comic-contact-item {
-        font-size: clamp(6.2px, 1.6vw, 7.5px);
-        padding: 2px 3.5px;
+        font-size: 5.8px;
+        padding: 1.2px 2.8px;
         border-width: 0.8px;
-        letter-spacing: -0.02em;
       }
     }
   </style>
@@ -616,480 +607,6 @@
       writing-mode: vertical-rl;
       transform: translateY(-50%);
       letter-spacing: 0.3em;
-    }
-
-    /* Tablet & Medium Screens (<= 860px) */
-    @media (max-width: 860px) {
-      .glass-rail {
-        display: none;
-      }
-
-      .resume-stage {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-
-      .resume-avatar-col {
-        position: static;
-        max-width: 280px;
-        margin: 0 auto;
-      }
-
-      .tl-entry {
-        padding-bottom: 70px;
-      }
-    }
-
-    /* Mobile Screens (<= 680px) */
-    @media (max-width: 680px) {
-      .hero-chrome {
-        --m: 8px;
-      }
-
-      .hero-mark {
-        font-size: 10px;
-      }
-
-      /* Hide static corner stamps that overlap with UI navigation and content on mobile */
-      .hm-right,
-      .hm-tr,
-      .hm-tl,
-      .hm-bl {
-        display: none;
-      }
-
-      /* Top Navigation Bar - compact and cleanly spaced */
-      .top-nav-bar {
-        top: 10px;
-        right: 10px;
-        gap: 6px;
-      }
-
-      .pill-btn {
-        padding: 6px 11px;
-        font-size: 11px;
-        letter-spacing: 0.04em;
-      }
-
-      .github-link {
-        width: 32px;
-        height: 32px;
-      }
-
-      .github-link svg {
-        width: 15px;
-        height: 15px;
-      }
-
-      /* Hero Section */
-      .hero {
-        min-height: 100vh;
-        min-height: 100svh;
-        min-height: 100dvh;
-        justify-content: center;
-        padding: 80px 14px 40px;
-      }
-
-      .about {
-        padding: 0 8px;
-        max-width: 100%;
-      }
-
-      .about-title {
-        font-size: clamp(32px, 8.8vw, 56px);
-        margin-bottom: 0.35em;
-      }
-
-      .about-body {
-        font-size: clamp(14px, 4.2vw, 17px);
-        line-height: 1.6;
-        max-width: 100%;
-        margin-top: 0.4em;
-      }
-
-      .scroll-cue {
-        margin-top: 3.5vh;
-      }
-
-      /* Resume Section */
-      .resume {
-        padding: 60px 14px 40px;
-      }
-
-      .resume-stage {
-        grid-template-columns: 1fr;
-        gap: 24px;
-        max-width: 100%;
-      }
-
-      .resume-avatar-col {
-        position: static;
-        width: 100%;
-        max-width: 275px;
-        margin: 0 auto 12px;
-      }
-
-      .resume-dl-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        box-sizing: border-box;
-        padding: 9px 12px;
-        font-size: 11.5px;
-        letter-spacing: 0.03em;
-        gap: 6px;
-      }
-
-      .resume-avatar-card {
-        padding: 12px;
-        border-radius: 16px;
-      }
-
-      .resume-avatar-name {
-        font-size: 1.25rem;
-      }
-
-      .resume-avatar-bio {
-        font-size: 11.5px;
-      }
-
-      .resume-avatar-tags {
-        gap: 4px;
-      }
-
-      .resume-avatar-tags .wk-badge {
-        font-size: 9.5px;
-        padding: 4px 8px;
-      }
-
-      .resume-header-row {
-        margin-bottom: 18px;
-        padding-bottom: 14px;
-      }
-
-      .resume-title {
-        font-size: clamp(28px, 7vw, 42px);
-      }
-
-      /* Eliminates the 22vh blank space between timeline items */
-      .timeline {
-        margin-top: 14px;
-      }
-
-      .timeline:before {
-        left: 4px;
-      }
-
-      .tl-entry {
-        padding-left: 20px;
-        padding-bottom: 40px;
-      }
-
-      .tl-entry:last-child {
-        padding-bottom: 12px;
-      }
-
-      .tl-dot {
-        left: 0;
-        top: 6px;
-        width: 9px;
-        height: 9px;
-      }
-
-      .tl-period {
-        font-size: 11px;
-        letter-spacing: 0.16em;
-        margin-bottom: 0.4em;
-      }
-
-      .tl-head {
-        gap: 8px;
-      }
-
-      .tl-place {
-        font-size: 18px;
-        line-height: 1.25;
-      }
-
-      .tl-logo-chip {
-        width: 32px;
-        height: 32px;
-        border-radius: 7px;
-      }
-
-      .tl-role {
-        font-size: 12.5px;
-        margin-top: 0.25em;
-        line-height: 1.45;
-        word-break: break-word;
-      }
-
-      .tl-points {
-        margin-top: 0.7em;
-        gap: 0.55em;
-      }
-
-      .tl-points li {
-        font-size: 12.5px;
-        line-height: 1.55;
-        padding-left: 1em;
-        word-break: break-word;
-      }
-
-      /* Works Gallery */
-      .works {
-        padding: 40px 0 60px;
-      }
-
-      .works-container {
-        padding: 0 14px;
-        max-width: 100%;
-      }
-
-      .works-header {
-        margin-bottom: 24px;
-        padding-bottom: 14px;
-        gap: 8px;
-      }
-
-      .works-title {
-        font-size: clamp(30px, 7.5vw, 46px);
-      }
-
-      .works-subtitle {
-        font-size: 11px;
-        letter-spacing: 0.16em;
-      }
-
-      .wk-sections-grid {
-        gap: 18px;
-      }
-
-      .wk-card {
-        padding: 20px 14px;
-        border-radius: 14px;
-      }
-
-      .wk-card-head {
-        margin-bottom: 16px;
-      }
-
-      .wk-card-no {
-        font-size: 11px;
-        margin-bottom: 0.35em;
-      }
-
-      .wk-card-title {
-        font-size: 22px;
-        line-height: 1.2;
-      }
-
-      .wk-card-tagline {
-        font-size: 11.5px;
-        line-height: 1.4;
-      }
-
-      .wk-line-btn {
-        padding: 12px 0;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-      }
-
-      .wk-line-btn:hover,
-      .wk-line-btn:focus-visible {
-        padding-left: 0;
-      }
-
-      .wk-line-name {
-        font-size: 13.5px;
-        line-height: 1.35;
-        width: 100%;
-      }
-
-      .wk-line-meta {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        text-align: left;
-        gap: 6px 8px;
-        align-items: center;
-        margin-top: 2px;
-      }
-
-      .wk-line-num {
-        font-size: 11.5px;
-        white-space: normal;
-        word-break: break-word;
-        line-height: 1.4;
-      }
-
-      .wk-line-tag {
-        font-size: 10.5px;
-        white-space: nowrap;
-      }
-
-      .wk-line-tag:before {
-        display: none;
-      }
-
-      .wk-line-arrow {
-        display: none;
-      }
-
-      .wk-foot {
-        margin-top: 14px;
-        padding-top: 12px;
-        font-size: 11px;
-        line-height: 1.5;
-        word-break: break-word;
-      }
-
-      /* Detail Modal */
-      .wk-detail {
-        inset: 10px;
-        border-radius: 14px;
-      }
-
-      .wk-detail-article {
-        padding: 22px 14px 34px;
-        max-width: 100%;
-      }
-
-      .wk-detail-close {
-        top: 10px;
-        right: 10px;
-        width: 36px;
-        height: 36px;
-        font-size: 18px;
-      }
-
-      .wk-detail-head {
-        padding-bottom: 16px;
-        margin-bottom: 18px;
-      }
-
-      .wk-detail-title {
-        font-size: 22px;
-        line-height: 1.2;
-        padding-right: 36px;
-        word-break: break-word;
-      }
-
-      .wk-detail-sub {
-        font-size: 11.5px;
-        line-height: 1.4;
-      }
-
-      .wk-detail-tags {
-        gap: 5px;
-        margin-top: 1em;
-      }
-
-      .wk-badge {
-        font-size: 10.5px;
-        padding: 4px 9px;
-      }
-
-      .wk-detail-desc {
-        font-size: 13px;
-        line-height: 1.65;
-        word-break: break-word;
-      }
-
-      .wk-detail-actions {
-        flex-direction: column;
-        gap: 8px;
-        margin-top: 20px;
-        width: 100%;
-      }
-
-      .wk-detail-link {
-        width: 100%;
-        justify-content: center;
-        text-align: center;
-        padding: 11px 16px;
-        font-size: 12.5px;
-        box-sizing: border-box;
-        white-space: normal;
-      }
-
-      /* Footer */
-      .footer {
-        padding: 50px 14px 36px;
-      }
-
-      .footer-links {
-        gap: 8px;
-      }
-
-      .credit {
-        flex-direction: column;
-        gap: 5px;
-        font-size: 9.5px;
-        letter-spacing: 0.16em;
-        line-height: 1.6;
-        white-space: normal;
-      }
-
-      .credit-sep {
-        display: none;
-      }
-
-      .credit-tools {
-        font-size: 10.5px;
-      }
-
-      .toast-msg {
-        width: calc(100% - 28px);
-        max-width: 340px;
-        font-size: 11.5px;
-        padding: 8px 16px;
-        bottom: 16px;
-      }
-    }
-
-    /* Small Compact Phones (<= 400px) */
-    @media (max-width: 400px) {
-      .top-nav-bar {
-        top: 8px;
-        right: 8px;
-        gap: 4px;
-      }
-
-      .pill-btn {
-        padding: 5px 8px;
-        font-size: 10.5px;
-      }
-
-      .github-link {
-        width: 28px;
-        height: 28px;
-      }
-
-      .github-link svg {
-        width: 13px;
-        height: 13px;
-      }
-
-      .about-title {
-        font-size: 28px;
-      }
-
-      .about-body {
-        font-size: 13.5px;
-      }
-
-      .resume-avatar-col {
-        max-width: 260px;
-      }
-
-      .resume-dl-btn {
-        font-size: 11px;
-        padding: 8px 10px;
-      }
     }
 
     /* Fixed Top Navigation Buttons */
@@ -2272,7 +1789,296 @@
     }
 
 
-  </style>
+  
+    /* ==========================================================================
+       RESPONSIVE BREAKPOINTS (Cascaded at bottom of stylesheet for proper mobile priority)
+       ========================================================================== */
+    /* Tablet & Medium Screens (<= 860px) */
+    @media (max-width: 860px) {
+      .glass-rail {
+        display: none !important;
+      }
+
+      .resume-stage {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+      }
+
+      .resume-avatar-col {
+        position: static !important;
+        top: auto !important;
+        width: 100% !important;
+        max-width: 290px !important;
+        margin: 0 auto 16px !important;
+      }
+
+      .tl-entry {
+        padding-bottom: 70px;
+      }
+
+      .works-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Mobile Screens (<= 680px) */
+    @media (max-width: 680px) {
+      .hero-chrome {
+        --m: 8px;
+      }
+
+      .hero-mark {
+        font-size: 10px;
+      }
+
+      /* Hide static corner stamps that overlap with UI navigation and content on mobile */
+      .hm-right,
+      .hm-tr,
+      .hm-tl,
+      .hm-bl {
+        display: none !important;
+      }
+
+      /* Top Navigation Bar - compact, fixed, and cleanly spaced */
+      .top-nav-bar {
+        position: fixed !important;
+        top: max(8px, env(safe-area-inset-top, 8px)) !important;
+        right: 8px !important;
+        gap: 4px !important;
+        z-index: 120 !important;
+      }
+
+      .pill-btn {
+        padding: 5px 8px !important;
+        font-size: 10.5px !important;
+        letter-spacing: 0.02em !important;
+      }
+
+      .github-link {
+        width: 30px !important;
+        height: 30px !important;
+      }
+
+      .github-link svg {
+        width: 14px !important;
+        height: 14px !important;
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        min-height: 100svh;
+        min-height: 100dvh;
+        justify-content: center;
+        padding: 84px 16px 40px !important;
+      }
+
+      .about {
+        padding: 0 8px !important;
+        max-width: 100% !important;
+      }
+
+      .about-title {
+        font-size: clamp(32px, 8.8vw, 56px) !important;
+        margin-bottom: 0.35em !important;
+      }
+
+      .about-body {
+        font-size: clamp(14px, 4.2vw, 17px) !important;
+        line-height: 1.6 !important;
+        max-width: 100% !important;
+        margin-top: 0.4em !important;
+      }
+
+      /* Resume Section: Single Centered Column on Mobile */
+      .resume {
+        padding: 60px 14px 40px !important;
+      }
+
+      .resume-stage {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+      }
+
+      .resume-avatar-col {
+        position: static !important;
+        top: auto !important;
+        width: 100% !important;
+        max-width: 280px !important;
+        margin: 0 auto 14px !important;
+      }
+
+      .resume-avatar-card {
+        width: 100% !important;
+        max-width: 280px !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+      }
+
+      .resume-dl-btn {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        max-width: 280px !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+        white-space: nowrap !important;
+      }
+
+      .tl-stream {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      .tl-entry {
+        padding-bottom: 44px !important;
+      }
+
+      .tl-year {
+        font-size: 11px !important;
+        letter-spacing: 0.12em !important;
+        margin-bottom: 6px !important;
+      }
+
+      .tl-role {
+        font-size: 18px !important;
+        line-height: 1.25 !important;
+        margin-bottom: 4px !important;
+      }
+
+      .tl-inst {
+        font-size: 13px !important;
+        margin-bottom: 12px !important;
+      }
+
+      .tl-desc {
+        font-size: 13px !important;
+        line-height: 1.55 !important;
+      }
+
+      /* Works Gallery */
+      .works {
+        padding: 60px 14px 40px !important;
+      }
+
+      .works-header {
+        margin-bottom: 28px !important;
+      }
+
+      .works-title {
+        font-size: clamp(32px, 8.8vw, 56px) !important;
+      }
+
+      .works-sub {
+        font-size: 14px !important;
+      }
+
+      .works-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+      }
+
+      .project-card {
+        padding: 16px !important;
+      }
+
+      .project-title {
+        font-size: 18px !important;
+      }
+
+      .project-desc {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+      }
+
+      /* Detail Modal */
+      .detail-modal {
+        padding: 10px !important;
+      }
+
+      .detail-modal-card {
+        max-height: 92vh !important;
+        border-radius: 16px !important;
+      }
+
+      .detail-modal-header {
+        padding: 16px 18px 12px !important;
+      }
+
+      .detail-modal-title {
+        font-size: 18px !important;
+      }
+
+      .detail-modal-body {
+        padding: 16px 18px 24px !important;
+      }
+
+      /* Footer */
+      .site-footer {
+        padding: 40px 14px 28px !important;
+      }
+    }
+
+    /* Small Compact Phones (<= 400px) */
+    @media (max-width: 400px) {
+      .top-nav-bar {
+        top: max(6px, env(safe-area-inset-top, 6px)) !important;
+        right: 6px !important;
+        gap: 3px !important;
+      }
+
+      .pill-btn {
+        padding: 4px 7px !important;
+        font-size: 10px !important;
+      }
+
+      .github-link {
+        width: 28px !important;
+        height: 28px !important;
+      }
+
+      .github-link svg {
+        width: 12px !important;
+        height: 12px !important;
+      }
+
+      .about-title {
+        font-size: 28px !important;
+      }
+
+      .about-body {
+        font-size: 13px !important;
+      }
+
+      .resume-avatar-col {
+        max-width: 260px !important;
+      }
+
+      .resume-avatar-card {
+        max-width: 260px !important;
+      }
+
+      .resume-dl-btn {
+        max-width: 260px !important;
+        font-size: 11px !important;
+        padding: 8px 10px !important;
+      }
+    }
+</style>
 </head>
 
 <body>
