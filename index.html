@@ -120,6 +120,8 @@
       position: relative;
       width: 100vw;
       height: 100vh;
+      height: 100dvh;
+      height: 100svh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -221,30 +223,31 @@
       outline: none !important;
       border: none !important;
       box-shadow: none !important;
+      overflow: hidden;
     }
 
-    /* Slide 1 Bubble: Resume (True Belly Center: cx=34.30%, cy=65.76%) */
+    /* Slide 1 Bubble: Resume (True Belly Center: cx=34.27%, cy=64.37%) */
     .bubble-pos-1 {
-      left: 34.30%;
-      top: 65.76%;
-      width: 17%;
-      height: 5.6%;
+      left: 34.27%;
+      top: 64.37%;
+      width: 19.5%;
+      height: 9%;
     }
 
-    /* Slide 2 Bubble: Works (True Belly Center: cx=67.89%, cy=69.60%) */
+    /* Slide 2 Bubble: Works (True Belly Center: cx=67.89%, cy=70.95%) */
     .bubble-pos-2 {
       left: 67.89%;
-      top: 69.60%;
-      width: 17%;
-      height: 5.6%;
+      top: 70.95%;
+      width: 19.5%;
+      height: 9%;
     }
 
-    /* Slide 3 Bubble: Contact (True Belly Center: cx=31.28%, cy=83.73%) */
+    /* Slide 3 Bubble: Contact (True Belly Center: cx=31.28%, cy=82.30%) */
     .bubble-pos-3 {
       left: 31.28%;
-      top: 83.73%;
-      width: 17.5%;
-      height: 5.6%;
+      top: 82.30%;
+      width: 20%;
+      height: 9%;
     }
 
     /* Comic Action Buttons (Resume / Works) - Dead Center, Clean Comic Typography */
@@ -281,11 +284,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: clamp(3px, 0.35vw, 7px);
+      gap: clamp(4px, 0.4vw, 8px);
       width: 100%;
       height: 100%;
-      padding: 0 4px;
+      padding: 0 6px;
       box-sizing: border-box;
+      overflow: hidden;
     }
 
     .comic-contact-item {
@@ -295,17 +299,19 @@
       background: rgba(0, 0, 0, 0.04);
       border: 1.2px solid #1a1a1a;
       border-radius: 999px;
-      padding: clamp(2px, 0.3vw, 5px) clamp(5px, 0.5vw, 9px);
+      padding: clamp(3px, 0.35vw, 6px) clamp(6px, 0.6vw, 10px);
       color: #1a1a1a;
       text-decoration: none;
       font-family: 'Chiron GoRound TC', -apple-system, sans-serif;
-      font-size: clamp(8px, 0.75vw, 11.5px);
+      font-size: clamp(9px, 0.8vw, 12px);
       font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
       transition: all 0.18s ease;
       line-height: 1;
       outline: none !important;
+      flex: 0 1 auto;
+      box-sizing: border-box;
     }
 
     .comic-contact-item:hover {
@@ -317,47 +323,89 @@
     /* Mobile Responsive Optimizations for Canva Modal */
     @media (max-width: 768px) {
       .canva-close-floating {
-        top: 14px;
-        right: 14px;
-        width: 36px;
-        height: 36px;
-        font-size: 20px;
+        top: max(16px, env(safe-area-inset-top, 16px));
+        right: max(16px, env(safe-area-inset-right, 16px));
+        width: 38px;
+        height: 38px;
+        font-size: 22px;
+        z-index: 999;
       }
 
+      /* Scale Canva frame so avatar and text box fill the mobile viewport comfortably */
       .canva-slide-frame {
-        transform: scale(1.18);
+        transform: scale(1.42);
+        transform-origin: center center;
       }
 
       .bubble-pos-1 {
-        width: 19%;
-        height: 6.8%;
+        left: 34.27%;
+        top: 64.37%;
+        width: 20%;
+        height: 9.2%;
       }
       .bubble-pos-1 .comic-btn-action {
-        font-size: clamp(11px, 3.2vw, 15px);
+        font-size: clamp(14px, 3.8vw, 18px);
+        font-weight: 800;
       }
 
       .bubble-pos-2 {
-        width: 19%;
-        height: 6.8%;
+        left: 67.89%;
+        top: 70.95%;
+        width: 20%;
+        height: 9.2%;
       }
       .bubble-pos-2 .comic-btn-action {
-        font-size: clamp(11px, 3.2vw, 15px);
+        font-size: clamp(14px, 3.8vw, 18px);
+        font-weight: 800;
       }
 
       .bubble-pos-3 {
-        width: 20%;
-        height: 6.8%;
+        left: 31.28%;
+        top: 82.30%;
+        width: 20.2%;
+        height: 9.2%;
       }
 
       .comic-contact-group {
-        gap: 3px;
+        gap: 2.5px;
         padding: 0 2px;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
       }
 
       .comic-contact-item {
         font-size: clamp(7px, 1.8vw, 8.5px);
-        padding: 2px 4px;
+        padding: 2.5px 5px;
         border-width: 1px;
+        letter-spacing: -0.01em;
+        line-height: 1;
+        flex: 0 1 auto;
+      }
+    }
+
+    /* Small mobile screens (<= 380px, e.g. iPhone SE, Galaxy A-series) */
+    @media (max-width: 380px) {
+      .canva-slide-frame {
+        transform: scale(1.36);
+      }
+
+      .bubble-pos-1 .comic-btn-action,
+      .bubble-pos-2 .comic-btn-action {
+        font-size: clamp(12px, 3.5vw, 15px);
+      }
+
+      .comic-contact-group {
+        gap: 1.5px;
+        padding: 0 1px;
+      }
+
+      .comic-contact-item {
+        font-size: clamp(6.2px, 1.6vw, 7.5px);
+        padding: 2px 3.5px;
+        border-width: 0.8px;
+        letter-spacing: -0.02em;
       }
     }
   </style>
