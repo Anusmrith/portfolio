@@ -114,6 +114,114 @@
       transform: scale(1.08) rotate(90deg);
     }
 
+    /* Explore / Look for More Pill directly under the close button */
+    .canva-explore-pill {
+      position: absolute;
+      top: 68px;
+      right: 24px;
+      z-index: 200;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(14, 18, 26, 0.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      font-family: 'Chiron GoRound TC', -apple-system, sans-serif;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: auto;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      user-select: none;
+      -webkit-user-select: none;
+      animation: canvaPillPulse 2.4s ease-in-out infinite;
+    }
+
+    .canva-explore-pill:hover {
+      background: rgba(255, 255, 255, 0.95);
+      color: #0a0e16;
+      border-color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .canva-explore-pill svg {
+      width: 12px;
+      height: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .canva-explore-pill:hover svg {
+      transform: translateY(2px);
+    }
+
+    /* Floating Swipe Up Indicator at the bottom for mobile visitors */
+    .canva-swipe-bottom {
+      position: absolute;
+      bottom: max(22px, env(safe-area-inset-bottom, 22px));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 200;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(14, 18, 26, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      font-family: 'Chiron GoRound TC', -apple-system, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      pointer-events: auto;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+      animation: canvaSwipeBounce 2s ease-in-out infinite;
+      white-space: nowrap;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: all 0.2s ease;
+    }
+
+    .canva-swipe-bottom:hover {
+      background: rgba(255, 255, 255, 0.95);
+      color: #0a0e16;
+      border-color: #ffffff;
+    }
+
+    .canva-swipe-bottom svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    @keyframes canvaSwipeBounce {
+      0%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      50% {
+        transform: translateX(-50%) translateY(-6px);
+      }
+    }
+
+    @keyframes canvaPillPulse {
+      0%, 100% {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      }
+      50% {
+        box-shadow: 0 4px 22px rgba(255, 255, 255, 0.25);
+      }
+    }
+
     /* Slides Viewport Stage */
     .canva-stage-viewport {
       position: relative;
@@ -328,6 +436,20 @@
         z-index: 999;
       }
 
+      .canva-explore-pill {
+        top: calc(max(16px, env(safe-area-inset-top, 16px)) + 46px);
+        right: max(16px, env(safe-area-inset-right, 16px));
+        padding: 5px 11px;
+        font-size: 10.5px;
+        gap: 5px;
+      }
+
+      .canva-swipe-bottom {
+        bottom: max(16px, env(safe-area-inset-bottom, 16px));
+        padding: 6.5px 13px;
+        font-size: 10.5px;
+      }
+
       .canva-slide-frame {
         transform: scale(1.28);
         transform-origin: center center;
@@ -384,6 +506,15 @@
     @media (max-width: 380px) {
       .canva-slide-frame {
         transform: scale(1.22);
+      }
+      .canva-explore-pill {
+        font-size: 9.5px;
+        padding: 4px 9px;
+      }
+      .canva-swipe-bottom {
+        bottom: max(12px, env(safe-area-inset-bottom, 12px));
+        font-size: 9.5px;
+        padding: 5.5px 11px;
       }
       .bubble-pos-1 .comic-btn-action,
       .bubble-pos-2 .comic-btn-action {
@@ -2837,6 +2968,24 @@
     <!-- Minimal discreet close button -->
     <button type="button" class="canva-close-floating" id="closeCanvaModalBtn" aria-label="Close fullscreen view">&times;</button>
 
+    <!-- Explore / Look for More Pill directly under the close button -->
+    <button type="button" class="canva-explore-pill" id="canvaExplorePill" aria-label="Explore About Section">
+      <span>About &bull; Look for more</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <polyline points="19 12 12 19 5 12"></polyline>
+      </svg>
+    </button>
+
+    <!-- Floating Swipe Up indicator for mobile visitors -->
+    <button type="button" class="canva-swipe-bottom" id="canvaSwipeBottom" aria-label="Swipe up to explore About section">
+      <span>Swipe up for About</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="19" x2="12" y2="5"></line>
+        <polyline points="5 12 12 5 19 12"></polyline>
+      </svg>
+    </button>
+
     <!-- Viewport Stage -->
     <div class="canva-stage-viewport" id="canvaStageViewport">
       <div class="canva-slide-frame" id="canvaSlideFrame">
@@ -3276,6 +3425,8 @@
 
       // Modal elements
       const closeBtn = document.getElementById('closeCanvaModalBtn');
+      const explorePill = document.getElementById('canvaExplorePill');
+      const swipeBottom = document.getElementById('canvaSwipeBottom');
       const faceHitbox = document.getElementById('canvaFaceHitbox');
 
       // Slides
@@ -3395,6 +3546,22 @@
           closeModal('home');
         });
       }
+      // Explore About Pill (under close button) & Bottom Swipe Up Hint
+      if (explorePill) {
+        explorePill.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          closeModal('home');
+        });
+      }
+
+      if (swipeBottom) {
+        swipeBottom.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          closeModal('home');
+        });
+      }
 
       // Keyboard navigation (Esc to enter portfolio, Arrow keys to navigate expressions)
       window.addEventListener('keydown', function(e) {
@@ -3412,7 +3579,7 @@
       // Clicking on the character OR clicking outside the character on the background advances 1 -> 2 -> 3 -> 1
       modal.addEventListener('click', function(e) {
         // If clicked on close button or inside the comic speech bubble buttons, let them handle it!
-        if (e.target && (e.target.closest('#closeCanvaModalBtn') || e.target.closest('.canva-bubble-overlay'))) {
+        if (e.target && (e.target.closest('#closeCanvaModalBtn') || e.target.closest('#canvaExplorePill') || e.target.closest('#canvaSwipeBottom') || e.target.closest('.canva-bubble-overlay'))) {
           return;
         }
         nextStage();
