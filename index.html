@@ -15,6 +15,11 @@
     href="https://fonts.googleapis.com/css2?family=Mansalva&family=Cormorant+Upright:wght@400;500;600&family=Chiron+GoRound+TC:wght@300;400;500;700&display=swap"
     rel="stylesheet" />
 
+  <!-- Preload 3D Avatar Expression Renders for instantaneous interactive switching -->
+  <link rel="preload" as="image" href="assets/meCALM.webp" type="image/webp" />
+  <link rel="preload" as="image" href="assets/mesmile.webp" type="image/webp" />
+  <link rel="preload" as="image" href="assets/me3dblack.webp" type="image/webp" />
+
   <style>
     /* ==========================================================================
        portfolio EXACT COLOR PALETTE & ARCHITECTURAL STYLESHEET
@@ -950,7 +955,7 @@
     }
 
 
-    /* Photo/Avatar Flip Card */
+    /* Interactive Photo & 3D Avatar Showcase */
     .resume-avatar-box {
       width: 100%;
       aspect-ratio: 735 / 960;
@@ -959,21 +964,80 @@
       border: 1px solid rgba(244, 241, 234, 0.12);
       background: #080c14;
       position: relative;
-      perspective: 800px;
+      perspective: 900px;
+      user-select: none;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .resume-avatar-box.is-zoomed {
+      border-color: rgba(255, 217, 179, 0.45);
+      box-shadow: 0 0 32px rgba(255, 217, 179, 0.16), 0 12px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Top Mode Switcher Pill (Photo vs 3D Avatar) */
+    .avatar-mode-switch {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 25;
+      display: inline-flex;
+      background: rgba(10, 14, 22, 0.82);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(244, 241, 234, 0.15);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 3px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+    }
+
+    .avatar-mode-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      outline: none;
+      color: rgba(244, 241, 234, 0.65);
+      font-family: 'Chiron GoRound TC', -apple-system, sans-serif;
+      font-size: 9.5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 999px;
       cursor: pointer;
+      transition: all 0.22s ease;
+      white-space: nowrap;
+    }
+
+    .avatar-mode-btn:hover {
+      color: var(--ink);
+    }
+
+    .avatar-mode-btn.is-active {
+      background: rgba(255, 217, 179, 0.18);
+      color: var(--accent);
+      border-color: rgba(255, 217, 179, 0.35);
+      font-weight: 600;
     }
 
     .flip-inner {
       position: relative;
       width: 100%;
       height: 100%;
-      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
       transform-style: preserve-3d;
     }
 
-    .resume-avatar-box:hover .flip-inner,
-    .resume-avatar-box.flipped .flip-inner {
+    /* Flip trigger states */
+    .resume-avatar-box.flipped .flip-inner,
+    .resume-avatar-box.mode-avatar .flip-inner {
       transform: rotateY(180deg);
+    }
+
+    /* On desktop hover, flips if not explicitly locked to photo mode and not zoomed */
+    @media (hover: hover) and (pointer: fine) {
+      .resume-avatar-box:not(.mode-photo):not(.is-zoomed):hover .flip-inner {
+        transform: rotateY(180deg);
+      }
     }
 
     .flip-front,
@@ -986,49 +1050,143 @@
 
     .flip-front {
       z-index: 2;
+      cursor: pointer;
     }
 
     .flip-back {
       transform: rotateY(180deg);
-    }
-
-    .flip-front img,
-    .flip-back img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+      background: #080c14;
     }
 
     .flip-front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       object-position: center 15%;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .flip-back img {
-      object-position: center center;
+    .resume-avatar-box:hover .flip-front img {
+      transform: scale(1.03);
+    }
+
+    /* 3D Avatar Interactive Stage */
+    .avatar-stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      cursor: zoom-in;
+    }
+
+    .avatar-stage.is-zoomed {
+      cursor: zoom-out;
+    }
+
+    .avatar-expr-layer {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform-origin: 50% 28%;
+      transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1);
+      will-change: transform;
+    }
+
+    .avatar-stage.is-zoomed .avatar-expr-layer {
+      transform: scale(1.58) translate(var(--pan-x, 0px), var(--pan-y, 0px));
+    }
+
+    .avatar-expr {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      opacity: 0;
+      transition: opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      display: block;
+    }
+
+    .avatar-expr.is-active {
+      opacity: 1;
+    }
+
+        .avatar-stage .resume-avatar-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      bottom: auto;
+      left: auto;
+      transform: none;
+      z-index: 20;
+    }
+
+    /* Bottom Action & Zoom Indicator Pill */
+    .avatar-action-pill {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      z-index: 15;
+      font-size: 8.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(244, 241, 234, 0.7);
+      background: rgba(10, 14, 22, 0.82);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 241, 234, 0.14);
+      pointer-events: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .avatar-action-pill .zoom-svg-out {
+      display: none;
+    }
+
+    .avatar-stage.is-zoomed .avatar-action-pill {
+      background: rgba(255, 217, 179, 0.18);
+      border-color: rgba(255, 217, 179, 0.45);
+      color: var(--accent);
+    }
+
+    .avatar-stage.is-zoomed .avatar-action-pill .zoom-svg-in {
+      display: none;
+    }
+
+    .avatar-stage.is-zoomed .avatar-action-pill .zoom-svg-out {
+      display: inline-block;
     }
 
     .flip-hint {
       position: absolute;
-      bottom: 8px;
-      right: 8px;
-      z-index: 5;
+      bottom: 10px;
+      right: 10px;
+      z-index: 10;
       font-size: 8.5px;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(244, 241, 234, 0.5);
-      background: rgba(10, 14, 22, 0.7);
+      color: rgba(244, 241, 234, 0.6);
+      background: rgba(10, 14, 22, 0.78);
       backdrop-filter: blur(4px);
       padding: 3px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(244, 241, 234, 0.1);
+      border: 1px solid rgba(244, 241, 234, 0.12);
       pointer-events: none;
-      opacity: 1;
       transition: opacity 0.3s ease;
     }
 
-    .resume-avatar-box.flipped .flip-hint,
-    .resume-avatar-box:hover .flip-hint {
+    .resume-avatar-box.flipped .photo-hint,
+    .resume-avatar-box.mode-avatar .photo-hint,
+    .resume-avatar-box:hover .photo-hint {
       opacity: 0;
     }
 
@@ -1803,18 +1961,55 @@
         <!-- Left Column: Sticky 3D Avatar Card (Fills the left space!) -->
         <div class="resume-avatar-col">
           <div class="resume-avatar-card">
-            <div class="resume-avatar-box" id="avatarFlipBox" title="Tap to flip">
+            <div class="resume-avatar-box" id="avatarFlipBox">
+              <!-- Mode Switcher Pill (Photo vs 3D Avatar) -->
+              <div class="avatar-mode-switch" id="avatarModeSwitch" aria-label="Toggle photo or avatar view">
+                <button type="button" class="avatar-mode-btn is-active" id="btnModePhoto" data-mode="photo" title="View Real Photo">
+                  <span>Photo</span>
+                </button>
+                <button type="button" class="avatar-mode-btn" id="btnModeAvatar" data-mode="avatar" title="View Interactive 3D Avatar">
+                  <span>3D Avatar</span>
+                </button>
+              </div>
+
               <div class="flip-inner">
-                <div class="flip-front">
+                <!-- Front Face: Real Photo -->
+                <div class="flip-front" id="flipFrontFace" title="Click or hover to switch to 3D Avatar">
                   <img src="assets/profile.jpg" alt="Anusmrith M M — Photo" />
                   <span class="resume-avatar-badge">Student Developer</span>
+                  <span class="flip-hint photo-hint">3D Avatar &rarr;</span>
                 </div>
-                <div class="flip-back">
-                  <img src="assets/avatar.jpg" alt="Anusmrith M M — Avatar" />
-                  <span class="resume-avatar-badge">Avatar Mode</span>
+
+                <!-- Back Face: Interactive 3D Avatar with Expressions & Zoom -->
+                <div class="flip-back" id="flipBackFace">
+                  <div class="avatar-stage" id="avatarStage" title="Click to zoom in · Move mouse to change expressions">
+                    <div class="avatar-expr-layer">
+                      <picture>
+                        <source srcset="assets/meCALM.webp" type="image/webp" />
+                        <img src="assets/meCALM.png" class="avatar-expr expr-calm is-active" alt="3D Avatar Calm" />
+                      </picture>
+                      <picture>
+                        <source srcset="assets/mesmile.webp" type="image/webp" />
+                        <img src="assets/mesmile.png" class="avatar-expr expr-smile" alt="3D Avatar Smiling" />
+                      </picture>
+                      <picture>
+                        <source srcset="assets/me3dblack.webp" type="image/webp" />
+                        <img src="assets/me3dblack.png" class="avatar-expr expr-black" alt="3D Avatar Focused" />
+                      </picture>
+                    </div>
+
+                    <!-- Dynamic expression badge -->
+                    <span class="resume-avatar-badge" id="avatarExprBadge">Calm Mode</span>
+
+                    <!-- Interactive zoom / action pill -->
+                    <span class="avatar-action-pill" id="avatarActionPill">
+                      <svg class="zoom-svg-in" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                      <svg class="zoom-svg-out" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                      <span class="action-text">Click to zoom</span>
+                    </span>
+                  </div>
                 </div>
               </div>
-              <span class="flip-hint">Hover to flip</span>
             </div>
             <div class="resume-avatar-info">
               <h3 class="resume-avatar-name">Anusmrith M M</h3>
@@ -2584,17 +2779,157 @@
       setTimeout(() => t.classList.remove('show'), 2600);
     }
 
-    // Avatar flip on tap (mobile) 
-    (function() {
+    // ============================================================
+    // Interactive 3D Avatar: Expressions on Mouse Move + Click to Zoom
+    // ============================================================
+    (function initInteractiveAvatar() {
       const flipBox = document.getElementById('avatarFlipBox');
-      if (!flipBox) return;
-      flipBox.addEventListener('click', function() {
-        flipBox.classList.toggle('flipped');
+      const avatarStage = document.getElementById('avatarStage');
+      const exprLayer = avatarStage ? avatarStage.querySelector('.avatar-expr-layer') : null;
+      const exprImages = avatarStage ? avatarStage.querySelectorAll('.avatar-expr') : [];
+      const exprBadge = document.getElementById('avatarExprBadge');
+      const actionPill = document.getElementById('avatarActionPill');
+      const actionText = actionPill ? actionPill.querySelector('.action-text') : null;
+      const btnModePhoto = document.getElementById('btnModePhoto');
+      const btnModeAvatar = document.getElementById('btnModeAvatar');
+      const flipFrontFace = document.getElementById('flipFrontFace');
+
+      if (!flipBox || !avatarStage) return;
+
+      let isZoomed = false;
+      let currentExpr = 'calm';
+
+      // 1. Mode Switcher (Photo vs Avatar)
+      function setMode(mode) {
+        if (mode === 'photo') {
+          flipBox.classList.remove('mode-avatar', 'flipped');
+          flipBox.classList.add('mode-photo');
+          if (btnModePhoto) btnModePhoto.classList.add('is-active');
+          if (btnModeAvatar) btnModeAvatar.classList.remove('is-active');
+          if (isZoomed) toggleZoom(false);
+        } else if (mode === 'avatar') {
+          flipBox.classList.remove('mode-photo');
+          flipBox.classList.add('mode-avatar', 'flipped');
+          if (btnModeAvatar) btnModeAvatar.classList.add('is-active');
+          if (btnModePhoto) btnModePhoto.classList.remove('is-active');
+        }
+      }
+
+      if (btnModePhoto && btnModeAvatar) {
+        btnModePhoto.addEventListener('click', function(e) {
+          e.stopPropagation();
+          setMode('photo');
+        });
+        btnModeAvatar.addEventListener('click', function(e) {
+          e.stopPropagation();
+          setMode('avatar');
+        });
+      }
+
+      // Clicking front face flips to avatar
+      if (flipFrontFace) {
+        flipFrontFace.addEventListener('click', function() {
+          setMode('avatar');
+        });
+      }
+
+      // 2. Expression Switching Logic
+      const exprMap = {
+        black: { label: 'Cool Mode' },
+        calm:  { label: 'Calm Mode' },
+        smile: { label: 'Happy Mode' }
+      };
+
+      function setExpression(exprKey) {
+        if (currentExpr === exprKey) return;
+        currentExpr = exprKey;
+
+        for (let i = 0; i < exprImages.length; i++) {
+          const img = exprImages[i];
+          if (img.classList.contains('expr-' + exprKey)) {
+            img.classList.add('is-active');
+          } else {
+            img.classList.remove('is-active');
+          }
+        }
+
+        if (exprBadge && exprMap[exprKey]) {
+          exprBadge.textContent = exprMap[exprKey].label;
+        }
+      }
+
+      // 3. Mouse Movement Tracking for Expressions & Zoom Pan
+      function handlePointerMove(e) {
+        const rect = avatarStage.getBoundingClientRect();
+        if (rect.width === 0 || rect.height === 0) return;
+
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        const ratioX = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+        const ratioY = Math.max(0, Math.min(1, (clientY - rect.top) / rect.height));
+
+        // Horizontal zones for expressions:
+        // Left (< 0.35): Cool (me3dblack)
+        // Center (0.35 - 0.65): Calm (meCALM)
+        // Right (> 0.65): Smile (mesmile)
+        if (ratioX < 0.35) {
+          setExpression('black');
+        } else if (ratioX > 0.65) {
+          setExpression('smile');
+        } else {
+          setExpression('calm');
+        }
+
+        // If zoomed in: subtle camera pan with cursor
+        if (isZoomed && exprLayer) {
+          const panX = ((ratioX - 0.5) * -24).toFixed(1) + 'px';
+          const panY = ((ratioY - 0.5) * -22).toFixed(1) + 'px';
+          exprLayer.style.setProperty('--pan-x', panX);
+          exprLayer.style.setProperty('--pan-y', panY);
+        }
+      }
+
+      avatarStage.addEventListener('mousemove', handlePointerMove);
+      avatarStage.addEventListener('touchmove', handlePointerMove, { passive: true });
+
+      // Reset to calm expression and centered pan when mouse leaves
+      avatarStage.addEventListener('mouseleave', function() {
+        setExpression('calm');
+        if (exprLayer) {
+          exprLayer.style.setProperty('--pan-x', '0px');
+          exprLayer.style.setProperty('--pan-y', '0px');
+        }
       });
-      // Change hint text on mobile
+
+      // 4. Click to Zoom In / Zoom Out
+      function toggleZoom(forceState) {
+        isZoomed = typeof forceState === 'boolean' ? forceState : !isZoomed;
+
+        if (isZoomed) {
+          avatarStage.classList.add('is-zoomed');
+          flipBox.classList.add('is-zoomed');
+          if (actionText) actionText.textContent = 'Click to zoom out';
+        } else {
+          avatarStage.classList.remove('is-zoomed');
+          flipBox.classList.remove('is-zoomed');
+          const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+          if (actionText) actionText.textContent = isTouch ? 'Tap to zoom' : 'Click to zoom';
+          if (exprLayer) {
+            exprLayer.style.setProperty('--pan-x', '0px');
+            exprLayer.style.setProperty('--pan-y', '0px');
+          }
+        }
+      }
+
+      avatarStage.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleZoom();
+      });
+
+      // Touch friendly hint text
       if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-        const hint = flipBox.querySelector('.flip-hint');
-        if (hint) hint.textContent = 'Tap to flip';
+        if (actionText) actionText.textContent = 'Tap to zoom';
       }
     })();
 
