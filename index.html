@@ -28,26 +28,29 @@
     .canva-modal {
       position: fixed;
       inset: 0;
-      z-index: 99999;
-      display: flex;
+      z-index: 999999;
+      display: none;
       align-items: center;
       justify-content: center;
       background: #ab826d;
       background: radial-gradient(circle at 50% 40%, #ba917c 0%, #ab826d 55%, #845e4d 100%);
       opacity: 0;
       visibility: hidden;
+      pointer-events: none;
       transform: scale(0.96);
-      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                  visibility 0.35s;
+      transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                  visibility 0.32s;
       overflow: hidden;
       user-select: none;
     }
 
     .canva-modal.is-open {
-      opacity: 1;
-      visibility: visible;
-      transform: scale(1);
+      display: flex !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+      transform: scale(1) !important;
     }
 
     /* Modal Top Header */
@@ -2441,8 +2444,8 @@
                     </div>
 
                     <!-- Clean launch pill -->
-                    <span class="avatar-action-pill" id="avatarActionPill">
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                    <span class="avatar-action-pill" id="avatarActionPill" title="Click to open fullscreen avatar experience">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
                       <span class="action-text">Click to expand</span>
                     </span>
                   </div>
@@ -2842,6 +2845,89 @@
   <div class="toast-msg" id="toastMsg">Email copied to clipboard!</div>
 
   <!-- ==========================================================================
+       CANVA WHOLE-WINDOW INTERACTIVE AVATAR MODAL (Canva Prototype)
+       ========================================================================== -->
+  <div class="canva-modal stage-1" id="canvaModal" aria-hidden="true" role="dialog" aria-label="Interactive 3D Avatar Showcase">
+    <!-- Header Bar -->
+    <div class="canva-modal-header">
+      <div class="canva-stage-indicator">
+        <span class="stage-dot" id="canvaStageDot"></span>
+        <span id="canvaStageText">Page 1 / 3 &bull; Resume</span>
+      </div>
+      <button type="button" class="canva-modal-close" id="closeCanvaModalBtn" aria-label="Close fullscreen view" title="Close (Esc)">
+        &times;
+      </button>
+    </div>
+
+    <!-- Viewport Stage -->
+    <div class="canva-stage-viewport" id="canvaStageViewport">
+      <!-- Giant Calligraphy Signature in Background -->
+      <h1 class="canva-bg-signature" id="canvaBgSignature" aria-hidden="true">Anusmrith</h1>
+
+      <!-- 3D Avatar Cutouts (Transparent Renders) -->
+      <div class="canva-avatar-holder" id="canvaAvatarHolder" title="Click face or move mouse to change expressions">
+        <picture>
+          <source srcset="assets/avatar_stage1_calm.webp" type="image/webp" />
+          <img src="assets/avatar_stage1_calm.png" class="canva-avatar-img stage-img-1 is-active" alt="Anusmrith 3D Avatar — Calm" />
+        </picture>
+        <picture>
+          <source srcset="assets/avatar_stage2_smile.webp" type="image/webp" />
+          <img src="assets/avatar_stage2_smile.png" class="canva-avatar-img stage-img-2" alt="Anusmrith 3D Avatar — Smiling" />
+        </picture>
+        <picture>
+          <source srcset="assets/avatar_stage3_laugh.webp" type="image/webp" />
+          <img src="assets/avatar_stage3_laugh.png" class="canva-avatar-img stage-img-3" alt="Anusmrith 3D Avatar — Joyful" />
+        </picture>
+      </div>
+
+      <!-- Comic Speech Bubble: Stage 1 (Resume) -->
+      <div class="canva-comic-bubble canva-bubble-stage1 is-active" id="canvaBubbleStage1">
+        <a href="assets/resume.pdf" target="_blank" download="resume-anusmrith.pdf" class="comic-btn-action" title="Download Resume">
+          <span>Resume</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+        </a>
+      </div>
+
+      <!-- Comic Speech Bubble: Stage 2 (Works) -->
+      <div class="canva-comic-bubble canva-bubble-stage2" id="canvaBubbleStage2">
+        <button type="button" class="comic-btn-action" id="canvaBtnWorks" title="Explore Projects">
+          <span>Works</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+        </button>
+      </div>
+
+      <!-- Comic Speech Bubble: Stage 3 (Contact) -->
+      <div class="canva-comic-bubble canva-bubble-stage3" id="canvaBubbleStage3">
+        <div class="comic-contact-group">
+          <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer" class="comic-contact-item" title="Visit GitHub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <span>GitHub</span>
+          </a>
+          <a href="https://linkedin.com/in/anusmrith" target="_blank" rel="noopener noreferrer" class="comic-contact-item" title="Visit LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            <span>LinkedIn</span>
+          </a>
+          <button type="button" class="comic-contact-item" id="canvaCopyEmailBtn" title="Copy Email">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <span id="canvaEmailLabel">Email</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation Tabs & Controls -->
+    <div class="canva-modal-bottom">
+      <button type="button" class="canva-nav-arrow" id="canvaNavPrev" aria-label="Previous Page">&larr;</button>
+      <div class="canva-stage-tabs">
+        <button type="button" class="canva-tab-btn is-active" data-stage="1">1. Resume</button>
+        <button type="button" class="canva-tab-btn" data-stage="2">2. Works</button>
+        <button type="button" class="canva-tab-btn" data-stage="3">3. Contact</button>
+      </div>
+      <button type="button" class="canva-nav-arrow" id="canvaNavNext" aria-label="Next Page">&rarr;</button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
        CLIENT SCRIPTS: SILKY WAVE CANVAS + DETAIL MODAL + MINI-GAME + COPY EMAIL
        ========================================================================== -->
   <script>
@@ -3220,16 +3306,17 @@
     // ============================================================
     // Canva Whole-Window Interactive Avatar Showcase
     // ============================================================
-    (function initCanvaAvatarShowcase() {
+    function initCanvaAvatarShowcase() {
+      const modal = document.getElementById('canvaModal');
       const flipBox = document.getElementById('avatarFlipBox');
       const avatarStage = document.getElementById('avatarStage');
       const btnModePhoto = document.getElementById('btnModePhoto');
       const btnModeAvatar = document.getElementById('btnModeAvatar');
       const flipFrontFace = document.getElementById('flipFrontFace');
       const flipBackFace = document.getElementById('flipBackFace');
+      const actionPill = document.getElementById('avatarActionPill');
 
       // Modal elements
-      const modal = document.getElementById('canvaModal');
       const closeBtn = document.getElementById('closeCanvaModalBtn');
       const stageDot = document.getElementById('canvaStageDot');
       const stageText = document.getElementById('canvaStageText');
@@ -3247,7 +3334,10 @@
       const copyEmailBtn = document.getElementById('canvaCopyEmailBtn');
       const emailLabel = document.getElementById('canvaEmailLabel');
 
-      if (!modal) return;
+      if (!modal) {
+        console.error('[CanvaShowcase] Modal element #canvaModal not found in DOM!');
+        return;
+      }
 
       let currentStage = 1;
       const stageInfo = {
@@ -3301,6 +3391,9 @@
       // 2. Open / Close Modal
       function openModal(initialStage) {
         setCanvaStage(initialStage || 1);
+        modal.style.display = 'flex';
+        // force reflow
+        void modal.offsetWidth;
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
@@ -3310,58 +3403,46 @@
         modal.classList.remove('is-open');
         modal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
+        setTimeout(function() {
+          if (!modal.classList.contains('is-open')) {
+            modal.style.display = 'none';
+          }
+        }, 320);
       }
 
-      // Launch modal on clicking the avatar card in resume section
-      if (avatarStage) {
-        avatarStage.addEventListener('click', function(e) {
+      // 3. Bulletproof Triggers: Clicking the avatar card opens the Canva fullscreen experience!
+      const triggers = [
+        flipBox,
+        avatarStage,
+        flipFrontFace,
+        flipBackFace,
+        actionPill,
+        btnModeAvatar
+      ];
+
+      triggers.forEach(function(el) {
+        if (!el) return;
+        el.addEventListener('click', function(e) {
+          // If clicked specifically on the photo button, switch card to photo mode
+          if (e.target && e.target.closest('#btnModePhoto')) {
+            if (flipBox) {
+              flipBox.classList.remove('mode-avatar', 'flipped');
+              flipBox.classList.add('mode-photo');
+            }
+            if (btnModePhoto) btnModePhoto.classList.add('is-active');
+            if (btnModeAvatar) btnModeAvatar.classList.remove('is-active');
+            return;
+          }
+          e.preventDefault();
           e.stopPropagation();
           openModal(1);
         });
-      }
-      if (flipBackFace) {
-        flipBackFace.addEventListener('click', function(e) {
-          e.stopPropagation();
-          openModal(1);
-        });
-      }
+      });
 
-      // Mode Switcher on Resume Card
-      function setCardMode(mode) {
-        if (mode === 'photo') {
-          flipBox.classList.remove('mode-avatar', 'flipped');
-          flipBox.classList.add('mode-photo');
-          if (btnModePhoto) btnModePhoto.classList.add('is-active');
-          if (btnModeAvatar) btnModeAvatar.classList.remove('is-active');
-        } else if (mode === 'avatar') {
-          flipBox.classList.remove('mode-photo');
-          flipBox.classList.add('mode-avatar', 'flipped');
-          if (btnModeAvatar) btnModeAvatar.classList.add('is-active');
-          if (btnModePhoto) btnModePhoto.classList.remove('is-active');
-        }
-      }
-
-      if (btnModePhoto && btnModeAvatar) {
-        btnModePhoto.addEventListener('click', function(e) {
-          e.stopPropagation();
-          setCardMode('photo');
-        });
-        btnModeAvatar.addEventListener('click', function(e) {
-          e.stopPropagation();
-          setCardMode('avatar');
-        });
-      }
-
-      if (flipFrontFace) {
-        flipFrontFace.addEventListener('click', function() {
-          setCardMode('avatar');
-        });
-      }
-
-      // Close modal events
+      // Close modal button
       if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
-      // Close when clicking modal backdrop outside stage viewport
+      // Close when clicking modal backdrop
       modal.addEventListener('click', function(e) {
         if (e.target === modal || e.target.classList.contains('canva-stage-viewport')) {
           closeModal();
@@ -3379,7 +3460,7 @@
         }
       });
 
-      // 3. Mouse Movement Over Face / Avatar Holder to Change Expressions
+      // 4. Mouse Movement Over Face / Avatar Holder to Change Expressions
       if (avatarHolder) {
         avatarHolder.addEventListener('mousemove', function(e) {
           const rect = avatarHolder.getBoundingClientRect();
@@ -3404,7 +3485,7 @@
         });
       }
 
-      // 4. Tab Buttons Navigation
+      // 5. Tab Buttons Navigation
       tabBtns.forEach(function(btn) {
         btn.addEventListener('click', function(e) {
           e.stopPropagation();
@@ -3413,7 +3494,7 @@
         });
       });
 
-      // 5. Arrow Buttons
+      // 6. Arrow Buttons
       if (btnPrev) {
         btnPrev.addEventListener('click', function(e) {
           e.stopPropagation();
@@ -3427,7 +3508,7 @@
         });
       }
 
-      // 6. Action Button in Stage 2 (Works): Redirects to works section and closes modal
+      // 7. Action Button in Stage 2 (Works): Redirects to works section and closes modal
       if (btnWorks) {
         btnWorks.addEventListener('click', function(e) {
           e.stopPropagation();
@@ -3441,7 +3522,7 @@
         });
       }
 
-      // 7. Contact Email Copy in Stage 3
+      // 8. Contact Email Copy in Stage 3
       if (copyEmailBtn) {
         copyEmailBtn.addEventListener('click', function(e) {
           e.stopPropagation();
@@ -3458,7 +3539,7 @@
         });
       }
 
-      // 8. Mobile Swipe Navigation
+      // 9. Mobile Swipe Navigation
       let touchStartX = 0;
       modal.addEventListener('touchstart', function(e) {
         touchStartX = e.touches[0].clientX;
@@ -3475,94 +3556,18 @@
           }
         }
       }, { passive: true });
-    })();
+    }
+
+    // Run both immediately and on DOMContentLoaded
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCanvaAvatarShowcase);
+    } else {
+      initCanvaAvatarShowcase();
+    }
 
     document.getElementById('copyEmailTopBtn').addEventListener('click', copyEmailToClipboard);
     document.getElementById('copyEmailBottomBtn').addEventListener('click', copyEmailToClipboard);
   </script>
-  <!-- ==========================================================================
-       CANVA WHOLE-WINDOW INTERACTIVE AVATAR MODAL (Canva Prototype)
-       ========================================================================== -->
-  <div class="canva-modal stage-1" id="canvaModal" aria-hidden="true" role="dialog" aria-label="Interactive 3D Avatar Showcase">
-    <!-- Header Bar -->
-    <div class="canva-modal-header">
-      <div class="canva-stage-indicator">
-        <span class="stage-dot" id="canvaStageDot"></span>
-        <span id="canvaStageText">Page 1 / 3 &bull; Resume</span>
-      </div>
-      <button type="button" class="canva-modal-close" id="closeCanvaModalBtn" aria-label="Close fullscreen view" title="Close (Esc)">
-        &times;
-      </button>
-    </div>
-
-    <!-- Viewport Stage -->
-    <div class="canva-stage-viewport" id="canvaStageViewport">
-      <!-- Giant Calligraphy Signature in Background -->
-      <h1 class="canva-bg-signature" id="canvaBgSignature" aria-hidden="true">Anusmrith</h1>
-
-      <!-- 3D Avatar Cutouts (Transparent Renders) -->
-      <div class="canva-avatar-holder" id="canvaAvatarHolder" title="Click face or move mouse to change expressions">
-        <picture>
-          <source srcset="assets/avatar_stage1_calm.webp" type="image/webp" />
-          <img src="assets/avatar_stage1_calm.png" class="canva-avatar-img stage-img-1 is-active" alt="Anusmrith 3D Avatar — Calm" />
-        </picture>
-        <picture>
-          <source srcset="assets/avatar_stage2_smile.webp" type="image/webp" />
-          <img src="assets/avatar_stage2_smile.png" class="canva-avatar-img stage-img-2" alt="Anusmrith 3D Avatar — Smiling" />
-        </picture>
-        <picture>
-          <source srcset="assets/avatar_stage3_laugh.webp" type="image/webp" />
-          <img src="assets/avatar_stage3_laugh.png" class="canva-avatar-img stage-img-3" alt="Anusmrith 3D Avatar — Joyful" />
-        </picture>
-      </div>
-
-      <!-- Comic Speech Bubble: Stage 1 (Resume) -->
-      <div class="canva-comic-bubble canva-bubble-stage1 is-active" id="canvaBubbleStage1">
-        <a href="assets/resume.pdf" target="_blank" download="resume-anusmrith.pdf" class="comic-btn-action" title="Download Resume">
-          <span>Resume</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-        </a>
-      </div>
-
-      <!-- Comic Speech Bubble: Stage 2 (Works) -->
-      <div class="canva-comic-bubble canva-bubble-stage2" id="canvaBubbleStage2">
-        <button type="button" class="comic-btn-action" id="canvaBtnWorks" title="Explore Projects">
-          <span>Works</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-        </button>
-      </div>
-
-      <!-- Comic Speech Bubble: Stage 3 (Contact) -->
-      <div class="canva-comic-bubble canva-bubble-stage3" id="canvaBubbleStage3">
-        <div class="comic-contact-group">
-          <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer" class="comic-contact-item" title="Visit GitHub">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            <span>GitHub</span>
-          </a>
-          <a href="https://linkedin.com/in/anusmrith" target="_blank" rel="noopener noreferrer" class="comic-contact-item" title="Visit LinkedIn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            <span>LinkedIn</span>
-          </a>
-          <button type="button" class="comic-contact-item" id="canvaCopyEmailBtn" title="Copy Email">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            <span id="canvaEmailLabel">Email</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bottom Navigation Tabs & Controls -->
-    <div class="canva-modal-bottom">
-      <button type="button" class="canva-nav-arrow" id="canvaNavPrev" aria-label="Previous Page">&larr;</button>
-      <div class="canva-stage-tabs">
-        <button type="button" class="canva-tab-btn is-active" data-stage="1">1. Resume</button>
-        <button type="button" class="canva-tab-btn" data-stage="2">2. Works</button>
-        <button type="button" class="canva-tab-btn" data-stage="3">3. Contact</button>
-      </div>
-      <button type="button" class="canva-nav-arrow" id="canvaNavNext" aria-label="Next Page">&rarr;</button>
-    </div>
-  </div>
-
 </body>
 
 </html>
