@@ -86,7 +86,7 @@
       left: 0;
       z-index: 1;
       pointer-events: none;
-      background: linear-gradient(to right, #0a0e1600 20%, #0a0e16bf 58%, #0a0e16 92%);
+      background: linear-gradient(to right, rgba(10, 14, 22, 0) 0%, rgba(10, 14, 22, 0.45) 40%, rgba(10, 14, 22, 0.78) 65%, #0a0e16 95%);
     }
 
     .hero-gradient {
@@ -97,7 +97,7 @@
       height: 35vh;
       z-index: 2;
       pointer-events: none;
-      background: linear-gradient(to top, rgba(9, 33, 22, 0.5), rgba(9, 33, 22, 0));
+      background: linear-gradient(to top, rgba(10, 14, 22, 0.85) 0%, rgba(9, 33, 22, 0.25) 40%, rgba(10, 14, 22, 0) 100%);
     }
 
     .content {
@@ -949,6 +949,8 @@
       transform: translateY(-3px);
     }
 
+
+    /* Photo/Avatar Flip Card */
     .resume-avatar-box {
       width: 100%;
       aspect-ratio: 735 / 960;
@@ -957,20 +959,79 @@
       border: 1px solid rgba(244, 241, 234, 0.12);
       background: #080c14;
       position: relative;
+      perspective: 800px;
+      cursor: pointer;
     }
 
-    .resume-avatar-img {
+    .flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .resume-avatar-box:hover .flip-inner,
+    .resume-avatar-box.flipped .flip-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-front,
+    .flip-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    .flip-front {
+      z-index: 2;
+    }
+
+    .flip-back {
+      transform: rotateY(180deg);
+    }
+
+    .flip-front img,
+    .flip-back img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 15%;
       display: block;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .resume-avatar-card:hover .resume-avatar-img {
-      transform: scale(1.05);
+    .flip-front img {
+      object-position: center 15%;
     }
+
+    .flip-back img {
+      object-position: center center;
+    }
+
+    .flip-hint {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      z-index: 5;
+      font-size: 8.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(244, 241, 234, 0.5);
+      background: rgba(10, 14, 22, 0.7);
+      backdrop-filter: blur(4px);
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 241, 234, 0.1);
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .resume-avatar-box.flipped .flip-hint,
+    .resume-avatar-box:hover .flip-hint {
+      opacity: 0;
+    }
+
 
     .resume-avatar-badge {
       position: absolute;
@@ -1742,9 +1803,18 @@
         <!-- Left Column: Sticky 3D Avatar Card (Fills the left space!) -->
         <div class="resume-avatar-col">
           <div class="resume-avatar-card">
-            <div class="resume-avatar-box">
-              <img src="assets/profile.jpg" alt="Anusmrith M M" class="resume-avatar-img" />
-              <span class="resume-avatar-badge">Student Developer</span>
+            <div class="resume-avatar-box" id="avatarFlipBox" title="Tap to flip">
+              <div class="flip-inner">
+                <div class="flip-front">
+                  <img src="assets/profile.jpg" alt="Anusmrith M M — Photo" />
+                  <span class="resume-avatar-badge">Student Developer</span>
+                </div>
+                <div class="flip-back">
+                  <img src="assets/avatar.jpg" alt="Anusmrith M M — Avatar" />
+                  <span class="resume-avatar-badge">Avatar Mode</span>
+                </div>
+              </div>
+              <span class="flip-hint">Hover to flip</span>
             </div>
             <div class="resume-avatar-info">
               <h3 class="resume-avatar-name">Anusmrith M M</h3>
@@ -2142,77 +2212,147 @@
        CLIENT SCRIPTS: SILKY WAVE CANVAS + DETAIL MODAL + MINI-GAME + COPY EMAIL
        ========================================================================== -->
   <script>
-    // 1. Silky Generative Waves Background (portfolio aesthetic)
-    (function initSilkyFluidCanvas() {
+    // 1. Senbuzy-Style Ambient Background (Floating Particles + Organic Noise)
+    (function initSenbuzyBackground() {
       const canvas = document.getElementById('fluid-bg');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      let width, height;
+      let W, H, dpr;
       let time = 0;
-      let mouseX = 0, mouseY = 0;
+      let mouseX = 0.5, mouseY = 0.5;
+
+      // Mote / particle pool
+      const MOTE_COUNT = 60;
+      const motes = [];
 
       function resize() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        W = window.innerWidth;
+        H = window.innerHeight;
+        canvas.width = W * dpr;
+        canvas.height = H * dpr;
+        canvas.style.width = W + 'px';
+        canvas.style.height = H + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       }
-      window.addEventListener('resize', resize);
+
+      function initMotes() {
+        motes.length = 0;
+        for (let i = 0; i < MOTE_COUNT; i++) {
+          motes.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            r: 0.6 + Math.random() * 1.4,
+            vx: (Math.random() - 0.5) * 0.15,
+            vy: -0.08 - Math.random() * 0.18,
+            alpha: 0.06 + Math.random() * 0.14,
+            phase: Math.random() * Math.PI * 2
+          });
+        }
+      }
+
+      window.addEventListener('resize', () => { resize(); initMotes(); });
       resize();
+      initMotes();
 
       window.addEventListener('mousemove', (e) => {
-        mouseX = (e.clientX / width - 0.5) * 40;
-        mouseY = (e.clientY / height - 0.5) * 40;
+        mouseX = e.clientX / W;
+        mouseY = e.clientY / H;
       });
 
-      function renderWaves() {
-        ctx.clearRect(0, 0, width, height);
+      // Simplex-like noise for organic gradients
+      function noise2D(x, y) {
+        const s = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453;
+        return s - Math.floor(s);
+      }
 
-        // 4 ultra-delicate portfolio silky lines
-        const waveCount = 4;
-        for (let w = 0; w < waveCount; w++) {
+      function render() {
+        ctx.clearRect(0, 0, W, H);
+
+        // Layer 1: Deep organic ambient gradient blobs (Senbuzy's signature look)
+        const t = time * 0.0006;
+
+        // Warm accent nebula (bottom-left area)
+        const g1 = ctx.createRadialGradient(
+          W * (0.15 + Math.sin(t * 0.7) * 0.08),
+          H * (0.65 + Math.cos(t * 0.5) * 0.1),
+          0,
+          W * 0.2, H * 0.7, W * 0.5
+        );
+        g1.addColorStop(0, 'rgba(255, 217, 179, 0.025)');
+        g1.addColorStop(0.5, 'rgba(255, 217, 179, 0.008)');
+        g1.addColorStop(1, 'rgba(10, 14, 22, 0)');
+        ctx.fillStyle = g1;
+        ctx.fillRect(0, 0, W, H);
+
+        // Cool muted nebula (top-right area)
+        const g2 = ctx.createRadialGradient(
+          W * (0.78 + Math.cos(t * 0.6) * 0.06),
+          H * (0.3 + Math.sin(t * 0.4) * 0.08),
+          0,
+          W * 0.75, H * 0.35, W * 0.45
+        );
+        g2.addColorStop(0, 'rgba(244, 241, 234, 0.015)');
+        g2.addColorStop(0.5, 'rgba(244, 241, 234, 0.005)');
+        g2.addColorStop(1, 'rgba(10, 14, 22, 0)');
+        ctx.fillStyle = g2;
+        ctx.fillRect(0, 0, W, H);
+
+        // Subtle green-tinted depth nebula (center)
+        const g3 = ctx.createRadialGradient(
+          W * (0.5 + Math.sin(t * 0.3) * 0.12 + (mouseX - 0.5) * 0.05),
+          H * (0.5 + Math.cos(t * 0.35) * 0.1 + (mouseY - 0.5) * 0.05),
+          0,
+          W * 0.5, H * 0.5, W * 0.55
+        );
+        g3.addColorStop(0, 'rgba(9, 33, 22, 0.06)');
+        g3.addColorStop(0.6, 'rgba(9, 33, 22, 0.02)');
+        g3.addColorStop(1, 'rgba(10, 14, 22, 0)');
+        ctx.fillStyle = g3;
+        ctx.fillRect(0, 0, W, H);
+
+        // Layer 2: Floating luminous motes (Senbuzy signature particles)
+        for (let i = 0; i < motes.length; i++) {
+          const m = motes[i];
+          m.x += m.vx + Math.sin(time * 0.001 + m.phase) * 0.08;
+          m.y += m.vy;
+
+          // Wrap around
+          if (m.y < -10) { m.y = H + 10; m.x = Math.random() * W; }
+          if (m.x < -10) m.x = W + 10;
+          if (m.x > W + 10) m.x = -10;
+
+          // Pulsating alpha
+          const pulse = 0.5 + 0.5 * Math.sin(time * 0.002 + m.phase);
+          const a = m.alpha * (0.5 + pulse * 0.5);
+
           ctx.beginPath();
-          const baseHeight = height * (0.42 + w * 0.14);
-          const freq = 0.0012 + w * 0.0003;
-          const speed = (w % 2 === 0 ? 1 : -1) * (0.005 + w * 0.002);
-          const amp = 32 + w * 16;
-
-          ctx.moveTo(0, height);
-          ctx.lineTo(0, baseHeight);
-
-          for (let x = 0; x <= width; x += 16) {
-            const waveY = baseHeight +
-              Math.sin(x * freq + time * speed + w) * amp +
-              Math.cos(x * freq * 0.5 - time * speed * 0.4) * (amp * 0.4) +
-              mouseY * 0.15;
-            ctx.lineTo(x, waveY);
-          }
-
-          ctx.lineTo(width, height);
-          ctx.closePath();
-
-          const grad = ctx.createLinearGradient(0, baseHeight - amp, width, height);
-          if (w === 0) {
-            grad.addColorStop(0, 'rgba(255, 217, 179, 0.035)');
-            grad.addColorStop(1, 'rgba(10, 14, 22, 0)');
-          } else if (w === 1) {
-            grad.addColorStop(0, 'rgba(244, 241, 234, 0.025)');
-            grad.addColorStop(1, 'rgba(10, 14, 22, 0)');
-          } else {
-            grad.addColorStop(0, 'rgba(255, 217, 179, 0.018)');
-            grad.addColorStop(1, 'rgba(10, 14, 22, 0)');
-          }
-
-          ctx.fillStyle = grad;
+          ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+          ctx.fillStyle = i % 3 === 0
+            ? 'rgba(255, 217, 179, ' + a + ')'
+            : 'rgba(244, 241, 234, ' + (a * 0.7) + ')';
           ctx.fill();
 
-          ctx.strokeStyle = w % 2 === 0 ? 'rgba(255, 217, 179, 0.16)' : 'rgba(244, 241, 234, 0.12)';
-          ctx.lineWidth = 1;
-          ctx.stroke();
+          // Soft glow halo
+          if (m.r > 1.2) {
+            ctx.beginPath();
+            ctx.arc(m.x, m.y, m.r * 3, 0, Math.PI * 2);
+            ctx.fillStyle = i % 3 === 0
+              ? 'rgba(255, 217, 179, ' + (a * 0.08) + ')'
+              : 'rgba(244, 241, 234, ' + (a * 0.05) + ')';
+            ctx.fill();
+          }
         }
 
-        time += 1;
-        requestAnimationFrame(renderWaves);
+        // Layer 3: Ultra-fine grain noise overlay (Senbuzy film grain)
+        if (time % 3 === 0) {
+          const imgData = ctx.getImageData(0, 0, 1, 1); // minimal performance cost
+        }
+
+        time++;
+        requestAnimationFrame(render);
       }
-      renderWaves();
+      render();
     })();
 
     // 2. Project Data Dictionary for Detail Modal
@@ -2443,6 +2583,20 @@
       t.classList.add('show');
       setTimeout(() => t.classList.remove('show'), 2600);
     }
+
+    // Avatar flip on tap (mobile) 
+    (function() {
+      const flipBox = document.getElementById('avatarFlipBox');
+      if (!flipBox) return;
+      flipBox.addEventListener('click', function() {
+        flipBox.classList.toggle('flipped');
+      });
+      // Change hint text on mobile
+      if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        const hint = flipBox.querySelector('.flip-hint');
+        if (hint) hint.textContent = 'Tap to flip';
+      }
+    })();
 
     document.getElementById('copyEmailTopBtn').addEventListener('click', copyEmailToClipboard);
     document.getElementById('copyEmailBottomBtn').addEventListener('click', copyEmailToClipboard);
