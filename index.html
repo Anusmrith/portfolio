@@ -135,30 +135,19 @@
       pointer-events: none;
     }
 
-    /* Interactive Cursor Hitbox over Avatar Face & Body */
+    /* Interactive Hitbox over Avatar Face & Upper Area (Move cursor here to animate expression) */
     .canva-face-hitbox {
       position: absolute;
-      left: 42%;
-      top: 22%;
-      width: 16%;
-      height: 32%;
+      left: 38%;
+      top: 18%;
+      width: 24%;
+      height: 38%;
       z-index: 60;
       cursor: pointer;
       pointer-events: auto;
     }
 
-    .canva-body-hitbox {
-      position: absolute;
-      left: 36%;
-      top: 54%;
-      width: 28%;
-      height: 46%;
-      z-index: 60;
-      cursor: pointer;
-      pointer-events: auto;
-    }
-
-    /* Comic Speech Bubble Overlay — exactly matching Canva speech bubbles */
+    /* Comic Speech Bubble Overlays — Perfectly centered on the white belly of each speech bubble */
     .canva-bubble-overlay {
       position: absolute;
       z-index: 70;
@@ -167,47 +156,51 @@
       justify-content: center;
       pointer-events: auto;
       cursor: default;
+      transform: translate(-50%, -50%);
     }
 
-    /* Slide 1 Bubble: Resume */
+    /* Slide 1 Bubble: Resume (True Belly Center: cx=34.30%, cy=65.76%) */
     .bubble-pos-1 {
-      left: 24.1%;
-      top: 59.7%;
-      width: 20.3%;
-      height: 9.4%;
+      left: 34.30%;
+      top: 65.76%;
+      width: 17%;
+      height: 5.6%;
     }
 
-    /* Slide 2 Bubble: Works */
+    /* Slide 2 Bubble: Works (True Belly Center: cx=67.89%, cy=69.60%) */
     .bubble-pos-2 {
-      left: 57.7%;
-      top: 66.3%;
-      width: 20.4%;
-      height: 9.4%;
+      left: 67.89%;
+      top: 69.60%;
+      width: 17%;
+      height: 5.6%;
     }
 
-    /* Slide 3 Bubble: Contact */
+    /* Slide 3 Bubble: Contact (True Belly Center: cx=31.28%, cy=83.73%) */
     .bubble-pos-3 {
-      left: 21.1%;
-      top: 77.6%;
-      width: 20.4%;
-      height: 9.5%;
+      left: 31.28%;
+      top: 83.73%;
+      width: 17.5%;
+      height: 5.6%;
     }
 
-    /* Comic Action Buttons inside Speech Bubbles */
+    /* Comic Action Buttons (Resume / Works) - Dead Center, Clean Comic Typography */
     .comic-btn-action {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
       color: #1a1a1a;
       text-decoration: none;
       font-family: 'Chiron GoRound TC', -apple-system, sans-serif;
-      font-size: clamp(24px, 2.5vw, 36px);
+      font-size: clamp(18px, 1.95vw, 29px);
       font-weight: 800;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
       background: transparent;
       border: none;
       cursor: pointer;
-      padding: 4px 12px;
+      padding: 0;
+      margin: 0;
+      line-height: 1;
+      text-align: center;
       transition: transform 0.18s ease;
       width: 100%;
       height: 100%;
@@ -217,29 +210,32 @@
       transform: scale(1.06);
     }
 
+    /* Contact Details inside Slide 3 Bubble: Scaled down to fit 100% inside the box */
     .comic-contact-group {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      width: 95%;
+      gap: clamp(4px, 0.4vw, 8px);
+      width: 100%;
       height: 100%;
+      padding: 0 4px;
     }
 
     .comic-contact-item {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: rgba(0, 0, 0, 0.05);
-      border: 1.5px solid #1a1a1a;
+      background: rgba(0, 0, 0, 0.04);
+      border: 1.2px solid #1a1a1a;
       border-radius: 999px;
-      padding: 5px 12px;
+      padding: clamp(2px, 0.3vw, 5px) clamp(6px, 0.55vw, 10px);
       color: #1a1a1a;
       text-decoration: none;
       font-family: 'Chiron GoRound TC', -apple-system, sans-serif;
-      font-size: clamp(12px, 1.1vw, 15px);
+      font-size: clamp(8.5px, 0.78vw, 12px);
       font-weight: 700;
       cursor: pointer;
+      white-space: nowrap;
       transition: all 0.18s ease;
       line-height: 1;
     }
@@ -259,11 +255,11 @@
         font-size: 20px;
       }
       .comic-contact-group {
-        gap: 5px;
+        gap: 3px;
       }
       .comic-contact-item {
-        font-size: 11px;
-        padding: 4px 8px;
+        font-size: 8px;
+        padding: 2px 5px;
       }
     }
   </style>
@@ -2701,9 +2697,8 @@
           </div>
         </div>
 
-        <!-- Interactive Hitbox over Avatar Face & Body (Move cursor here to change expression) -->
-        <div class="canva-face-hitbox" id="canvaFaceHitbox" title="Move cursor over face to change expression"></div>
-        <div class="canva-body-hitbox" id="canvaBodyHitbox" title="Move cursor over avatar to change expression"></div>
+        <!-- Interactive Hitbox over Avatar Face & Upper Area (Move cursor here to animate expression) -->
+        <div class="canva-face-hitbox" id="canvaFaceHitbox" title="Move cursor around face to change expression"></div>
       </div>
     </div>
   </div>
@@ -3100,7 +3095,6 @@
       // Modal elements
       const closeBtn = document.getElementById('closeCanvaModalBtn');
       const faceHitbox = document.getElementById('canvaFaceHitbox');
-      const bodyHitbox = document.getElementById('canvaBodyHitbox');
 
       // Slides
       const slide1 = document.getElementById('canvaSlide1');
@@ -3227,30 +3221,52 @@
         }
       });
 
-      // 5. CORE FEATURE: MOVING CURSOR TO THE FACE OF THE AVATAR CHANGES THE EXPRESSION!
-      // Tracks cursor position across the face:
-      // Left side -> Stage 1 (Calm / Resume)
-      // Center -> Stage 2 (Smile / Works)
-      // Right side -> Stage 3 (Joyful / Contact)
-      function handleHitboxMove(e, hitbox) {
-        const rect = hitbox.getBoundingClientRect();
-        const relX = (e.clientX - rect.left) / rect.width;
-        let targetStage = 1;
-        if (relX < 0.35) {
-          targetStage = 1;
-        } else if (relX < 0.68) {
-          targetStage = 2;
-        } else {
-          targetStage = 3;
-        }
-        if (targetStage !== currentStage) {
-          setCanvaStage(targetStage);
-        }
-      }
+      // 5. ANIMATION WHEN MOUSE IS OVER / AROUND THE FACE OF THE AVATAR
+      // Tracks cursor motion and horizontal position over the face:
+      // Both positional zones (left/center/right) AND motion distance trigger smooth expression changes!
+      let lastFaceX = null;
+      let lastFaceY = null;
+      let accumDistance = 0;
+      const MOVE_THRESHOLD = 32; // Every 32px of cursor movement around face advances expression
 
       if (faceHitbox) {
+        faceHitbox.addEventListener('mouseenter', function(e) {
+          lastFaceX = e.clientX;
+          lastFaceY = e.clientY;
+          accumDistance = 0;
+        });
+
         faceHitbox.addEventListener('mousemove', function(e) {
-          handleHitboxMove(e, faceHitbox);
+          const rect = faceHitbox.getBoundingClientRect();
+          const relX = (e.clientX - rect.left) / rect.width;
+
+          // 1. Position-based responsiveness across horizontal thirds of face
+          let targetStage = 1;
+          if (relX < 0.36) {
+            targetStage = 1;
+          } else if (relX < 0.68) {
+            targetStage = 2;
+          } else {
+            targetStage = 3;
+          }
+
+          if (targetStage !== currentStage) {
+            setCanvaStage(targetStage);
+          }
+
+          // 2. Motion-based responsiveness: moving cursor around the face also dynamically animates expressions!
+          if (lastFaceX !== null && lastFaceY !== null) {
+            const dx = e.clientX - lastFaceX;
+            const dy = e.clientY - lastFaceY;
+            accumDistance += Math.sqrt(dx * dx + dy * dy);
+            if (accumDistance >= MOVE_THRESHOLD) {
+              accumDistance = 0;
+              const next = currentStage === 3 ? 1 : currentStage + 1;
+              setCanvaStage(next);
+            }
+          }
+          lastFaceX = e.clientX;
+          lastFaceY = e.clientY;
         });
 
         faceHitbox.addEventListener('click', function(e) {
@@ -3259,33 +3275,43 @@
           setCanvaStage(next);
         });
 
-        // Touch support for mobile: moving finger across face changes expression
+        // Touch support for mobile: moving finger around face changes expression
+        let touchLastX = null;
+        let touchLastY = null;
+        faceHitbox.addEventListener('touchstart', function(e) {
+          if (e.touches && e.touches[0]) {
+            touchLastX = e.touches[0].clientX;
+            touchLastY = e.touches[0].clientY;
+          }
+        }, { passive: true });
+
         faceHitbox.addEventListener('touchmove', function(e) {
-          if (e.touches && e.touches.length > 0) {
+          if (e.touches && e.touches[0]) {
             const touch = e.touches[0];
             const rect = faceHitbox.getBoundingClientRect();
             const relX = (touch.clientX - rect.left) / rect.width;
-            let targetStage = relX < 0.35 ? 1 : (relX < 0.68 ? 2 : 3);
+            let targetStage = relX < 0.36 ? 1 : (relX < 0.68 ? 2 : 3);
             if (targetStage !== currentStage) {
               setCanvaStage(targetStage);
+            }
+            if (touchLastX !== null && touchLastY !== null) {
+              const dx = touch.clientX - touchLastX;
+              const dy = touch.clientY - touchLastY;
+              if (Math.sqrt(dx * dx + dy * dy) > 28) {
+                touchLastX = touch.clientX;
+                touchLastY = touch.clientY;
+                const next = currentStage === 3 ? 1 : currentStage + 1;
+                setCanvaStage(next);
+              }
+            } else {
+              touchLastX = touch.clientX;
+              touchLastY = touch.clientY;
             }
           }
         }, { passive: true });
       }
 
-      if (bodyHitbox) {
-        bodyHitbox.addEventListener('mousemove', function(e) {
-          handleHitboxMove(e, bodyHitbox);
-        });
-
-        bodyHitbox.addEventListener('click', function(e) {
-          e.stopPropagation();
-          const next = currentStage === 3 ? 1 : currentStage + 1;
-          setCanvaStage(next);
-        });
-      }
-
-      // CRITICAL: When cursor moves OUTSIDE the avatar face/body to click speech bubble buttons,
+      // CRITICAL: When cursor moves OUTSIDE the avatar face to click speech bubble buttons,
       // the expression STAYS on the current stage and does NOT change!
       const bubbleOverlays = modal.querySelectorAll('.canva-bubble-overlay');
       bubbleOverlays.forEach(function(b) {
