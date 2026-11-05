@@ -114,8 +114,8 @@
       transform: scale(1.08) rotate(90deg);
     }
 
-    /* Explore / Look for More Pill directly under the close button */
-    .canva-explore-pill {
+    /* Small text directly under the X button: Swipe down to view more portfolio */
+    .canva-swipe-down-hint {
       position: absolute;
       top: 68px;
       right: 24px;
@@ -144,7 +144,7 @@
       animation: canvaPillPulse 2.4s ease-in-out infinite;
     }
 
-    .canva-explore-pill:hover {
+    .canva-swipe-down-hint:hover {
       background: rgba(255, 255, 255, 0.95);
       color: #0a0e16;
       border-color: #ffffff;
@@ -152,13 +152,13 @@
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     }
 
-    .canva-explore-pill svg {
+    .canva-swipe-down-hint svg {
       width: 12px;
       height: 12px;
       transition: transform 0.2s ease;
     }
 
-    .canva-explore-pill:hover svg {
+    .canva-swipe-down-hint:hover svg {
       transform: translateY(2px);
     }
 
@@ -436,7 +436,7 @@
         z-index: 999;
       }
 
-      .canva-explore-pill {
+      .canva-swipe-down-hint {
         top: calc(max(16px, env(safe-area-inset-top, 16px)) + 46px);
         right: max(16px, env(safe-area-inset-right, 16px));
         padding: 5px 11px;
@@ -507,7 +507,7 @@
       .canva-slide-frame {
         transform: scale(1.22);
       }
-      .canva-explore-pill {
+      .canva-swipe-down-hint {
         font-size: 9.5px;
         padding: 4px 9px;
       }
@@ -2968,21 +2968,21 @@
     <!-- Minimal discreet close button -->
     <button type="button" class="canva-close-floating" id="closeCanvaModalBtn" aria-label="Close fullscreen view">&times;</button>
 
-    <!-- Explore / Look for More Pill directly under the close button -->
-    <button type="button" class="canva-explore-pill" id="canvaExplorePill" aria-label="Explore About Section">
-      <span>About &bull; Look for more</span>
+    <!-- Small text directly under the X button indicating portfolio below -->
+    <button type="button" class="canva-swipe-down-hint" id="canvaSwipeDownHint" aria-label="Swipe down to view more portfolio">
+      <span>Swipe down to view more portfolio</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <line x1="12" y1="5" x2="12" y2="19"></line>
         <polyline points="19 12 12 19 5 12"></polyline>
       </svg>
     </button>
 
-    <!-- Floating Swipe Up indicator for mobile visitors -->
-    <button type="button" class="canva-swipe-bottom" id="canvaSwipeBottom" aria-label="Swipe up to explore About section">
-      <span>Swipe up for About</span>
+    <!-- Floating Swipe Down indicator for mobile visitors -->
+    <button type="button" class="canva-swipe-bottom" id="canvaSwipeBottom" aria-label="Swipe down to view portfolio">
+      <span>Swipe down to view portfolio</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="12" y1="19" x2="12" y2="5"></line>
-        <polyline points="5 12 12 5 19 12"></polyline>
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <polyline points="19 12 12 19 5 12"></polyline>
       </svg>
     </button>
 
@@ -3425,7 +3425,7 @@
 
       // Modal elements
       const closeBtn = document.getElementById('closeCanvaModalBtn');
-      const explorePill = document.getElementById('canvaExplorePill');
+      const swipeDownHint = document.getElementById('canvaSwipeDownHint');
       const swipeBottom = document.getElementById('canvaSwipeBottom');
       const faceHitbox = document.getElementById('canvaFaceHitbox');
 
@@ -3546,9 +3546,9 @@
           closeModal('home');
         });
       }
-      // Explore About Pill (under close button) & Bottom Swipe Up Hint
-      if (explorePill) {
-        explorePill.addEventListener('click', function(e) {
+      // Small text under X button & Bottom Swipe Down Hint
+      if (swipeDownHint) {
+        swipeDownHint.addEventListener('click', function(e) {
           e.preventDefault();
           e.stopPropagation();
           closeModal('home');
@@ -3579,7 +3579,7 @@
       // Clicking on the character OR clicking outside the character on the background advances 1 -> 2 -> 3 -> 1
       modal.addEventListener('click', function(e) {
         // If clicked on close button or inside the comic speech bubble buttons, let them handle it!
-        if (e.target && (e.target.closest('#closeCanvaModalBtn') || e.target.closest('#canvaExplorePill') || e.target.closest('#canvaSwipeBottom') || e.target.closest('.canva-bubble-overlay'))) {
+        if (e.target && (e.target.closest('#closeCanvaModalBtn') || e.target.closest('#canvaSwipeDownHint') || e.target.closest('#canvaSwipeBottom') || e.target.closest('.canva-bubble-overlay'))) {
           return;
         }
         nextStage();
@@ -3682,7 +3682,8 @@
         if (e.changedTouches && e.changedTouches[0]) {
           const touchEndY = e.changedTouches[0].clientY;
           const diffY = touchEndY - touchStartY;
-          if (diffY < -50) {
+          // Both swipe down and swipe up seamlessly reveal the portfolio below
+          if (Math.abs(diffY) > 38) {
             closeModal('home');
           }
         }
