@@ -23,7 +23,7 @@
     }
 
     /* ==========================================================================
-       CANVA WHOLE-WINDOW INTERACTIVE AVATAR SHOWCASE (Fullscreen Pop-up)
+       CANVA WHOLE-WINDOW INTERACTIVE AVATAR SHOWCASE (Fullscreen Opening & Modal)
        ========================================================================== */
     .canva-modal {
       position: fixed;
@@ -35,10 +35,8 @@
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transform: scale(0.96);
-      transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-                  visibility 0.32s,
+      transition: opacity 0.38s ease,
+                  visibility 0.38s ease,
                   background 0.45s ease;
       overflow: hidden;
       user-select: none;
@@ -49,7 +47,6 @@
       opacity: 1 !important;
       visibility: visible !important;
       pointer-events: auto !important;
-      transform: scale(1) !important;
     }
 
     /* Stage 1: Warm Mocha with Isometric Cubes & Halftone Shield */
@@ -84,7 +81,7 @@
       background-position: 0 0, 0 24px, 24px -24px, -24px 0px;
     }
 
-    /* Decorative Shapes — REMOVED (user wants clean fade-only transitions) */
+    /* Clean fade-only transitions — decorative shapes removed */
 
     /* Modal Top Header */
     .canva-modal-header {
@@ -103,18 +100,19 @@
       display: inline-flex;
       align-items: center;
       gap: 9px;
-      background: rgba(14, 18, 26, 0.75);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(14, 18, 26, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 999px;
-      padding: 6px 16px;
+      padding: 7px 18px;
       color: #f4f1ea;
       font-family: 'Chiron GoRound TC', -apple-system, sans-serif;
       font-size: 11.5px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      font-weight: 500;
+      font-weight: 600;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
     }
 
     .canva-stage-indicator .stage-dot {
@@ -130,27 +128,62 @@
     .canva-modal.stage-2 .stage-dot { background: #c1ff72; box-shadow: 0 0 10px #c1ff72; }
     .canva-modal.stage-3 .stage-dot { background: #ff3131; box-shadow: 0 0 10px #ff3131; }
 
+    .canva-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .canva-skip-btn {
+      background: rgba(14, 18, 26, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #f4f1ea;
+      font-family: 'Chiron GoRound TC', -apple-system, sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 7px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    }
+
+    .canva-skip-btn:hover {
+      background: #ffffff;
+      color: #0a0e16;
+      border-color: #ffffff;
+      transform: translateY(-1px);
+    }
+
     .canva-modal-close {
-      background: rgba(14, 18, 26, 0.75);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(14, 18, 26, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
       color: #fff;
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
+      font-size: 20px;
       line-height: 1;
       cursor: pointer;
       transition: all 0.25s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
     }
 
     .canva-modal-close:hover {
-      background: rgba(14, 18, 26, 0.98);
-      transform: scale(1.08) rotate(90deg);
+      background: rgba(255, 255, 255, 0.95);
+      color: #0a0e16;
+      transform: scale(1.06) rotate(90deg);
       border-color: rgba(255, 255, 255, 0.45);
     }
 
@@ -168,24 +201,53 @@
     /* Giant Handwritten Brush Signature in Background */
     .canva-bg-signature {
       position: absolute;
-      top: 25%;
+      top: 24%;
       left: 50%;
       transform: translate(-50%, -50%) rotate(-4deg);
       font-family: 'BiroScriptPlus', cursive, sans-serif;
-      font-size: clamp(80px, 15vw, 220px);
+      font-size: clamp(85px, 16vw, 230px);
       font-weight: 400;
       line-height: 1;
       color: #ffbd59;
       white-space: nowrap;
       pointer-events: none;
       z-index: 10;
-      transition: color 0.4s ease, transform 0.4s ease;
-      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 60px rgba(0, 0, 0, 0.3);
+      transition: color 0.4s ease;
+      text-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.85),
+        0 0 50px rgba(0, 0, 0, 0.65),
+        -1.5px -1.5px 0 rgba(0, 0, 0, 0.6),
+        1.5px 1.5px 0 rgba(0, 0, 0, 0.6);
+      letter-spacing: 0.02em;
     }
 
     .canva-modal.stage-1 .canva-bg-signature { color: #ffbd59; }
     .canva-modal.stage-2 .canva-bg-signature { color: #c1ff72; }
     .canva-modal.stage-3 .canva-bg-signature { color: #ff3131; }
+
+    /* Hint Pill over Avatar */
+    .canva-avatar-hint {
+      position: absolute;
+      top: 13%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      background: rgba(14, 18, 26, 0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: rgba(244, 241, 234, 0.88);
+      font-family: 'Chiron GoRound TC', -apple-system, sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      padding: 5px 14px;
+      border-radius: 999px;
+      pointer-events: none;
+      opacity: 0.88;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+      transition: opacity 0.3s ease;
+    }
 
     /* 3D Avatar Center Cutout */
     .canva-avatar-holder {
@@ -375,19 +437,20 @@
     /* Bottom Navigation Bar */
     .canva-modal-bottom {
       position: absolute;
-      bottom: 22px;
+      bottom: 24px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 100;
       display: flex;
       align-items: center;
-      gap: 16px;
-      background: rgba(14, 18, 26, 0.75);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      gap: 12px;
+      background: rgba(14, 18, 26, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 999px;
       padding: 6px 18px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
     }
 
     .canva-nav-arrow {
@@ -397,11 +460,15 @@
       font-size: 16px;
       cursor: pointer;
       padding: 4px 8px;
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .canva-nav-arrow:hover {
       transform: scale(1.2);
+      color: var(--accent);
     }
 
     .canva-stage-tabs {
@@ -410,14 +477,14 @@
     }
 
     .canva-tab-btn {
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.1);
       border: 1px solid transparent;
       color: rgba(255, 255, 255, 0.75);
       font-family: 'Chiron GoRound TC', -apple-system, sans-serif;
       font-size: 11.5px;
       font-weight: 600;
       letter-spacing: 0.05em;
-      padding: 4px 14px;
+      padding: 5px 14px;
       border-radius: 999px;
       cursor: pointer;
       transition: all 0.25s ease;
@@ -432,18 +499,100 @@
       background: #fff;
       color: #1a1a1a;
       border-color: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .canva-bottom-sep {
+      width: 1px;
+      height: 18px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .canva-explore-pill {
+      background: rgba(255, 217, 179, 0.15);
+      border: 1px solid rgba(255, 217, 179, 0.35);
+      color: #ffd9b3;
+      font-family: 'Chiron GoRound TC', -apple-system, sans-serif;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 5px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .canva-explore-pill:hover {
+      background: #ffd9b3;
+      color: #0a0e16;
+      border-color: #ffd9b3;
+      transform: translateY(-1px);
+    }
+
+    .canva-explore-pill .arrow-bounce {
+      display: inline-block;
+      animation: arrowBounce 1.8s infinite ease-in-out;
+    }
+
+    @keyframes arrowBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(3px); }
+    }
+
+    .pill-btn.avatar-pill {
+      background: rgba(255, 217, 179, 0.12);
+      border-color: rgba(255, 217, 179, 0.35);
+      color: var(--accent);
+      cursor: pointer;
+    }
+
+    .pill-btn.avatar-pill:hover {
+      background: var(--accent);
+      color: #0a0e16;
     }
 
     /* Mobile Responsive for Canva Modal */
     @media (max-width: 768px) {
+      .canva-modal-header {
+        top: 12px;
+        left: 12px;
+        right: 12px;
+      }
+
+      .canva-stage-indicator {
+        font-size: 10px;
+        padding: 5px 12px;
+      }
+
+      .canva-skip-btn {
+        font-size: 11px;
+        padding: 5px 12px;
+      }
+
+      .canva-modal-close {
+        width: 34px;
+        height: 34px;
+        font-size: 18px;
+      }
+
       .canva-bg-signature {
-        top: 20%;
-        font-size: clamp(60px, 16vw, 110px);
+        top: 18%;
+        font-size: clamp(55px, 15vw, 100px);
       }
 
       .canva-avatar-holder {
-        height: 70%;
-        width: 90vw;
+        height: 68%;
+        width: 92vw;
+      }
+
+      .canva-avatar-hint {
+        top: 14%;
+        font-size: 9.5px;
+        padding: 3px 10px;
       }
 
       .canva-bubble-stage1,
@@ -475,12 +624,17 @@
       }
 
       .canva-modal-bottom {
-        bottom: 14px;
-        padding: 4px 12px;
-        gap: 8px;
+        bottom: 12px;
+        padding: 5px 12px;
+        gap: 6px;
       }
 
       .canva-tab-btn {
+        font-size: 10px;
+        padding: 3px 8px;
+      }
+
+      .canva-explore-pill {
         font-size: 10px;
         padding: 3px 9px;
       }
@@ -2395,6 +2549,7 @@
           d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
       </svg>
     </a>
+    <button type="button" class="pill-btn avatar-pill" id="openAvatarTopBtn" title="Interactive 3D Avatar Showcase">Avatar &#10022;</button>
     <a href="#resume" class="pill-btn">Resume</a>
     <a href="#works" class="pill-btn">Works</a>
     <button class="pill-btn accent" id="copyEmailTopBtn">Contact</button>
@@ -2881,20 +3036,28 @@
         <span class="stage-dot" id="canvaStageDot"></span>
         <span id="canvaStageText">Page 1 / 3 &bull; Resume</span>
       </div>
-      <button type="button" class="canva-modal-close" id="closeCanvaModalBtn" aria-label="Close fullscreen view" title="Close (Esc)">
-        &times;
-      </button>
+      <div class="canva-header-actions">
+        <button type="button" class="canva-skip-btn" id="canvaEnterPortfolioTopBtn" title="Enter Portfolio">
+          <span>Enter Portfolio</span> &darr;
+        </button>
+        <button type="button" class="canva-modal-close" id="closeCanvaModalBtn" aria-label="Close fullscreen view" title="Close (Esc)">
+          &times;
+        </button>
+      </div>
     </div>
 
     <!-- Viewport Stage -->
     <div class="canva-stage-viewport" id="canvaStageViewport">
-      <!-- Decorative shapes removed — clean fade transitions only -->
+      <!-- Clean fade-only transitions — decorative shapes removed -->
+
+      <!-- Hint Pill over Avatar -->
+      <div class="canva-avatar-hint" id="canvaAvatarHint" aria-hidden="true">&#128070; Click avatar to change expression</div>
 
       <!-- Giant Calligraphy Signature in Background -->
       <h1 class="canva-bg-signature" id="canvaBgSignature" aria-hidden="true">Anusmrith</h1>
 
       <!-- 3D Avatar Cutouts (Transparent Renders) -->
-      <div class="canva-avatar-holder" id="canvaAvatarHolder" title="Click face or move mouse to change expressions">
+      <div class="canva-avatar-holder" id="canvaAvatarHolder" title="Click avatar to change expression">
         <picture>
           <source srcset="assets/avatar_stage1_calm.webp" type="image/webp" />
           <img src="assets/avatar_stage1_calm.png" class="canva-avatar-img stage-img-1 is-active" alt="Anusmrith 3D Avatar — Calm" />
@@ -2940,19 +3103,26 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
             <span id="canvaEmailLabel">Email</span>
           </button>
+          <button type="button" class="comic-contact-item comic-about-btn" id="canvaBtnAbout" title="Read About Anusmrith">
+            <span>About &darr;</span>
+          </button>
         </div>
       </div>
     </div>
 
     <!-- Bottom Navigation Tabs & Controls -->
     <div class="canva-modal-bottom">
-      <button type="button" class="canva-nav-arrow" id="canvaNavPrev" aria-label="Previous Page">&larr;</button>
+      <button type="button" class="canva-nav-arrow" id="canvaNavPrev" aria-label="Previous Page" title="Previous expression (&larr;)">&larr;</button>
       <div class="canva-stage-tabs">
         <button type="button" class="canva-tab-btn is-active" data-stage="1">1. Resume</button>
         <button type="button" class="canva-tab-btn" data-stage="2">2. Works</button>
         <button type="button" class="canva-tab-btn" data-stage="3">3. Contact</button>
       </div>
-      <button type="button" class="canva-nav-arrow" id="canvaNavNext" aria-label="Next Page">&rarr;</button>
+      <button type="button" class="canva-nav-arrow" id="canvaNavNext" aria-label="Next Page" title="Next expression (&rarr;)">&rarr;</button>
+      <div class="canva-bottom-sep" aria-hidden="true"></div>
+      <button type="button" class="canva-explore-pill" id="canvaScrollPill" title="Explore Portfolio">
+        <span>Explore Portfolio</span> <span class="arrow-bounce">&darr;</span>
+      </button>
     </div>
   </div>
 
@@ -3333,7 +3503,7 @@
     }
 
     // ============================================================
-    // Canva Whole-Window Interactive Avatar Showcase
+    // Canva Whole-Window Interactive Avatar Showcase (Idea B)
     // ============================================================
     function initCanvaAvatarShowcase() {
       const modal = document.getElementById('canvaModal');
@@ -3347,10 +3517,12 @@
 
       // Modal elements
       const closeBtn = document.getElementById('closeCanvaModalBtn');
+      const enterPortfolioTopBtn = document.getElementById('canvaEnterPortfolioTopBtn');
+      const scrollPill = document.getElementById('canvaScrollPill');
       const stageDot = document.getElementById('canvaStageDot');
       const stageText = document.getElementById('canvaStageText');
       const avatarHolder = document.getElementById('canvaAvatarHolder');
-      const avatarImgs = avatarHolder ? avatarHolder.querySelectorAll('.canva-avatar-img') : [];
+      const avatarImgs = modal ? modal.querySelectorAll('.canva-avatar-img') : [];
       const bubbles = [
         document.getElementById('canvaBubbleStage1'),
         document.getElementById('canvaBubbleStage2'),
@@ -3360,8 +3532,10 @@
       const btnPrev = document.getElementById('canvaNavPrev');
       const btnNext = document.getElementById('canvaNavNext');
       const btnWorks = document.getElementById('canvaBtnWorks');
+      const btnAbout = document.getElementById('canvaBtnAbout');
       const copyEmailBtn = document.getElementById('canvaCopyEmailBtn');
       const emailLabel = document.getElementById('canvaEmailLabel');
+      const openAvatarTopBtn = document.getElementById('openAvatarTopBtn');
 
       if (!modal) {
         console.error('[CanvaShowcase] Modal element #canvaModal not found in DOM!');
@@ -3376,10 +3550,11 @@
       };
 
       // 1. Set Stage (1: Resume / Calm, 2: Works / Smile, 3: Contact / Laugh)
+      // Pure, gentle fade transitions only — matching user's Canva PDF prototype
       function setCanvaStage(stageNum) {
         currentStage = Math.max(1, Math.min(3, stageNum));
 
-        // Update modal class
+        // Update modal stage class (crossfades background)
         modal.classList.remove('stage-1', 'stage-2', 'stage-3');
         modal.classList.add('stage-' + currentStage);
 
@@ -3388,7 +3563,7 @@
           stageText.textContent = 'Page ' + currentStage + ' / 3 • ' + stageInfo[currentStage].name;
         }
 
-        // Switch active avatar image
+        // Crossfade active avatar image
         avatarImgs.forEach(function(img, idx) {
           if (idx === currentStage - 1) {
             img.classList.add('is-active');
@@ -3397,7 +3572,7 @@
           }
         });
 
-        // Switch active comic speech bubble
+        // Crossfade active comic speech bubble
         bubbles.forEach(function(b, idx) {
           if (!b) return;
           if (idx === currentStage - 1) {
@@ -3417,7 +3592,7 @@
         });
       }
 
-      // 2. Open / Close Modal
+      // 2. Open / Close Modal (Smooth Fade)
       function openModal(initialStage) {
         setCanvaStage(initialStage || 1);
         modal.style.display = 'flex';
@@ -3428,7 +3603,7 @@
         document.body.style.overflow = 'hidden';
       }
 
-      function closeModal() {
+      function closeModal(targetSectionId) {
         modal.classList.remove('is-open');
         modal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
@@ -3436,11 +3611,31 @@
           if (!modal.classList.contains('is-open')) {
             modal.style.display = 'none';
           }
+          if (targetSectionId) {
+            const targetEl = document.getElementById(targetSectionId);
+            if (targetEl) {
+              targetEl.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
         }, 320);
       }
 
-      // 3. Bulletproof Triggers: Clicking the avatar card opens the Canva fullscreen experience!
-      const triggers = [
+      // 3. Idea B: Automatically open avatar showcase on initial page visit!
+      // If the URL has no specific hash or has #avatar, welcome visitor with the full-screen avatar stage
+      if (!window.location.hash || window.location.hash === '#avatar' || window.location.hash === '#') {
+        openModal(1);
+      }
+
+      // Top navigation bar Avatar button
+      if (openAvatarTopBtn) {
+        openAvatarTopBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          openModal(currentStage || 1);
+        });
+      }
+
+      // 4. Triggers from Resume Card: Clicking the avatar card re-opens the Canva fullscreen experience
+      const cardTriggers = [
         flipBox,
         avatarStage,
         flipFrontFace,
@@ -3449,10 +3644,9 @@
         btnModeAvatar
       ];
 
-      triggers.forEach(function(el) {
+      cardTriggers.forEach(function(el) {
         if (!el) return;
         el.addEventListener('click', function(e) {
-          // If clicked specifically on the photo button, switch card to photo mode
           if (e.target && e.target.closest('#btnModePhoto')) {
             if (flipBox) {
               flipBox.classList.remove('mode-avatar', 'flipped');
@@ -3469,61 +3663,57 @@
       });
 
       // Close modal button
-      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+          closeModal('home');
+        });
+      }
 
-      // Close when clicking modal backdrop
+      // Enter portfolio buttons (top button and bottom pill)
+      const enterBtns = [enterPortfolioTopBtn, scrollPill, btnAbout];
+      enterBtns.forEach(function(btn) {
+        if (!btn) return;
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          closeModal('home');
+        });
+      });
+
+      // Close when clicking modal backdrop outside the avatar / bubbles
       modal.addEventListener('click', function(e) {
         if (e.target === modal || e.target.classList.contains('canva-stage-viewport')) {
-          closeModal();
+          closeModal('home');
         }
       });
 
-      // Keyboard navigation (Esc to close, Arrow keys to navigate)
+      // Keyboard navigation (Esc to enter portfolio, Arrow keys to navigate expressions)
       window.addEventListener('keydown', function(e) {
         if (!modal.classList.contains('is-open')) return;
-        if (e.key === 'Escape') closeModal();
-        else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        if (e.key === 'Escape') {
+          closeModal('home');
+        } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
           setCanvaStage(currentStage === 3 ? 1 : currentStage + 1);
         } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
           setCanvaStage(currentStage === 1 ? 3 : currentStage - 1);
         }
       });
 
-      // 4. MOUSE MOVEMENT STRICTLY OVER AVATAR IMAGES ONLY
-      // pointer-events: none on .canva-avatar-holder means mousemove
-      // only fires on the actual <img> pixels, never on transparent
-      // surrounding area. Bubbles are never blocked!
-      avatarImgs.forEach(function(img) {
-        img.addEventListener('mousemove', function(e) {
-          const rect = avatarHolder.getBoundingClientRect();
-          if (rect.width === 0) return;
-          
-          const mouseX = e.clientX - rect.left;
-          const centerX = rect.width / 2;
-          const distFromCenter = mouseX - centerX;
-
-          // Character body width threshold (narrow zone around the body)
-          const bodyHalfWidth = Math.min(130, rect.width * 0.28);
-
-          // If mouse is outside the narrow body zone, freeze expression
-          if (Math.abs(distFromCenter) > bodyHalfWidth) {
-            return;
-          }
-
-          // Inside the body/face:
-          // Left zone (< -35px): Stage 1 (Calm, Resume)
-          // Center zone (-35px to +35px): Stage 2 (Smile, Works)
-          // Right zone (> +35px): Stage 3 (Laugh, Contact)
-          if (distFromCenter < -35) {
-            if (currentStage !== 1) setCanvaStage(1);
-          } else if (distFromCenter > 35) {
-            if (currentStage !== 3) setCanvaStage(3);
-          } else {
-            if (currentStage !== 2) setCanvaStage(2);
-          }
+      // 5. CRITICAL BUG FIX: BUTTONS ARE 100% CLICKABLE AND STABLE!
+      // Clicking the avatar image directly advances to the next expression (1 -> 2 -> 3 -> 1).
+      // We DO NOT hijack horizontal mouse movement to change stages,
+      // so when moving mouse to click "Works" or "Resume" or "Contact",
+      // the stage NEVER changes accidentally!
+      if (avatarHolder) {
+        avatarHolder.addEventListener('click', function(e) {
+          if (e.target && e.target.closest('.canva-comic-bubble')) return;
+          e.stopPropagation();
+          const next = currentStage === 3 ? 1 : currentStage + 1;
+          setCanvaStage(next);
         });
+      }
 
-        // Clicking directly on avatar image advances to next expression
+      avatarImgs.forEach(function(img) {
         img.addEventListener('click', function(e) {
           e.stopPropagation();
           const next = currentStage === 3 ? 1 : currentStage + 1;
@@ -3531,14 +3721,15 @@
         });
       });
 
-      // Stop any propagation from bubbles (extra safety)
+      // Stop any propagation from comic speech bubbles so buttons receive all clicks directly
       bubbles.forEach(function(b) {
         if (!b) return;
+        b.addEventListener('click', function(e) { e.stopPropagation(); });
         b.addEventListener('mousemove', function(e) { e.stopPropagation(); });
         b.addEventListener('mouseenter', function(e) { e.stopPropagation(); });
       });
 
-      // 5. Tab Buttons Navigation
+      // 6. Tab Buttons Navigation (1. Resume, 2. Works, 3. Contact)
       tabBtns.forEach(function(btn) {
         btn.addEventListener('click', function(e) {
           e.stopPropagation();
@@ -3547,7 +3738,7 @@
         });
       });
 
-      // 6. Arrow Buttons
+      // 7. Arrow Buttons (Prev / Next)
       if (btnPrev) {
         btnPrev.addEventListener('click', function(e) {
           e.stopPropagation();
@@ -3561,23 +3752,19 @@
         });
       }
 
-      // 7. Action Button in Stage 2 (Works): Redirects to works section and closes modal
+      // 8. Action Button in Stage 2 (Works): Smoothly closes modal and scrolls directly to #works!
       if (btnWorks) {
         btnWorks.addEventListener('click', function(e) {
+          e.preventDefault();
           e.stopPropagation();
-          closeModal();
-          setTimeout(function() {
-            const worksEl = document.getElementById('works');
-            if (worksEl) {
-              worksEl.scrollIntoView({ behavior: 'smooth' });
-            }
-          }, 200);
+          closeModal('works');
         });
       }
 
-      // 8. Contact Email Copy in Stage 3
+      // 9. Contact Email Copy in Stage 3
       if (copyEmailBtn) {
         copyEmailBtn.addEventListener('click', function(e) {
+          e.preventDefault();
           e.stopPropagation();
           const email = 'anusmrithchanju@gmail.com';
           navigator.clipboard.writeText(email).then(function() {
@@ -3592,16 +3779,43 @@
         });
       }
 
-      // 9. Mobile Swipe Navigation
+      // 10. Scroll & Swipe to Enter Portfolio
+      // Mouse wheel down smoothly fades out splash and enters the portfolio
+      let wheelAccum = 0;
+      modal.addEventListener('wheel', function(e) {
+        if (e.deltaY > 15) {
+          wheelAccum += e.deltaY;
+          if (wheelAccum > 60) {
+            closeModal('home');
+            wheelAccum = 0;
+          }
+        } else {
+          wheelAccum = 0;
+        }
+      }, { passive: true });
+
+      // Mobile Touch: swipe up enters portfolio; swipe left/right changes expressions
       let touchStartX = 0;
+      let touchStartY = 0;
       modal.addEventListener('touchstart', function(e) {
         touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
       }, { passive: true });
 
       modal.addEventListener('touchend', function(e) {
         const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
         const diffX = touchEndX - touchStartX;
-        if (Math.abs(diffX) > 45) {
+        const diffY = touchEndY - touchStartY;
+
+        // Vertical swipe up (user scrolling down to enter portfolio)
+        if (diffY < -50 && Math.abs(diffY) > Math.abs(diffX)) {
+          closeModal('home');
+          return;
+        }
+
+        // Horizontal swipe (next / prev expression)
+        if (Math.abs(diffX) > 40) {
           if (diffX < 0) {
             setCanvaStage(currentStage === 3 ? 1 : currentStage + 1);
           } else {
