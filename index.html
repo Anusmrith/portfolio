@@ -35,9 +35,8 @@
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.38s ease,
-                  visibility 0.38s ease,
-                  background 0.45s ease;
+      transition: opacity 0.32s ease,
+                  visibility 0.32s ease;
       overflow: hidden;
       user-select: none;
     }
@@ -49,39 +48,66 @@
       pointer-events: auto !important;
     }
 
-    /* Stage 1: Warm Mocha with Isometric Cubes & Halftone Shield */
+    /* Stage 1: Solid Warm Mocha (Exact from Canva PDF rgb: .6706 .5098 .4275) */
     .canva-modal.stage-1 {
-      background-color: #9c7760;
-      background-image: 
-        radial-gradient(ellipse at 50% 45%, rgba(255, 255, 255, 0.12) 0%, transparent 60%),
-        url('assets/bg_stage1_cubes.webp');
-      background-size: cover;
-      background-position: center center;
+      background-color: #ab826d;
+      background-image: none;
     }
 
-    /* Stage 2: Pop-Art Purple with Comic Halftone Polka Dots & Starburst */
+    /* Stage 2: Solid Vivid Purple (Exact from Canva PDF rgb: .549 .3216 1) */
     .canva-modal.stage-2 {
-      background-color: #7b3cf0;
-      background-image: 
-        radial-gradient(circle, rgba(20, 5, 45, 0.42) 20%, transparent 22%),
-        radial-gradient(circle, rgba(20, 5, 45, 0.42) 20%, transparent 22%);
-      background-size: 20px 20px;
-      background-position: 0 0, 10px 10px;
+      background-color: #8c52ff;
+      background-image: none;
     }
 
-    /* Stage 3: Warped Checkered Flag (Black & Lavender) */
+    /* Stage 3: Solid Deep Black (Exact from Canva PDF rgb: 0 0 0) */
     .canva-modal.stage-3 {
-      background-color: #d1bce7;
-      background-image: 
-        linear-gradient(45deg, #111116 25%, transparent 25%), 
-        linear-gradient(-45deg, #111116 25%, transparent 25%), 
-        linear-gradient(45deg, transparent 75%, #111116 75%), 
-        linear-gradient(-45deg, transparent 75%, #111116 75%);
-      background-size: 48px 48px;
-      background-position: 0 0, 0 24px, 24px -24px, -24px 0px;
+      background-color: #000000;
+      background-image: none;
     }
 
-    /* Clean fade-only transitions — decorative shapes removed */
+    /* Static Graphic Shapes Behind Avatar — Exact from Canva PDF (NO animation) */
+    .canva-stage-backdrop-shape {
+      position: absolute;
+      top: 48%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 12;
+      display: none;
+    }
+
+    /* Stage 1: Halftone Dot Shield Oval */
+    .canva-modal.stage-1 .canva-shape-stage1 {
+      display: block;
+      width: clamp(280px, 35vw, 480px);
+      height: clamp(300px, 38vw, 500px);
+      background: radial-gradient(circle, rgba(55, 30, 20, 0.45) 18%, transparent 19%);
+      background-size: 14px 14px;
+      mask-image: radial-gradient(ellipse at center, black 45%, transparent 72%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 45%, transparent 72%);
+    }
+
+    /* Stage 2: Pink Comic Starburst Shape */
+    .canva-modal.stage-2 .canva-shape-stage2 {
+      display: block;
+      width: clamp(340px, 46vw, 650px);
+      height: clamp(340px, 46vw, 650px);
+      background: #ff7bac;
+      clip-path: polygon(50% 0%, 63% 32%, 98% 35%, 72% 57%, 85% 91%, 52% 73%, 22% 95%, 31% 60%, 2% 41%, 38% 31%);
+      transform: translate(-50%, -50%) rotate(8deg);
+    }
+
+    /* Stage 3: Pink Paint Splash / Brush Stroke */
+    .canva-modal.stage-3 .canva-shape-stage3 {
+      display: block;
+      width: clamp(320px, 48vw, 660px);
+      height: clamp(200px, 30vw, 400px);
+      background: #ed9ac2;
+      border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%;
+      filter: blur(0.5px);
+      transform: translate(-50%, -50%) rotate(-4deg);
+    }
 
     /* Modal Top Header */
     .canva-modal-header {
@@ -212,13 +238,12 @@
       white-space: nowrap;
       pointer-events: none;
       z-index: 10;
-      transition: color 0.4s ease;
+      letter-spacing: 0.02em;
       text-shadow: 
         0 4px 20px rgba(0, 0, 0, 0.85),
         0 0 50px rgba(0, 0, 0, 0.65),
         -1.5px -1.5px 0 rgba(0, 0, 0, 0.6),
         1.5px 1.5px 0 rgba(0, 0, 0, 0.6);
-      letter-spacing: 0.02em;
     }
 
     .canva-modal.stage-1 .canva-bg-signature { color: #ffbd59; }
@@ -246,7 +271,6 @@
       pointer-events: none;
       opacity: 0.88;
       box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
-      transition: opacity 0.3s ease;
     }
 
     /* 3D Avatar Center Cutout */
@@ -262,7 +286,7 @@
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      pointer-events: none; /* CRITICAL: let clicks/mousemove pass through to bubbles behind */
+      pointer-events: none;
     }
 
     .canva-avatar-img {
@@ -275,14 +299,12 @@
       max-width: 100%;
       object-fit: contain;
       object-position: bottom center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      display: none;
       filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.35));
     }
 
     .canva-avatar-img.is-active {
-      opacity: 1;
+      display: block;
       pointer-events: auto;
       cursor: pointer;
     }
@@ -290,21 +312,18 @@
     /* Comic Speech Bubble Container */
     .canva-comic-bubble {
       position: absolute;
-      z-index: 35;
+      z-index: 50;
       background: #ffffff;
       border: 3.5px solid #1a1a1a;
       border-radius: 40px;
       padding: 10px 22px;
       box-shadow: 4px 6px 0px rgba(0, 0, 0, 0.26);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s;
+      display: none;
       pointer-events: none;
     }
 
     .canva-comic-bubble.is-active {
-      opacity: 1;
-      visibility: visible;
+      display: block;
       pointer-events: auto;
     }
 
@@ -3048,7 +3067,10 @@
 
     <!-- Viewport Stage -->
     <div class="canva-stage-viewport" id="canvaStageViewport">
-      <!-- Clean fade-only transitions — decorative shapes removed -->
+      <!-- Backdrop Graphic Shapes from Canva PDF (Halftone dot oval, Starburst, Paint splash) -->
+      <div class="canva-stage-backdrop-shape canva-shape-stage1" aria-hidden="true"></div>
+      <div class="canva-stage-backdrop-shape canva-shape-stage2" aria-hidden="true"></div>
+      <div class="canva-stage-backdrop-shape canva-shape-stage3" aria-hidden="true"></div>
 
       <!-- Hint Pill over Avatar -->
       <div class="canva-avatar-hint" id="canvaAvatarHint" aria-hidden="true">&#128070; Click avatar to change expression</div>
