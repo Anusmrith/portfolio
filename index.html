@@ -1970,66 +1970,257 @@
         line-height: 1.55 !important;
       }
 
-      /* Works Gallery */
+      /* Works Section & Technical Matrix on Mobile */
       .works {
         padding: 60px 14px 40px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+      }
+
+      .works-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
       }
 
       .works-header {
-        margin-bottom: 28px !important;
+        margin-bottom: 24px !important;
       }
 
       .works-title {
-        font-size: clamp(32px, 8.8vw, 56px) !important;
+        font-size: clamp(32px, 8.8vw, 54px) !important;
+        margin-bottom: 0.25em !important;
       }
 
-      .works-sub {
-        font-size: 14px !important;
-      }
-
-      .works-grid {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
-      }
-
-      .project-card {
-        padding: 16px !important;
-      }
-
-      .project-title {
-        font-size: 18px !important;
-      }
-
-      .project-desc {
+      .works-subtitle {
         font-size: 13px !important;
-        line-height: 1.5 !important;
+        letter-spacing: 0.08em !important;
       }
 
-      /* Detail Modal */
-      .detail-modal {
-        padding: 10px !important;
+      .wk-sections-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 22px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
       }
 
-      .detail-modal-card {
-        max-height: 92vh !important;
+      .wk-card {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 20px 16px !important;
         border-radius: 16px !important;
+        overflow: hidden !important;
       }
 
-      .detail-modal-header {
-        padding: 16px 18px 12px !important;
+      .wk-card-head {
+        margin-bottom: 16px !important;
       }
 
-      .detail-modal-title {
-        font-size: 18px !important;
+      .wk-card-no {
+        font-size: 11px !important;
+        margin-bottom: 4px !important;
       }
 
-      .detail-modal-body {
-        padding: 16px 18px 24px !important;
+      .wk-card-title {
+        font-size: clamp(22px, 6vw, 28px) !important;
+        line-height: 1.15 !important;
+      }
+
+      .wk-card-tagline {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+        margin-top: 0.35em !important;
+      }
+
+      .wk-list {
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      .wk-line {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 2px 0 !important;
+      }
+
+      /* Stack line item title and metadata vertically on mobile so technical matrix never clips */
+      .wk-line-btn {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        gap: 6px !important;
+        width: 100% !important;
+        padding: 12px 0 !important;
+        box-sizing: border-box !important;
+        text-align: left !important;
+      }
+
+      .wk-line-name {
+        font-size: 14.5px !important;
+        font-weight: 500 !important;
+        line-height: 1.35 !important;
+        width: 100% !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+      }
+
+      .wk-line-meta {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        gap: 4px 8px !important;
+        text-align: left !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Allow languages & tools (Python • JS • HTML • CSS • C • GDScript) to wrap cleanly inside mobile card */
+      .wk-line-num {
+        font-size: 12px !important;
+        font-weight: 500 !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+        line-height: 1.4 !important;
+        color: var(--accent) !important;
+        text-align: left !important;
+      }
+
+      .wk-line-tag {
+        font-size: 11px !important;
+        white-space: nowrap !important;
+        color: rgba(244, 241, 234, 0.5) !important;
+      }
+
+      .wk-line-tag:before {
+        margin-right: 0.4em !important;
+      }
+
+      .wk-line-arrow {
+        font-size: 14px !important;
+        color: rgba(244, 241, 234, 0.4) !important;
+      }
+
+      .wk-foot {
+        margin-top: 18px !important;
+        padding-top: 14px !important;
+        font-size: 11.5px !important;
+        line-height: 1.5 !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+      }
+
+      /* Work Detail Modal (.wk-detail) Full Responsiveness on Mobile */
+      .wk-detail-backdrop {
+        z-index: 99990 !important;
+      }
+
+      .wk-detail {
+        position: fixed !important;
+        inset: max(12px, env(safe-area-inset-top, 12px)) 12px max(12px, env(safe-area-inset-bottom, 12px)) 12px !important;
+        z-index: 99995 !important;
+        border-radius: 18px !important;
+        padding: 0 !important;
+        max-height: calc(100vh - 24px) !important;
+        max-height: calc(100dvh - 24px) !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        box-sizing: border-box !important;
+      }
+
+      .wk-detail-close {
+        position: absolute !important;
+        top: 12px !important;
+        right: 12px !important;
+        width: 38px !important;
+        height: 38px !important;
+        font-size: 20px !important;
+        z-index: 10 !important;
+      }
+
+      .wk-detail-article {
+        padding: 36px 18px 24px !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      .wk-detail-head {
+        padding-bottom: 16px !important;
+        margin-bottom: 20px !important;
+      }
+
+      .wk-detail-title {
+        font-size: clamp(22px, 6.5vw, 30px) !important;
+        line-height: 1.2 !important;
+        padding-right: 36px !important;
+        word-break: break-word !important;
+      }
+
+      .wk-detail-sub {
+        font-size: 12px !important;
+        margin-top: 0.5em !important;
+        line-height: 1.4 !important;
+        word-break: break-word !important;
+      }
+
+      .wk-detail-tags {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        margin-top: 14px !important;
+      }
+
+      .wk-badge {
+        font-size: 11px !important;
+        padding: 5px 10px !important;
+        line-height: 1.2 !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+      }
+
+      .wk-detail-desc {
+        font-size: 13.5px !important;
+        line-height: 1.65 !important;
+        word-break: break-word !important;
+        color: rgba(244, 241, 234, 0.9) !important;
+      }
+
+      .wk-detail-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        margin-top: 24px !important;
+      }
+
+      .wk-detail-link {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 11px 16px !important;
+        font-size: 13px !important;
+        box-sizing: border-box !important;
+        text-align: center !important;
       }
 
       /* Footer */
-      .site-footer {
+      .footer {
         padding: 40px 14px 28px !important;
+      }
+
+      .credit {
+        white-space: normal !important;
+        text-align: center !important;
+        letter-spacing: 0.15em !important;
+        flex-wrap: wrap !important;
+        line-height: 1.6 !important;
       }
     }
 
@@ -2077,8 +2268,55 @@
         font-size: 11px !important;
         padding: 8px 10px !important;
       }
+
+      .wk-card {
+        padding: 16px 12px !important;
+      }
+
+      .wk-card-title {
+        font-size: 20px !important;
+      }
+
+      .wk-card-tagline {
+        font-size: 11px !important;
+      }
+
+      .wk-line-name {
+        font-size: 13.5px !important;
+      }
+
+      .wk-line-num {
+        font-size: 11px !important;
+      }
+
+      .wk-line-tag {
+        font-size: 10px !important;
+      }
+
+      .wk-detail {
+        inset: max(8px, env(safe-area-inset-top, 8px)) 8px max(8px, env(safe-area-inset-bottom, 8px)) 8px !important;
+        border-radius: 14px !important;
+      }
+
+      .wk-detail-article {
+        padding: 32px 14px 20px !important;
+      }
+
+      .wk-detail-title {
+        font-size: 20px !important;
+      }
+
+      .wk-detail-desc {
+        font-size: 12.5px !important;
+        line-height: 1.6 !important;
+      }
+
+      .wk-badge {
+        font-size: 10px !important;
+        padding: 4px 8px !important;
+      }
     }
-</style>
+  </style>
 </head>
 
 <body>
