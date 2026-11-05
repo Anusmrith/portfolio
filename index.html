@@ -35,7 +35,7 @@
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.35s ease, visibility 0.35s ease, background-color 0.28s ease;
+      transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.15s ease;
       overflow: hidden;
       user-select: none;
       -webkit-user-select: none;
@@ -43,6 +43,7 @@
       outline: none !important;
       border: none !important;
       -webkit-tap-highlight-color: transparent !important;
+      cursor: pointer;
     }
 
     .canva-modal *,
@@ -102,6 +103,7 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      cursor: pointer;
     }
 
     /* The 1920:1079 Canva Canvas Frame matching the user's PDF */
@@ -116,9 +118,10 @@
       user-select: none;
       -webkit-user-select: none;
       transform-origin: center center;
+      cursor: pointer;
     }
 
-    /* Individual Canva PDF Slides — Pure Crossfade Transition */
+    /* Individual Canva PDF Slides — Crisp cut with zero double-exposure ghosting */
     .canva-slide {
       position: absolute;
       inset: 0;
@@ -126,13 +129,14 @@
       height: 100%;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.28s ease, visibility 0.28s ease;
+      transition: opacity 0.08s linear, visibility 0.08s linear;
       display: flex;
       align-items: center;
       justify-content: center;
       pointer-events: none;
       outline: none !important;
       border: none !important;
+      cursor: pointer;
     }
 
     .canva-slide.is-active {
@@ -288,7 +292,6 @@
         font-size: 20px;
       }
 
-      /* On mobile screens, scale frame gently so avatar and text boxes are perfectly sized */
       .canva-slide-frame {
         transform: scale(1.18);
       }
@@ -3178,7 +3181,7 @@
         modal.classList.remove('stage-1', 'stage-2', 'stage-3');
         modal.classList.add('stage-' + currentStage);
 
-        // Crossfade active slide
+        // Update active slide
         slides.forEach(function(s, idx) {
           if (!s) return;
           if (idx === currentStage - 1) {
@@ -3187,6 +3190,10 @@
             s.classList.remove('is-active');
           }
         });
+      }
+
+      function nextStage() {
+        setCanvaStage(currentStage === 3 ? 1 : currentStage + 1);
       }
 
       // 2. Open / Close Modal (Smooth Fade)
@@ -3257,7 +3264,7 @@
         });
       });
 
-      // Close modal button
+      // Close modal button (Top right X)
       if (closeBtn) {
         closeBtn.addEventListener('click', function(e) {
           e.stopPropagation();
@@ -3270,71 +3277,47 @@
         if (!modal.classList.contains('is-open')) return;
         if (e.key === 'Escape') {
           closeModal('home');
-        } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-          setCanvaStage(currentStage === 3 ? 1 : currentStage + 1);
+        } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+          nextStage();
         } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
           setCanvaStage(currentStage === 1 ? 3 : currentStage - 1);
         }
       });
 
-      // 5. SMOOTH ANIMATION WHEN MOUSE IS OVER / AROUND THE FACE OF THE AVATAR
-      // Uses hysteresis-protected horizontal tracking with motion fallback so it NEVER flickers or jitters!
-      let lastMoveX = null;
-      let lastMoveY = null;
-      let moveDist = 0;
+      // 5. CLICKING ANYWHERE (ON OR OUTSIDE THE CHARACTER) CHANGES FACIAL EXPRESSION!
+      // Clicking on the character OR clicking outside the character on the background advances 1 -> 2 -> 3 -> 1
+      modal.addEventListener('click', function(e) {
+        // If clicked on close button or inside the comic speech bubble buttons, let them handle it!
+        if (e.target && (e.target.closest('#closeCanvaModalBtn') || e.target.closest('.canva-bubble-overlay'))) {
+          return;
+        }
+        nextStage();
+      });
 
+      // 6. MOUSE HOVER OVER / AROUND THE FACE CHANGES THE EXPRESSION
+      // Tracks cursor position across the face:
+      // Left side -> Stage 1 (Calm), Center -> Stage 2 (Smile), Right side -> Stage 3 (Joyful)
       if (faceHitbox) {
-        faceHitbox.addEventListener('mouseenter', function(e) {
-          lastMoveX = e.clientX;
-          lastMoveY = e.clientY;
-          moveDist = 0;
-        });
-
         faceHitbox.addEventListener('mousemove', function(e) {
           const rect = faceHitbox.getBoundingClientRect();
           const relX = (e.clientX - rect.left) / rect.width;
 
-          // Hysteresis threshold logic: prevents boundary fluttering!
-          let nextStage = currentStage;
+          let nextSt = currentStage;
           if (currentStage === 1) {
-            if (relX > 0.42) nextStage = 2;
+            if (relX > 0.42) nextSt = 2;
           } else if (currentStage === 2) {
-            if (relX < 0.35) nextStage = 1;
-            else if (relX > 0.65) nextStage = 3;
+            if (relX < 0.35) nextSt = 1;
+            else if (relX > 0.65) nextSt = 3;
           } else if (currentStage === 3) {
-            if (relX < 0.58) nextStage = 2;
+            if (relX < 0.58) nextSt = 2;
           }
 
-          if (nextStage !== currentStage) {
-            setCanvaStage(nextStage);
-            moveDist = 0;
-          } else if (lastMoveX !== null && lastMoveY !== null) {
-            // If circling or vertical movement occurs around the face:
-            const dx = e.clientX - lastMoveX;
-            const dy = e.clientY - lastMoveY;
-            moveDist += Math.sqrt(dx * dx + dy * dy);
-            if (moveDist >= 48) {
-              moveDist = 0;
-              setCanvaStage(currentStage === 3 ? 1 : currentStage + 1);
-            }
+          if (nextSt !== currentStage) {
+            setCanvaStage(nextSt);
           }
-          lastMoveX = e.clientX;
-          lastMoveY = e.clientY;
         });
 
-        faceHitbox.addEventListener('click', function(e) {
-          e.stopPropagation();
-          setCanvaStage(currentStage === 3 ? 1 : currentStage + 1);
-        });
-
-        // Touch support for mobile: tapping or dragging on face smoothly cycles expressions
-        let touchStartX = null;
-        faceHitbox.addEventListener('touchstart', function(e) {
-          if (e.touches && e.touches[0]) {
-            touchStartX = e.touches[0].clientX;
-          }
-        }, { passive: true });
-
+        // Touch support for mobile: tapping or moving finger on face advances expression
         faceHitbox.addEventListener('touchmove', function(e) {
           if (e.touches && e.touches[0]) {
             const touch = e.touches[0];
@@ -3355,7 +3338,7 @@
         b.addEventListener('mouseenter', function(e) { e.stopPropagation(); });
       });
 
-      // 6. Action Button in Stage 2 (Works): Smoothly closes modal and scrolls directly to #works!
+      // 7. Action Button in Stage 2 (Works): Smoothly closes modal and scrolls directly to #works!
       if (btnWorks) {
         btnWorks.addEventListener('click', function(e) {
           e.preventDefault();
@@ -3364,7 +3347,7 @@
         });
       }
 
-      // 7. Contact Email Copy in Stage 3
+      // 8. Contact Email Copy in Stage 3
       if (copyEmailBtn) {
         copyEmailBtn.addEventListener('click', function(e) {
           e.preventDefault();
@@ -3382,7 +3365,7 @@
         });
       }
 
-      // 8. Scroll & Swipe to Enter Portfolio
+      // 9. Scroll & Swipe to Enter Portfolio
       let wheelAccum = 0;
       modal.addEventListener('wheel', function(e) {
         if (e.deltaY > 15) {
@@ -3413,13 +3396,6 @@
           }
         }
       }, { passive: true });
-
-      // Clicking on empty backdrop outside the frame enters portfolio
-      modal.addEventListener('click', function(e) {
-        if (e.target === modal || e.target.id === 'canvaStageViewport') {
-          closeModal('home');
-        }
-      });
     }
 
     // Run both immediately and on DOMContentLoaded
