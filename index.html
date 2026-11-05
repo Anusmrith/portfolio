@@ -38,7 +38,18 @@
       transition: opacity 0.35s ease, visibility 0.35s ease, background-color 0.28s ease;
       overflow: hidden;
       user-select: none;
+      -webkit-user-select: none;
       background-color: #ab826d;
+      outline: none !important;
+      border: none !important;
+      -webkit-tap-highlight-color: transparent !important;
+    }
+
+    .canva-modal *,
+    .canva-modal *:focus,
+    .canva-modal *:active {
+      outline: none !important;
+      -webkit-tap-highlight-color: transparent !important;
     }
 
     .canva-modal.is-open {
@@ -103,6 +114,8 @@
       align-items: center;
       justify-content: center;
       user-select: none;
+      -webkit-user-select: none;
+      transform-origin: center center;
     }
 
     /* Individual Canva PDF Slides — Pure Crossfade Transition */
@@ -118,6 +131,8 @@
       align-items: center;
       justify-content: center;
       pointer-events: none;
+      outline: none !important;
+      border: none !important;
     }
 
     .canva-slide.is-active {
@@ -133,21 +148,32 @@
       display: block;
       object-fit: contain;
       pointer-events: none;
+      -webkit-user-drag: none;
+      user-drag: none;
+      outline: none !important;
+      border: none !important;
     }
 
-    /* Interactive Hitbox over Avatar Face & Upper Area (Move cursor here to animate expression) */
+    /* Interactive Hitbox over Avatar Face & Upper Area (Zero visible rectangle box) */
     .canva-face-hitbox {
       position: absolute;
-      left: 38%;
+      left: 36%;
       top: 18%;
-      width: 24%;
-      height: 38%;
+      width: 28%;
+      height: 40%;
       z-index: 60;
       cursor: pointer;
       pointer-events: auto;
+      background: transparent !important;
+      outline: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      -webkit-tap-highlight-color: transparent !important;
+      user-select: none !important;
+      -webkit-user-select: none !important;
     }
 
-    /* Comic Speech Bubble Overlays — Perfectly centered on the white belly of each speech bubble */
+    /* Comic Speech Bubble Overlays — Exactly centered on the white belly of each speech bubble */
     .canva-bubble-overlay {
       position: absolute;
       z-index: 70;
@@ -157,6 +183,8 @@
       pointer-events: auto;
       cursor: default;
       transform: translate(-50%, -50%);
+      box-sizing: border-box;
+      outline: none !important;
     }
 
     /* Slide 1 Bubble: Resume (True Belly Center: cx=34.30%, cy=65.76%) */
@@ -191,7 +219,7 @@
       color: #1a1a1a;
       text-decoration: none;
       font-family: 'Chiron GoRound TC', -apple-system, sans-serif;
-      font-size: clamp(18px, 1.95vw, 29px);
+      font-size: clamp(16px, 1.85vw, 28px);
       font-weight: 800;
       letter-spacing: 0.04em;
       background: transparent;
@@ -204,6 +232,8 @@
       transition: transform 0.18s ease;
       width: 100%;
       height: 100%;
+      box-sizing: border-box;
+      outline: none !important;
     }
 
     .comic-btn-action:hover {
@@ -215,10 +245,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: clamp(4px, 0.4vw, 8px);
+      gap: clamp(3px, 0.35vw, 7px);
       width: 100%;
       height: 100%;
       padding: 0 4px;
+      box-sizing: border-box;
     }
 
     .comic-contact-item {
@@ -228,16 +259,17 @@
       background: rgba(0, 0, 0, 0.04);
       border: 1.2px solid #1a1a1a;
       border-radius: 999px;
-      padding: clamp(2px, 0.3vw, 5px) clamp(6px, 0.55vw, 10px);
+      padding: clamp(2px, 0.3vw, 5px) clamp(5px, 0.5vw, 9px);
       color: #1a1a1a;
       text-decoration: none;
       font-family: 'Chiron GoRound TC', -apple-system, sans-serif;
-      font-size: clamp(8.5px, 0.78vw, 12px);
+      font-size: clamp(8px, 0.75vw, 11.5px);
       font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
       transition: all 0.18s ease;
       line-height: 1;
+      outline: none !important;
     }
 
     .comic-contact-item:hover {
@@ -246,6 +278,7 @@
       transform: translateY(-1px);
     }
 
+    /* Mobile Responsive Optimizations for Canva Modal */
     @media (max-width: 768px) {
       .canva-close-floating {
         top: 14px;
@@ -254,12 +287,42 @@
         height: 36px;
         font-size: 20px;
       }
+
+      /* On mobile screens, scale frame gently so avatar and text boxes are perfectly sized */
+      .canva-slide-frame {
+        transform: scale(1.18);
+      }
+
+      .bubble-pos-1 {
+        width: 19%;
+        height: 6.8%;
+      }
+      .bubble-pos-1 .comic-btn-action {
+        font-size: clamp(11px, 3.2vw, 15px);
+      }
+
+      .bubble-pos-2 {
+        width: 19%;
+        height: 6.8%;
+      }
+      .bubble-pos-2 .comic-btn-action {
+        font-size: clamp(11px, 3.2vw, 15px);
+      }
+
+      .bubble-pos-3 {
+        width: 20%;
+        height: 6.8%;
+      }
+
       .comic-contact-group {
         gap: 3px;
+        padding: 0 2px;
       }
+
       .comic-contact-item {
-        font-size: 8px;
-        padding: 2px 5px;
+        font-size: clamp(7px, 1.8vw, 8.5px);
+        padding: 2px 4px;
+        border-width: 1px;
       }
     }
   </style>
@@ -1363,14 +1426,25 @@
       opacity: 1;
     }
 
-        .avatar-stage .resume-avatar-badge {
+    .resume-avatar-badge {
       position: absolute;
-      top: 10px;
-      right: 10px;
-      bottom: auto;
-      left: auto;
-      transform: none;
-      z-index: 20;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(10, 14, 22, 0.9);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      padding: 4px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
     }
 
     /* Bottom Action & Zoom Indicator Pill */
@@ -1414,47 +1488,28 @@
       display: inline-block;
     }
 
-    .flip-hint {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      z-index: 10;
-      font-size: 8.5px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(244, 241, 234, 0.6);
-      background: rgba(10, 14, 22, 0.78);
-      backdrop-filter: blur(4px);
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(244, 241, 234, 0.12);
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
 
-    .resume-avatar-box.flipped .photo-hint,
-    .resume-avatar-box.mode-avatar .photo-hint,
-    .resume-avatar-box:hover .photo-hint {
-      opacity: 0;
-    }
 
 
     .resume-avatar-badge {
       position: absolute;
-      bottom: 8px;
+      bottom: 12px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(10, 14, 22, 0.88);
-      border: 1px solid rgba(255, 217, 179, 0.35);
+      background: rgba(10, 14, 22, 0.9);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 999px;
-      padding: 3px 10px;
-      font-family: 'Helvetica Neue', system-ui, sans-serif;
-      font-size: 9px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+      padding: 4px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
       color: var(--accent);
       white-space: nowrap;
-      backdrop-filter: blur(4px);
+      pointer-events: none;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
     }
 
     .resume-avatar-info {
@@ -2226,7 +2281,7 @@
                 <div class="flip-front" id="flipFrontFace" title="Click to view 3D Avatar">
                   <img src="assets/profile.jpg" alt="Anusmrith M M — Photo" />
                   <span class="resume-avatar-badge">Student Developer</span>
-                  <span class="flip-hint photo-hint">3D Avatar &rarr;</span>
+                  
                 </div>
 
                 <!-- Back Face: 3D Avatar Preview (Click to open Fullscreen Experience) -->
@@ -2615,7 +2670,7 @@
         <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer" class="pill-btn">GitHub</a>
         <a href="https://www.linkedin.com/in/anusmrithmm/" target="_blank" rel="noopener noreferrer"
           class="pill-btn">LinkedIn</a>
-        <button class="pill-btn accent" id="copyEmailBottomBtn">Copy Email (anusmrithchanju@gmail.com)</button>
+        <button class="pill-btn accent" id="copyEmailBottomBtn">Copy Email</button>
       </div>
 
       <div class="credit">
@@ -2653,7 +2708,7 @@
        ========================================================================== -->
   <div class="canva-modal stage-1" id="canvaModal" aria-hidden="true" role="dialog" aria-label="Interactive 3D Avatar Showcase">
     <!-- Minimal discreet close button -->
-    <button type="button" class="canva-close-floating" id="closeCanvaModalBtn" aria-label="Close fullscreen view" title="Close (Esc)">&times;</button>
+    <button type="button" class="canva-close-floating" id="closeCanvaModalBtn" aria-label="Close fullscreen view">&times;</button>
 
     <!-- Viewport Stage -->
     <div class="canva-stage-viewport" id="canvaStageViewport">
@@ -2665,7 +2720,7 @@
             <img src="assets/canva_slide_1.png" alt="Anusmrith - Resume" class="canva-slide-img" draggable="false" />
           </picture>
           <div class="canva-bubble-overlay bubble-pos-1" id="canvaBubbleStage1">
-            <a href="assets/resume.pdf" target="_blank" download="resume-anusmrith.pdf" class="comic-btn-action" title="Download Resume">Resume</a>
+            <a href="assets/resume.pdf" target="_blank" download="resume-anusmrith.pdf" class="comic-btn-action">Resume</a>
           </div>
         </div>
 
@@ -2676,7 +2731,7 @@
             <img src="assets/canva_slide_2.png" alt="Anusmrith - Works" class="canva-slide-img" draggable="false" />
           </picture>
           <div class="canva-bubble-overlay bubble-pos-2" id="canvaBubbleStage2">
-            <button type="button" class="comic-btn-action" id="canvaBtnWorks" title="Explore Works">Works</button>
+            <button type="button" class="comic-btn-action" id="canvaBtnWorks">Works</button>
           </div>
         </div>
 
@@ -2688,17 +2743,17 @@
           </picture>
           <div class="canva-bubble-overlay bubble-pos-3" id="canvaBubbleStage3">
             <div class="comic-contact-group">
-              <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer" class="comic-contact-item" title="Visit GitHub">GitHub</a>
-              <a href="https://linkedin.com/in/anusmrith" target="_blank" rel="noopener noreferrer" class="comic-contact-item" title="Visit LinkedIn">LinkedIn</a>
-              <button type="button" class="comic-contact-item" id="canvaCopyEmailBtn" title="Copy Email">
+              <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer" class="comic-contact-item">GitHub</a>
+              <a href="https://linkedin.com/in/anusmrith" target="_blank" rel="noopener noreferrer" class="comic-contact-item">LinkedIn</a>
+              <button type="button" class="comic-contact-item" id="canvaCopyEmailBtn">
                 <span id="canvaEmailLabel">Email</span>
               </button>
             </div>
           </div>
         </div>
 
-        <!-- Interactive Hitbox over Avatar Face & Upper Area (Move cursor here to animate expression) -->
-        <div class="canva-face-hitbox" id="canvaFaceHitbox" title="Move cursor around face to change expression"></div>
+        <!-- Interactive Hitbox over Avatar Face & Upper Area (No tooltip, no rectangle box) -->
+        <div class="canva-face-hitbox" id="canvaFaceHitbox"></div>
       </div>
     </div>
   </div>
@@ -3116,6 +3171,7 @@
 
       // 1. Set Stage (1: Calm/Resume, 2: Smile/Works, 3: Joyful/Contact)
       function setCanvaStage(stageNum) {
+        if (stageNum === currentStage) return;
         currentStage = Math.max(1, Math.min(3, stageNum));
 
         // Update modal background color class
@@ -3221,67 +3277,61 @@
         }
       });
 
-      // 5. ANIMATION WHEN MOUSE IS OVER / AROUND THE FACE OF THE AVATAR
-      // Tracks cursor motion and horizontal position over the face:
-      // Both positional zones (left/center/right) AND motion distance trigger smooth expression changes!
-      let lastFaceX = null;
-      let lastFaceY = null;
-      let accumDistance = 0;
-      const MOVE_THRESHOLD = 32; // Every 32px of cursor movement around face advances expression
+      // 5. SMOOTH ANIMATION WHEN MOUSE IS OVER / AROUND THE FACE OF THE AVATAR
+      // Uses hysteresis-protected horizontal tracking with motion fallback so it NEVER flickers or jitters!
+      let lastMoveX = null;
+      let lastMoveY = null;
+      let moveDist = 0;
 
       if (faceHitbox) {
         faceHitbox.addEventListener('mouseenter', function(e) {
-          lastFaceX = e.clientX;
-          lastFaceY = e.clientY;
-          accumDistance = 0;
+          lastMoveX = e.clientX;
+          lastMoveY = e.clientY;
+          moveDist = 0;
         });
 
         faceHitbox.addEventListener('mousemove', function(e) {
           const rect = faceHitbox.getBoundingClientRect();
           const relX = (e.clientX - rect.left) / rect.width;
 
-          // 1. Position-based responsiveness across horizontal thirds of face
-          let targetStage = 1;
-          if (relX < 0.36) {
-            targetStage = 1;
-          } else if (relX < 0.68) {
-            targetStage = 2;
-          } else {
-            targetStage = 3;
+          // Hysteresis threshold logic: prevents boundary fluttering!
+          let nextStage = currentStage;
+          if (currentStage === 1) {
+            if (relX > 0.42) nextStage = 2;
+          } else if (currentStage === 2) {
+            if (relX < 0.35) nextStage = 1;
+            else if (relX > 0.65) nextStage = 3;
+          } else if (currentStage === 3) {
+            if (relX < 0.58) nextStage = 2;
           }
 
-          if (targetStage !== currentStage) {
-            setCanvaStage(targetStage);
-          }
-
-          // 2. Motion-based responsiveness: moving cursor around the face also dynamically animates expressions!
-          if (lastFaceX !== null && lastFaceY !== null) {
-            const dx = e.clientX - lastFaceX;
-            const dy = e.clientY - lastFaceY;
-            accumDistance += Math.sqrt(dx * dx + dy * dy);
-            if (accumDistance >= MOVE_THRESHOLD) {
-              accumDistance = 0;
-              const next = currentStage === 3 ? 1 : currentStage + 1;
-              setCanvaStage(next);
+          if (nextStage !== currentStage) {
+            setCanvaStage(nextStage);
+            moveDist = 0;
+          } else if (lastMoveX !== null && lastMoveY !== null) {
+            // If circling or vertical movement occurs around the face:
+            const dx = e.clientX - lastMoveX;
+            const dy = e.clientY - lastMoveY;
+            moveDist += Math.sqrt(dx * dx + dy * dy);
+            if (moveDist >= 48) {
+              moveDist = 0;
+              setCanvaStage(currentStage === 3 ? 1 : currentStage + 1);
             }
           }
-          lastFaceX = e.clientX;
-          lastFaceY = e.clientY;
+          lastMoveX = e.clientX;
+          lastMoveY = e.clientY;
         });
 
         faceHitbox.addEventListener('click', function(e) {
           e.stopPropagation();
-          const next = currentStage === 3 ? 1 : currentStage + 1;
-          setCanvaStage(next);
+          setCanvaStage(currentStage === 3 ? 1 : currentStage + 1);
         });
 
-        // Touch support for mobile: moving finger around face changes expression
-        let touchLastX = null;
-        let touchLastY = null;
+        // Touch support for mobile: tapping or dragging on face smoothly cycles expressions
+        let touchStartX = null;
         faceHitbox.addEventListener('touchstart', function(e) {
           if (e.touches && e.touches[0]) {
-            touchLastX = e.touches[0].clientX;
-            touchLastY = e.touches[0].clientY;
+            touchStartX = e.touches[0].clientX;
           }
         }, { passive: true });
 
@@ -3290,29 +3340,14 @@
             const touch = e.touches[0];
             const rect = faceHitbox.getBoundingClientRect();
             const relX = (touch.clientX - rect.left) / rect.width;
-            let targetStage = relX < 0.36 ? 1 : (relX < 0.68 ? 2 : 3);
-            if (targetStage !== currentStage) {
-              setCanvaStage(targetStage);
-            }
-            if (touchLastX !== null && touchLastY !== null) {
-              const dx = touch.clientX - touchLastX;
-              const dy = touch.clientY - touchLastY;
-              if (Math.sqrt(dx * dx + dy * dy) > 28) {
-                touchLastX = touch.clientX;
-                touchLastY = touch.clientY;
-                const next = currentStage === 3 ? 1 : currentStage + 1;
-                setCanvaStage(next);
-              }
-            } else {
-              touchLastX = touch.clientX;
-              touchLastY = touch.clientY;
-            }
+            let targetStage = relX < 0.38 ? 1 : (relX < 0.65 ? 2 : 3);
+            setCanvaStage(targetStage);
           }
         }, { passive: true });
       }
 
       // CRITICAL: When cursor moves OUTSIDE the avatar face to click speech bubble buttons,
-      // the expression STAYS on the current stage and does NOT change!
+      // the expression STAYS locked on the current stage and does NOT change!
       const bubbleOverlays = modal.querySelectorAll('.canva-bubble-overlay');
       bubbleOverlays.forEach(function(b) {
         b.addEventListener('click', function(e) { e.stopPropagation(); });
@@ -3362,20 +3397,20 @@
       }, { passive: true });
 
       // Mobile touch swipe up enters portfolio
-      let touchStartX = 0;
       let touchStartY = 0;
       modal.addEventListener('touchstart', function(e) {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
+        if (e.touches && e.touches[0]) {
+          touchStartY = e.touches[0].clientY;
+        }
       }, { passive: true });
 
       modal.addEventListener('touchend', function(e) {
-        const touchEndX = e.changedTouches[0].clientX;
-        const touchEndY = e.changedTouches[0].clientY;
-        const diffY = touchEndY - touchStartY;
-        // Vertical swipe up enters portfolio
-        if (diffY < -50) {
-          closeModal('home');
+        if (e.changedTouches && e.changedTouches[0]) {
+          const touchEndY = e.changedTouches[0].clientY;
+          const diffY = touchEndY - touchStartY;
+          if (diffY < -50) {
+            closeModal('home');
+          }
         }
       }, { passive: true });
 
