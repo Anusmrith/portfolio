@@ -35,20 +35,23 @@
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.15s ease;
+      /* Only fade modal when opening/closing; NO background-color transition so stages change in atomic sync */
+      transition: opacity 0.3s ease, visibility 0.3s ease;
       overflow: hidden;
       user-select: none;
       -webkit-user-select: none;
       background-color: #ab826d;
       outline: none !important;
       border: none !important;
+      box-shadow: none !important;
       -webkit-tap-highlight-color: transparent !important;
       cursor: pointer;
     }
 
     .canva-modal *,
     .canva-modal *:focus,
-    .canva-modal *:active {
+    .canva-modal *:active,
+    .canva-modal *:focus-visible {
       outline: none !important;
       -webkit-tap-highlight-color: transparent !important;
     }
@@ -60,9 +63,27 @@
       pointer-events: auto !important;
     }
 
-    .canva-modal.stage-1 { background-color: #ab826d; }
-    .canva-modal.stage-2 { background-color: #8c52ff; }
-    .canva-modal.stage-3 { background-color: #000000; }
+    /* All hierarchy levels (modal, stage viewport, slide frame, and slide) share identical background color in lockstep */
+    .canva-modal.stage-1,
+    .canva-modal.stage-1 .canva-stage-viewport,
+    .canva-modal.stage-1 .canva-slide-frame,
+    .canva-slide-1 {
+      background-color: #ab826d !important;
+    }
+
+    .canva-modal.stage-2,
+    .canva-modal.stage-2 .canva-stage-viewport,
+    .canva-modal.stage-2 .canva-slide-frame,
+    .canva-slide-2 {
+      background-color: #8c52ff !important;
+    }
+
+    .canva-modal.stage-3,
+    .canva-modal.stage-3 .canva-stage-viewport,
+    .canva-modal.stage-3 .canva-slide-frame,
+    .canva-slide-3 {
+      background-color: #000000 !important;
+    }
 
     /* Minimal floating close button in top right */
     .canva-close-floating {
@@ -104,6 +125,9 @@
       justify-content: center;
       overflow: hidden;
       cursor: pointer;
+      outline: none !important;
+      border: none !important;
+      box-shadow: none !important;
     }
 
     /* The 1920:1079 Canva Canvas Frame matching the user's PDF */
@@ -119,9 +143,12 @@
       -webkit-user-select: none;
       transform-origin: center center;
       cursor: pointer;
+      outline: none !important;
+      border: none !important;
+      box-shadow: none !important;
     }
 
-    /* Individual Canva PDF Slides — Crisp cut with zero double-exposure ghosting */
+    /* Individual Canva PDF Slides — Instant clean cut with zero crossfade ghosting and zero border artifacts */
     .canva-slide {
       position: absolute;
       inset: 0;
@@ -129,20 +156,22 @@
       height: 100%;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.08s linear, visibility 0.08s linear;
+      transition: none !important;
       display: flex;
       align-items: center;
       justify-content: center;
       pointer-events: none;
       outline: none !important;
       border: none !important;
+      box-shadow: none !important;
       cursor: pointer;
     }
 
     .canva-slide.is-active {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+      transition: none !important;
     }
 
     .canva-slide picture,
@@ -150,12 +179,13 @@
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: contain;
+      object-fit: cover;
       pointer-events: none;
       -webkit-user-drag: none;
       user-drag: none;
       outline: none !important;
       border: none !important;
+      box-shadow: none !important;
     }
 
     /* Interactive Hitbox over Avatar Face & Upper Area (Zero visible rectangle box) */
@@ -189,6 +219,8 @@
       transform: translate(-50%, -50%);
       box-sizing: border-box;
       outline: none !important;
+      border: none !important;
+      box-shadow: none !important;
     }
 
     /* Slide 1 Bubble: Resume (True Belly Center: cx=34.30%, cy=65.76%) */
