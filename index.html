@@ -84,51 +84,7 @@
       background-position: 0 0, 0 24px, 24px -24px, -24px 0px;
     }
 
-    /* Decorative Shapes Behind Avatar */
-    .canva-stage-backdrop-shape {
-      position: absolute;
-      top: 48%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 12;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Stage 1: Halftone Dot Shield */
-    .canva-modal.stage-1 .canva-shape-stage1 {
-      width: clamp(280px, 36vw, 500px);
-      height: clamp(280px, 36vw, 500px);
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 15%, transparent 16%);
-      background-size: 14px 14px;
-      mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
-      -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
-      opacity: 1;
-    }
-    .canva-modal:not(.stage-1) .canva-shape-stage1 { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
-
-    /* Stage 2: Comic Starburst Explosion */
-    .canva-modal.stage-2 .canva-shape-stage2 {
-      width: clamp(340px, 48vw, 680px);
-      height: clamp(340px, 48vw, 680px);
-      background: #ff5c93;
-      clip-path: polygon(50% 0%, 63% 32%, 98% 35%, 72% 57%, 85% 91%, 52% 73%, 22% 95%, 31% 60%, 2% 41%, 38% 31%);
-      opacity: 1;
-      transform: translate(-50%, -50%) rotate(12deg) scale(1);
-    }
-    .canva-modal:not(.stage-2) .canva-shape-stage2 { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
-
-    /* Stage 3: Vivid Pink Paint Splash */
-    .canva-modal.stage-3 .canva-shape-stage3 {
-      width: clamp(320px, 46vw, 640px);
-      height: clamp(220px, 32vw, 420px);
-      background: #ff6097;
-      border-radius: 45% 55% 62% 38% / 48% 42% 58% 52%;
-      filter: blur(1px);
-      opacity: 0.95;
-      transform: translate(-50%, -50%) rotate(-6deg) scale(1);
-    }
-    .canva-modal:not(.stage-3) .canva-shape-stage3 { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+    /* Decorative Shapes — REMOVED (user wants clean fade-only transitions) */
 
     /* Modal Top Header */
     .canva-modal-header {
@@ -224,7 +180,7 @@
       pointer-events: none;
       z-index: 10;
       transition: color 0.4s ease, transform 0.4s ease;
-      text-shadow: 0 6px 25px rgba(0, 0, 0, 0.18);
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 60px rgba(0, 0, 0, 0.3);
     }
 
     .canva-modal.stage-1 .canva-bg-signature { color: #ffbd59; }
@@ -244,6 +200,7 @@
       display: flex;
       align-items: flex-end;
       justify-content: center;
+      pointer-events: none; /* CRITICAL: let clicks/mousemove pass through to bubbles behind */
     }
 
     .canva-avatar-img {
@@ -265,6 +222,7 @@
     .canva-avatar-img.is-active {
       opacity: 1;
       pointer-events: auto;
+      cursor: pointer;
     }
 
     /* Comic Speech Bubble Container */
@@ -278,49 +236,38 @@
       box-shadow: 4px 6px 0px rgba(0, 0, 0, 0.26);
       opacity: 0;
       visibility: hidden;
-      transform: scale(0.85);
-      transition: opacity 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-                  transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-                  visibility 0.3s;
+      transition: opacity 0.3s ease, visibility 0.3s;
+      pointer-events: none;
     }
 
     .canva-comic-bubble.is-active {
       opacity: 1;
       visibility: visible;
-      transform: scale(1);
+      pointer-events: auto;
     }
 
     /* Stage 1 Bubble: On Left of Avatar, chest height */
     .canva-bubble-stage1 {
       left: calc(50% - clamp(240px, 28vw, 360px));
       top: 54%;
-      transform: translateY(-50%) scale(0.85);
+      transform: translateY(-50%);
       pointer-events: auto;
-    }
-    .canva-bubble-stage1.is-active {
-      transform: translateY(-50%) scale(1);
     }
 
     /* Stage 2 Bubble: On Right of Avatar, chest height */
     .canva-bubble-stage2 {
       left: calc(50% + clamp(80px, 12vw, 160px));
       top: 55%;
-      transform: translateY(-50%) scale(0.85);
+      transform: translateY(-50%);
       pointer-events: auto;
-    }
-    .canva-bubble-stage2.is-active {
-      transform: translateY(-50%) scale(1);
     }
 
     /* Stage 3 Bubble: On Left of Avatar, near waist */
     .canva-bubble-stage3 {
       left: calc(50% - clamp(260px, 30vw, 390px));
       top: 68%;
-      transform: translateY(-50%) scale(0.85);
+      transform: translateY(-50%);
       pointer-events: auto;
-    }
-    .canva-bubble-stage3.is-active {
-      transform: translateY(-50%) scale(1);
     }
 
     /* Speech Bubble Tails pointing towards the character's mouth */
@@ -2941,10 +2888,7 @@
 
     <!-- Viewport Stage -->
     <div class="canva-stage-viewport" id="canvaStageViewport">
-      <!-- Decorative Backdrop Graphic Shapes (Matching Canva PDF) -->
-      <div class="canva-stage-backdrop-shape canva-shape-stage1" aria-hidden="true"></div>
-      <div class="canva-stage-backdrop-shape canva-shape-stage2" aria-hidden="true"></div>
-      <div class="canva-stage-backdrop-shape canva-shape-stage3" aria-hidden="true"></div>
+      <!-- Decorative shapes removed — clean fade transitions only -->
 
       <!-- Giant Calligraphy Signature in Background -->
       <h1 class="canva-bg-signature" id="canvaBgSignature" aria-hidden="true">Anusmrith</h1>
@@ -3545,11 +3489,12 @@
         }
       });
 
-      // 4. MOUSE MOVEMENT STRICTLY OVER AVATAR BODY/FACE ONLY
-      // When cursor leaves the avatar body (e.g. to click speech bubble),
-      // the expression STAYS LOCKED in place so buttons are 100% clickable!
-      if (avatarHolder) {
-        avatarHolder.addEventListener('mousemove', function(e) {
+      // 4. MOUSE MOVEMENT STRICTLY OVER AVATAR IMAGES ONLY
+      // pointer-events: none on .canva-avatar-holder means mousemove
+      // only fires on the actual <img> pixels, never on transparent
+      // surrounding area. Bubbles are never blocked!
+      avatarImgs.forEach(function(img) {
+        img.addEventListener('mousemove', function(e) {
           const rect = avatarHolder.getBoundingClientRect();
           if (rect.width === 0) return;
           
@@ -3557,10 +3502,10 @@
           const centerX = rect.width / 2;
           const distFromCenter = mouseX - centerX;
 
-          // Character body width threshold (approx 260px wide body zone)
+          // Character body width threshold (narrow zone around the body)
           const bodyHalfWidth = Math.min(130, rect.width * 0.28);
 
-          // IF MOUSE IS OUTSIDE THE AVATAR BODY: FREEZE! DO NOT CHANGE EXPRESSION!
+          // If mouse is outside the narrow body zone, freeze expression
           if (Math.abs(distFromCenter) > bodyHalfWidth) {
             return;
           }
@@ -3578,17 +3523,15 @@
           }
         });
 
-        // Clicking directly on avatar advances to next expression
-        avatarHolder.addEventListener('click', function(e) {
-          // If clicked a button inside or near, ignore
-          if (e.target && e.target.closest('.canva-comic-bubble')) return;
+        // Clicking directly on avatar image advances to next expression
+        img.addEventListener('click', function(e) {
           e.stopPropagation();
           const next = currentStage === 3 ? 1 : currentStage + 1;
           setCanvaStage(next);
         });
-      }
+      });
 
-      // Stop any propagation from bubbles so mouse moves or clicks inside bubbles NEVER alter expressions
+      // Stop any propagation from bubbles (extra safety)
       bubbles.forEach(function(b) {
         if (!b) return;
         b.addEventListener('mousemove', function(e) { e.stopPropagation(); });
