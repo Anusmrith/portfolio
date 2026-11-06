@@ -114,53 +114,6 @@
       transform: scale(1.08) rotate(90deg);
     }
 
-    /* Small text directly under the X button: Swipe down to view more portfolio */
-    .canva-swipe-down-hint {
-      position: absolute;
-      top: 68px;
-      right: 24px;
-      z-index: 200;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 14px;
-      border-radius: 999px;
-      background: rgba(14, 18, 26, 0.65);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      color: #ffffff;
-      font-family: 'Chiron GoRound TC', -apple-system, sans-serif;
-      font-size: 11.5px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-      pointer-events: auto;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-      user-select: none;
-      -webkit-user-select: none;
-      animation: canvaPillPulse 2.4s ease-in-out infinite;
-    }
-
-    .canva-swipe-down-hint:hover {
-      background: rgba(255, 255, 255, 0.95);
-      color: #0a0e16;
-      border-color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-    }
-
-    .canva-swipe-down-hint svg {
-      width: 12px;
-      height: 12px;
-      transition: transform 0.2s ease;
-    }
-
-    .canva-swipe-down-hint:hover svg {
-      transform: translateY(2px);
-    }
 
     /* Floating Swipe Up Indicator at the bottom for mobile visitors */
     .canva-swipe-bottom {
@@ -436,13 +389,6 @@
         z-index: 999;
       }
 
-      .canva-swipe-down-hint {
-        top: calc(max(16px, env(safe-area-inset-top, 16px)) + 46px);
-        right: max(16px, env(safe-area-inset-right, 16px));
-        padding: 5px 11px;
-        font-size: 10.5px;
-        gap: 5px;
-      }
 
       .canva-swipe-bottom {
         bottom: max(16px, env(safe-area-inset-bottom, 16px));
@@ -506,10 +452,6 @@
     @media (max-width: 380px) {
       .canva-slide-frame {
         transform: scale(1.22);
-      }
-      .canva-swipe-down-hint {
-        font-size: 9.5px;
-        padding: 4px 9px;
       }
       .canva-swipe-bottom {
         bottom: max(12px, env(safe-area-inset-bottom, 12px));
@@ -2968,14 +2910,6 @@
     <!-- Minimal discreet close button -->
     <button type="button" class="canva-close-floating" id="closeCanvaModalBtn" aria-label="Close fullscreen view">&times;</button>
 
-    <!-- Small text directly under the X button indicating portfolio below -->
-    <button type="button" class="canva-swipe-down-hint" id="canvaSwipeDownHint" aria-label="Swipe down to view more portfolio">
-      <span>Swipe down to view more portfolio</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="12" y1="5" x2="12" y2="19"></line>
-        <polyline points="19 12 12 19 5 12"></polyline>
-      </svg>
-    </button>
 
     <!-- Floating Swipe Down indicator for mobile visitors -->
     <button type="button" class="canva-swipe-bottom" id="canvaSwipeBottom" aria-label="Swipe down to view portfolio">
@@ -3425,7 +3359,6 @@
 
       // Modal elements
       const closeBtn = document.getElementById('closeCanvaModalBtn');
-      const swipeDownHint = document.getElementById('canvaSwipeDownHint');
       const swipeBottom = document.getElementById('canvaSwipeBottom');
       const faceHitbox = document.getElementById('canvaFaceHitbox');
 
@@ -3546,14 +3479,6 @@
           closeModal('home');
         });
       }
-      // Small text under X button & Bottom Swipe Down Hint
-      if (swipeDownHint) {
-        swipeDownHint.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          closeModal('home');
-        });
-      }
 
       if (swipeBottom) {
         swipeBottom.addEventListener('click', function(e) {
@@ -3579,7 +3504,7 @@
       // Clicking on the character OR clicking outside the character on the background advances 1 -> 2 -> 3 -> 1
       modal.addEventListener('click', function(e) {
         // If clicked on close button or inside the comic speech bubble buttons, let them handle it!
-        if (e.target && (e.target.closest('#closeCanvaModalBtn') || e.target.closest('#canvaSwipeDownHint') || e.target.closest('#canvaSwipeBottom') || e.target.closest('.canva-bubble-overlay'))) {
+        if (e.target && (e.target.closest('#closeCanvaModalBtn') || e.target.closest('#canvaSwipeBottom') || e.target.closest('.canva-bubble-overlay'))) {
           return;
         }
         nextStage();
