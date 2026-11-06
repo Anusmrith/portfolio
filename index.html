@@ -1782,6 +1782,126 @@
     /* ==========================================================================
        CREDIT FOOTER & TOAST
        ========================================================================== */
+    /* ==========================================================================
+       OPEN TO WORK & INTERNSHIPS SECTION
+       ========================================================================== */
+    .open-to-work-section {
+      padding: clamp(60px, 9vh, 90px) 24px clamp(30px, 4vh, 50px);
+      position: relative;
+      z-index: 10;
+    }
+
+    .otw-container {
+      max-width: min(860px, 92vw);
+      margin: 0 auto;
+    }
+
+    .otw-card {
+      position: relative;
+      background: rgba(18, 22, 32, 0.72);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: clamp(36px, 5vw, 56px) clamp(24px, 4vw, 48px);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+    }
+
+    .otw-card:hover {
+      border-color: rgba(255, 217, 179, 0.35);
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.65);
+    }
+
+    .otw-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      font-family: 'Helvetica Neue', system-ui, sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .otw-pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: otwPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes otwPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 7px rgba(16, 185, 129, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+      }
+    }
+
+    .otw-title {
+      font-family: 'Cormorant Upright', Georgia, serif;
+      font-size: clamp(28px, 4.4vw, 46px);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--ink);
+      margin: 0 0 16px;
+    }
+
+    .otw-desc {
+      font-family: 'Chiron GoRound TC', -apple-system, sans-serif;
+      font-size: clamp(14px, 1.35vw, 16px);
+      line-height: 1.7;
+      color: rgba(244, 241, 234, 0.88);
+      max-width: 620px;
+      margin: 0 auto 24px;
+    }
+
+    .otw-desc strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .otw-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 32px;
+      max-width: 680px;
+    }
+
+    .otw-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      width: 100%;
+    }
+
+    .otw-btn {
+      padding: 10px 22px !important;
+      font-size: 13.5px !important;
+      text-decoration: none;
+    }
+
     .footer {
       padding: 12vh 24px 8vh;
       text-align: center;
@@ -2283,6 +2403,45 @@
         text-align: center !important;
       }
 
+      /* Open to Work on Mobile */
+      .open-to-work-section {
+        padding: 40px 14px 20px !important;
+      }
+
+      .otw-card {
+        padding: 28px 16px 24px !important;
+        border-radius: 18px !important;
+      }
+
+      .otw-title {
+        font-size: clamp(24px, 7vw, 32px) !important;
+        margin-bottom: 12px !important;
+      }
+
+      .otw-desc {
+        font-size: 13.5px !important;
+        line-height: 1.6 !important;
+        margin-bottom: 20px !important;
+      }
+
+      .otw-tags {
+        gap: 6px !important;
+        margin-bottom: 24px !important;
+      }
+
+      .otw-actions {
+        flex-direction: column !important;
+        gap: 10px !important;
+        width: 100% !important;
+      }
+
+      .otw-btn {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        text-align: center !important;
+        justify-content: center !important;
+      }
+
       /* Footer */
       .footer {
         padding: 40px 14px 28px !important;
@@ -2387,6 +2546,16 @@
       .wk-badge {
         font-size: 10px !important;
         padding: 4px 8px !important;
+      }
+
+      .otw-card {
+        padding: 24px 12px 20px !important;
+      }
+      .otw-title {
+        font-size: 22px !important;
+      }
+      .otw-desc {
+        font-size: 12.5px !important;
       }
     }
   </style>
@@ -2862,6 +3031,50 @@
     <!-- ==========================================================================
          FOOTER & CREDITS
          ========================================================================== -->
+    <!-- ==========================================================================
+         OPEN TO WORK & INTERNSHIPS CALLOUT SECTION
+         ========================================================================== -->
+    <section class="open-to-work-section" id="availability">
+      <div class="otw-container">
+        <div class="otw-card">
+          <div class="otw-badge">
+            <span class="otw-pulse-dot" aria-hidden="true"></span>
+            <span>Available for Opportunities</span>
+          </div>
+
+          <h2 class="otw-title">Open to Work &amp; Internships</h2>
+          
+          <p class="otw-desc">
+            I am actively seeking <strong>internships, apprentice roles, and engineering opportunities</strong> in 
+            <strong>Deep Learning &amp; AI, Full-Stack Web Development, and Flutter Mobile Engineering</strong>. Let's connect and discuss how I can bring dedication and value to your team.
+          </p>
+
+          <div class="otw-tags">
+            <span class="wk-badge">Machine Learning / AI</span>
+            <span class="wk-badge">Full-Stack Development</span>
+            <span class="wk-badge">Flutter &amp; Mobile</span>
+            <span class="wk-badge">Open-Source Collaboration</span>
+            <span class="wk-badge">Remote &bull; On-Site</span>
+          </div>
+
+          <div class="otw-actions">
+            <a href="mailto:anusmrithchanju@gmail.com" class="pill-btn accent otw-btn">
+              <span>Send Email</span>
+              <span aria-hidden="true">&nearr;</span>
+            </a>
+            <a href="https://www.linkedin.com/in/anusmrithmm/" target="_blank" rel="noopener noreferrer" class="pill-btn otw-btn">
+              <span>Connect on LinkedIn</span>
+              <span aria-hidden="true">&nearr;</span>
+            </a>
+            <a href="assets/resume.pdf" download="resume-anusmrith.pdf" target="_blank" class="pill-btn otw-btn">
+              <span>Download Resume</span>
+              <span aria-hidden="true">&nearr;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <footer class="footer" id="contact">
       <div class="footer-links">
         <a href="https://github.com/Anusmrith" target="_blank" rel="noopener noreferrer" class="pill-btn">GitHub</a>
